@@ -44,13 +44,13 @@ export default function Hello() {
       {/* 로그인 영역 */}
       <div className="w-full lg:w-1/2 h-full flex relative bg-white lg:shadow-2xl lg:shadow-gray-800">
         <h1 className="m-4 text-xl md:text-2xl font-semibold absolute">FLORA</h1>
-        <div className="flex mx-auto w-4/5 sm:w-3/4 md:w-1/2 lg:w-1/3 justify-center flex-col items-center">
+        <div className="flex mx-auto w-3/5 sm:w-1/2 justify-center flex-col items-center">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6 lg:mb-10">
             Welcome!
           </h2>
 
           {/* 폼 영역 */}
-          <form className="flex justify-center flex-col gap-4"
+          <form className="flex justify-center flex-col gap-4 w-full"
             onSubmit={handleSubmit}
           >
             <input
