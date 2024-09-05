@@ -36,12 +36,14 @@ export default function Hello() {
             onSubmit={handleSubmit}
           >
             <input
+              id='sign_email'
               className="border border-gray-700 rounded-badge px-4 py-2"
               placeholder="e-mail"
               type="email"
               value={email.value} onChange={email.onChange}
             />
             <input
+              id='sign_password'
               className="border border-gray-700 rounded-badge px-4 py-2"
               placeholder="password"
               type="password"
