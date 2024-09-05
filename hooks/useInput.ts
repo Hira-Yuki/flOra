@@ -1,7 +1,6 @@
-'use client'
-import { useState } from "react"
+import { useState } from "react";
 
-export default function useInput(initialValue: string = '') {
+export default function useInput(initialValue: string = "") {
   const [value, setValue] = useState(initialValue);
 
   // 입력 변경 핸들러
@@ -15,4 +14,4 @@ export default function useInput(initialValue: string = '') {
     onChange: handleChange,
     reset: () => setValue(initialValue),
   };
-};
+}

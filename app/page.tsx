@@ -13,8 +13,11 @@ export default function Hello() {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log('Email:', email.value);
-    console.log('Password:', password.value);
+    if (!email.value || !password.value) {
+      console.log('몬가 비어있음')
+      return
+    }
+    console.log(`Email: ${email.value}\tPassword: ${password.value}`);
     // 로그인 로직 추가
 
     resetForm()
