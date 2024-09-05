@@ -1,5 +1,6 @@
 'use client'
 import useInput from "@hooks/useInput";
+import { toast } from "react-toastify";
 
 export default function Hello() {
   // useInput 훅 사용
@@ -11,14 +12,19 @@ export default function Hello() {
     password.reset()
   }
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!email.value || !password.value) {
-      console.log('몬가 비어있음')
+      toast.warning('이메일과 비밀번호를 정확히 입력해 주세요.');
       return
     }
-    console.log(`Email: ${email.value}\tPassword: ${password.value}`);
+    console.log(`Email: ${email.value}\nPassword: ${password.value}`);
     // 로그인 로직 추가
+    try {
+      toast.success('로그인 요청!!')
+    } catch (error) {
+
+    }
 
     resetForm()
   };
