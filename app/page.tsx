@@ -1,9 +1,10 @@
 'use client'
 import useInput from "@hooks/useInput";
 import { toast } from "react-toastify";
+import { debounce } from 'lodash';
+import { useCallback } from 'react';
 
 export default function Hello() {
-  // useInput 훅 사용
   const email = useInput('');
   const password = useInput('');
 
@@ -12,21 +13,29 @@ export default function Hello() {
     password.reset()
   }
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
-    if (!email.value || !password.value) {
-      toast.warning('이메일과 비밀번호를 정확히 입력해 주세요.');
-      return
-    }
-    console.log(`Email: ${email.value}\nPassword: ${password.value}`);
-    // 로그인 로직 추가
-    try {
-      toast.success('로그인 요청!!')
-    } catch (error) {
+  // 디바운스된 handleSubmit 함수 정의
+  const debouncedSubmit = useCallback(
+    debounce(async (emailValue: string, passwordValue: string) => {
+      if (!emailValue || !passwordValue) {
+        toast.warning('이메일과 비밀번호를 정확히 입력해 주세요.');
+        return;
+      }
 
-    }
+      // 로그인 로직 추가
+      try {
+        toast.success('로그인 요청!!');
+      } catch (error) {
+        toast.error('로그인 실패');
+      }
 
-    resetForm()
+      resetForm();
+    }, 300),
+    []
+  );
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault(); // preventDefault를 즉시 실행합니다.
+    debouncedSubmit(email.value, password.value); // 값만 전달합니다.
   };
 
   return (
