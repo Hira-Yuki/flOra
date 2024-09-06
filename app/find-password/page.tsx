@@ -13,7 +13,7 @@ export default function FindPassword() {
       <SignInBlock>
         <SignInLogo />
         <SignInSection>
-          <SignInTitle text={'비밀번호 찾기'} />
+          <SignInTitle>비밀번호 찾기</SignInTitle>
           <FindPasswordForm />
         </SignInSection>
       </SignInBlock>
