@@ -100,16 +100,16 @@ export default function Hello() {
           </form>
           <div className="flex items-center w-full mt-8">
             <hr className="border-gray-300 w-1/5" />
-            <span className="mx-4 text-xs text-gray-500 w-3/5 text-center">
+            <span className="mx-4 text-xs text-gray-500 w-3/5 text-center text-nowrap">
               SNS 계정으로 시작하기
             </span>
             <hr className="border-gray-300 w-1/5" />
           </div>
           <ul className="flex items-center justify-around w-full">
-            <li className="w-8 h-8 sm:w-16 lg:w-8 lg:h-8 bg-gray-400 rounded-full" />
-            <li className="w-8 h-8 sm:w-16 lg:w-8 lg:h-8 bg-gray-400 rounded-full" />
-            <li className="w-8 h-8 sm:w-16 lg:w-8 lg:h-8 bg-gray-400 rounded-full" />
-            <li className="w-8 h-8 sm:w-16 lg:w-8 lg:h-8 bg-gray-400 rounded-full" />
+            <li className="w-8 h-8 sm:w-16 sm:h-16 lg:w-8 lg:h-8 bg-gray-400 rounded-full" />
+            <li className="w-8 h-8 sm:w-16 sm:h-16 lg:w-8 lg:h-8 bg-gray-400 rounded-full" />
+            <li className="w-8 h-8 sm:w-16 sm:h-16 lg:w-8 lg:h-8 bg-gray-400 rounded-full" />
+            <li className="w-8 h-8 sm:w-16 sm:h-16 lg:w-8 lg:h-8 bg-gray-400 rounded-full" />
           </ul>
         </section>
       </div>
