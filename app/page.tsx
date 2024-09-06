@@ -105,7 +105,7 @@ export default function Hello() {
             </span>
             <hr className="border-gray-300 w-1/5" />
           </div>
-          <ul className="flex gap-3 items-center justify-center">
+          <ul className="flex items-center justify-around w-full">
             <li className="w-8 h-8 bg-gray-400 rounded-full" />
             <li className="w-8 h-8 bg-gray-400 rounded-full" />
             <li className="w-8 h-8 bg-gray-400 rounded-full" />
