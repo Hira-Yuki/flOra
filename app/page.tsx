@@ -1,14 +1,16 @@
 'use client';
-import useDebouncedSubmit from '@hooks/useDebounceSubmit';
-import useErrorState from '@hooks/useErrorState';
-import useInput from '@hooks/useInput';
+import { useDebouncedSubmit, useErrorState, useInput } from '@hooks/index';
 import Link from 'next/link';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 export default function Hello() {
   const email = useInput('');
   const password = useInput('');
   const error = useErrorState();
+
+  // 디버그용
+  const [isDebug, setIsDebug] = useState(false);
 
   const resetForm = () => {
     email.reset();
@@ -23,7 +25,8 @@ export default function Hello() {
     }
 
     try {
-      throw new Error('비밀번호가 일치하지 않습니다.');
+      if (isDebug) throw new Error('비밀번호가 일치하지 않습니다.');
+
       toast.success('로그인 요청!!');
     } catch (err) {
       toast.error(err.message);
@@ -41,13 +44,26 @@ export default function Hello() {
     debouncedSubmit(email.value, password.value);
   };
 
+  const debugToggler = () => {
+    setIsDebug((prev) => !prev);
+  };
+
   return (
     <div className="w-screen h-screen flex justify-end bg-teal-400">
       {/* 인터페이스 */}
       <div className="w-full lg:w-1/2 h-full flex relative bg-white lg:shadow-2xl lg:shadow-gray-800">
-        <h1 className="m-4 text-xl md:text-2xl font-semibold absolute">
-          FLORA
-        </h1>
+        {/* debug */}
+        <div className="absolute">
+          <h1 className="m-4 text-xl md:text-2xl font-semibold ">FLORA</h1>
+          <button
+            type="button"
+            className="mt-4 p-2 md:mt-6 py-2 md:py-3 rounded-badge w-full bg-red-400"
+            onClick={debugToggler}
+          >
+            {isDebug ? '강제 에러 발생시키는 중' : '정상 동작 중'}
+          </button>
+        </div>
+
         <section className="flex mx-auto w-3/5 sm:w-1/2 justify-center flex-col items-center">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6 lg:mb-10 cursor-default">
             Welcome!

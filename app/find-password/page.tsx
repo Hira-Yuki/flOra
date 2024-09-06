@@ -1,7 +1,5 @@
 'use client';
-import useDebouncedSubmit from '@hooks/useDebounceSubmit';
-import useErrorState from '@hooks/useErrorState';
-import useInput from '@hooks/useInput';
+import { useDebouncedSubmit, useErrorState, useInput } from '@hooks/index';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
 
