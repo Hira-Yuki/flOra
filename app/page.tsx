@@ -45,7 +45,7 @@ export default function Hello() {
       <div className="w-full lg:w-1/2 h-full flex relative bg-white lg:shadow-2xl lg:shadow-gray-800">
         <h1 className="m-4 text-xl md:text-2xl font-semibold absolute">FLORA</h1>
         <div className="flex mx-auto w-3/5 sm:w-1/2 justify-center flex-col items-center">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6 lg:mb-10">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6 lg:mb-10 cursor-default">
             Welcome!
           </h2>
 
@@ -77,7 +77,7 @@ export default function Hello() {
             {/* 영역 분리 */}
             <div className="flex items-center mb-4">
               <hr className="border-1 border-gray-600 w-1/6 md:w-1/5 opacity-60" />
-              <span className="w-4/6 md:w-3/5 text-xs text-center text-gray-700 opacity-60">
+              <span className="w-4/6 md:w-3/5 text-xs text-center text-gray-700 opacity-60 cursor-default">
                 SNS 계정으로 시작하기
               </span>
               <hr className="border-1 border-gray-600 w-1/6 md:w-1/5 opacity-60" />
@@ -85,10 +85,10 @@ export default function Hello() {
 
             {/* SNS 아이콘 영역 */}
             <div className="flex items-center gap-3 md:gap-5 justify-center">
-              <div className="w-6 md:w-8 h-6 md:h-8 bg-gray-800 rounded-full" />
-              <div className="w-6 md:w-8 h-6 md:h-8 bg-gray-800 rounded-full" />
-              <div className="w-6 md:w-8 h-6 md:h-8 bg-gray-800 rounded-full" />
-              <div className="w-6 md:w-8 h-6 md:h-8 bg-gray-800 rounded-full" />
+              <div className="w-6 md:w-8 h-6 md:h-8 bg-gray-800 rounded-full cursor-pointer" />
+              <div className="w-6 md:w-8 h-6 md:h-8 bg-gray-800 rounded-full cursor-pointer" />
+              <div className="w-6 md:w-8 h-6 md:h-8 bg-gray-800 rounded-full cursor-pointer" />
+              <div className="w-6 md:w-8 h-6 md:h-8 bg-gray-800 rounded-full cursor-pointer" />
             </div>
           </form>
         </div>
