@@ -1,8 +1,8 @@
-'use client'
-import useInput from "@hooks/useInput";
-import { toast } from "react-toastify";
-import Link from "next/link";
-import useDebouncedSubmit from "@hooks/useDebounceSubmit";
+'use client';
+import useDebouncedSubmit from '@hooks/useDebounceSubmit';
+import useInput from '@hooks/useInput';
+import Link from 'next/link';
+import { toast } from 'react-toastify';
 
 export default function Hello() {
   const email = useInput('');
@@ -11,7 +11,7 @@ export default function Hello() {
   const resetForm = () => {
     email.reset();
     password.reset();
-  }
+  };
 
   const handleSubmit = async (emailValue: string, passwordValue: string) => {
     if (!emailValue || !passwordValue) {
@@ -23,6 +23,7 @@ export default function Hello() {
       toast.success('로그인 요청!!');
     } catch (error) {
       toast.error('로그인 실패');
+      console.log(error);
     }
 
     resetForm();
@@ -37,32 +38,36 @@ export default function Hello() {
 
   return (
     <div className="w-screen h-screen flex justify-end bg-teal-400">
-
       {/* 인터페이스 */}
       <div className="w-full lg:w-1/2 h-full flex relative bg-white lg:shadow-2xl lg:shadow-gray-800">
-        <h1 className="m-4 text-xl md:text-2xl font-semibold absolute">FLORA</h1>
+        <h1 className="m-4 text-xl md:text-2xl font-semibold absolute">
+          FLORA
+        </h1>
         <section className="flex mx-auto w-3/5 sm:w-1/2 justify-center flex-col items-center">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6 lg:mb-10 cursor-default">
             Welcome!
           </h2>
 
           {/* 폼 영역 */}
-          <form className="flex justify-center flex-col gap-4 w-full"
+          <form
+            className="flex justify-center flex-col gap-4 w-full"
             onSubmit={onSubmit}
           >
             <input
-              id='sign_email'
+              id="sign_email"
               className="border border-gray-700 rounded-badge px-4 py-2"
               placeholder="e-mail"
               type="email"
-              value={email.value} onChange={email.onChange}
+              value={email.value}
+              onChange={email.onChange}
             />
             <input
-              id='sign_password'
+              id="sign_password"
               className="border border-gray-700 rounded-badge px-4 py-2"
               placeholder="password"
               type="password"
-              value={password.value} onChange={password.onChange}
+              value={password.value}
+              onChange={password.onChange}
             />
             <button
               className="mt-4 md:mt-6 py-2 md:py-3 rounded-badge w-full bg-sky-400"
@@ -71,8 +76,13 @@ export default function Hello() {
               시작하기
             </button>
           </form>
-          <div className='w-full px-3 py-2'>
-            <p className='font-light text-sm'>비밀번호를 <Link className='font-bold underline' href={'/find-password'}>잊어버리셨나요?</Link></p>
+          <div className="w-full px-3 py-2">
+            <p className="font-light text-sm">
+              비밀번호를{' '}
+              <Link className="font-bold underline" href={'/find-password'}>
+                잊어버리셨나요?
+              </Link>
+            </p>
           </div>
           {/* 영역 분리 */}
           <div className="flex items-center my-4 w-full">
