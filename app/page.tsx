@@ -15,7 +15,7 @@ export default function Home() {
       <SignInBlock>
         <SignInLogo />
         <SignInSection>
-          <SignInTitle>Welcome!</SignInTitle>
+          <SignInTitle text={'Welcome!'} />
           <SignInForm />
           <SignInSNSDivider />
           <SignInSNSButtons />
