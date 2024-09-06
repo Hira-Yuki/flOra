@@ -1,4 +1,5 @@
 'use client';
+import PrimaryButton from '@components/element/PrimaryButton';
 import { useDebouncedSubmit, useErrorState, useInput } from '@hooks/index';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
@@ -58,12 +59,7 @@ export default function FindPassword() {
             {error.isError && (
               <span className="text-red-600 text-xs pl-2">{error.message}</span>
             )}
-            <button
-              className="mt-4 md:mt-6 py-2 md:py-3 rounded-badge w-full bg-sky-400"
-              type="submit"
-            >
-              이메일 발송하기
-            </button>
+            <PrimaryButton>이메일 발송하기</PrimaryButton>
           </form>
           <div className="w-full px-3 py-2">
             <p className="font-light text-xs">

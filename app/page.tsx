@@ -1,4 +1,5 @@
 'use client';
+import PrimaryButton from '@components/element/PrimaryButton';
 import { useDebouncedSubmit, useErrorState, useInput } from '@hooks/index';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -54,8 +55,8 @@ export default function Hello() {
         <div className="absolute left-4 top-4">
           <h1 className="text-xl font-bold">FLORA</h1>
           <button
-            className="px-2 bg-gray-800 text-white rounded-md py-3 w-full mt-4 hover:bg-gray-700 transition"
-            type="submit"
+            className="bg-gray-800 text-white rounded-md px-3 py-3 w-full mt-4 hover:bg-gray-700 transition"
+            type="button"
             onClick={debugToggler}
           >
             {isDebug ? '강제 에러 발생시키는 중' : '정상 동작 중'}
@@ -85,12 +86,7 @@ export default function Hello() {
             {error.isError && (
               <span className="text-red-600 text-xs">{error.message}</span>
             )}
-            <button
-              className="bg-gray-800 text-white rounded-badge py-3 w-full mt-4 hover:bg-gray-700 transition"
-              type="submit"
-            >
-              시작하기
-            </button>
+            <PrimaryButton>시작하기</PrimaryButton>
             <p className="text-xs text-center mt-2 text-gray-500">
               비밀번호를 잊으셨나요?{' '}
               <Link className="underline" href={'/find-password'}>
