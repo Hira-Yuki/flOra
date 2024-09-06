@@ -93,14 +93,14 @@ export default function Hello() {
             {error.isError && (
               <span className="text-red-600 text-xs pl-2">{error.message}</span>
             )}
-            <button
-              className="mt-4 md:mt-6 py-2 md:py-3 rounded-badge w-full bg-sky-400 lg:w-4/5"
-              type="submit"
-            >
-              시작하기
-            </button>
-            <div className="flex w-full px-3 py-2 lg:w-4/5">
-              <p className="font-light text-xs">
+            <div className="flex flex-col w-full items-center">
+              <button
+                className="mt-4 md:mt-6 py-2 md:py-3 rounded-badge w-full bg-sky-400 lg:w-4/5"
+                type="submit"
+              >
+                시작하기
+              </button>
+              <p className="font-light text-xs mt-2 pl-2">
                 비밀번호를 잊으셨나요?{' '}
                 <Link
                   className="font-bold underline text-xs"
