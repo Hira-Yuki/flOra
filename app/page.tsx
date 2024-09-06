@@ -49,83 +49,67 @@ export default function Hello() {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-end bg-teal-400">
-      {/* 인터페이스 */}
-      <div className="w-full lg:w-1/2 h-full flex relative bg-white lg:shadow-2xl lg:shadow-gray-800">
-        {/* debug */}
-        <div className="absolute">
-          <h1 className="m-4 text-xl md:text-2xl font-semibold ">FLORA</h1>
+    <div className="w-screen h-screen flex justify-end bg-gray-100">
+      <div className="w-full lg:w-1/2 h-full flex relative bg-white lg:shadow-2xl">
+        <div className="absolute left-4 top-4">
+          <h1 className="text-xl font-bold">FLORA</h1>
           <button
-            type="button"
-            className="mt-4 p-2 md:mt-6 py-2 md:py-3 rounded-badge w-full bg-red-400"
+            className="px-2 bg-gray-800 text-white rounded-md py-3 w-full mt-4 hover:bg-gray-700 transition"
+            type="submit"
             onClick={debugToggler}
           >
             {isDebug ? '강제 에러 발생시키는 중' : '정상 동작 중'}
           </button>
         </div>
-
-        <section className="flex mx-auto w-3/5 sm:w-1/2 justify-center flex-col items-center gap-8">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6 lg:mb-10 cursor-default">
+        <section className="flex mx-auto w-3/5 sm:w-1/2 justify-center flex-col items-center gap-8 p-6 lg:p-10">
+          <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-gray-800">
             Welcome!
           </h2>
-
-          {/* 폼 영역 */}
-          <form
-            className="flex justify-center flex-col gap-8 w-full items-center"
-            onSubmit={onSubmit}
-          >
+          <form className="flex flex-col gap-6 w-full" onSubmit={onSubmit}>
             <input
               id="sign_email"
-              className="border border-gray-700 rounded-badge px-4 py-2 lg:w-4/5"
-              placeholder="e-mail"
+              className="border border-gray-300 rounded-badge px-4 py-3 w-full"
+              placeholder="E-mail"
               type="email"
               value={email.value}
               onChange={email.onChange}
             />
             <input
               id="sign_password"
-              className="border border-gray-700 rounded-badge px-4 py-2 lg:w-4/5"
-              placeholder="password"
+              className="border border-gray-300 rounded-badge px-4 py-3 w-full"
+              placeholder="Password"
               type="password"
               value={password.value}
               onChange={password.onChange}
             />
             {error.isError && (
-              <span className="text-red-600 text-xs pl-2">{error.message}</span>
+              <span className="text-red-600 text-xs">{error.message}</span>
             )}
-            <div className="flex flex-col w-full items-center">
-              <button
-                className="mt-4 md:mt-6 py-2 md:py-3 rounded-badge w-full bg-sky-400 lg:w-4/5"
-                type="submit"
-              >
-                시작하기
-              </button>
-              <p className="font-light text-xs mt-2 pl-2">
-                비밀번호를 잊으셨나요?{' '}
-                <Link
-                  className="font-bold underline text-xs"
-                  href={'/find-password'}
-                >
-                  비밀번호 찾기
-                </Link>
-              </p>
-            </div>
+            <button
+              className="bg-gray-800 text-white rounded-badge py-3 w-full mt-4 hover:bg-gray-700 transition"
+              type="submit"
+            >
+              시작하기
+            </button>
+            <p className="text-xs text-center mt-2 text-gray-500">
+              비밀번호를 잊으셨나요?{' '}
+              <Link className="underline" href={'/find-password'}>
+                비밀번호 찾기
+              </Link>
+            </p>
           </form>
-          {/* 영역 분리 */}
-          <div className="flex items-center my-4 w-full">
-            <hr className="border-1 border-gray-600 w-1/6 md:w-1/5 opacity-60" />
-            <span className="w-4/6 md:w-3/5 text-xs text-center text-gray-700 opacity-60 cursor-default">
+          <div className="flex items-center w-full mt-8">
+            <hr className="border-gray-300 w-1/5" />
+            <span className="mx-4 text-xs text-gray-500 w-3/5 text-center">
               SNS 계정으로 시작하기
             </span>
-            <hr className="border-1 border-gray-600 w-1/6 md:w-1/5 opacity-60" />
+            <hr className="border-gray-300 w-1/5" />
           </div>
-
-          {/* SNS 아이콘 영역 */}
-          <ul className="flex items-center gap-3 md:gap-5 justify-center">
-            <li className="w-6 md:w-8 h-6 md:h-8 bg-gray-800 rounded-full cursor-pointer" />
-            <li className="w-6 md:w-8 h-6 md:h-8 bg-gray-800 rounded-full cursor-pointer" />
-            <li className="w-6 md:w-8 h-6 md:h-8 bg-gray-800 rounded-full cursor-pointer" />
-            <li className="w-6 md:w-8 h-6 md:h-8 bg-gray-800 rounded-full cursor-pointer" />
+          <ul className="flex gap-3 items-center justify-center">
+            <li className="w-8 h-8 bg-gray-400 rounded-full" />
+            <li className="w-8 h-8 bg-gray-400 rounded-full" />
+            <li className="w-8 h-8 bg-gray-400 rounded-full" />
+            <li className="w-8 h-8 bg-gray-400 rounded-full" />
           </ul>
         </section>
       </div>
