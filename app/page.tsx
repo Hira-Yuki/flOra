@@ -106,10 +106,10 @@ export default function Hello() {
             <hr className="border-gray-300 w-1/5" />
           </div>
           <ul className="flex items-center justify-around w-full">
-            <li className="w-16 h-16 bg-gray-400 rounded-full" />
-            <li className="w-16 h-16 bg-gray-400 rounded-full" />
-            <li className="w-16 h-16 bg-gray-400 rounded-full" />
-            <li className="w-16 h-16 bg-gray-400 rounded-full" />
+            <li className="w-8 h-8 sm:w-16 lg:w-8 lg:h-8 bg-gray-400 rounded-full" />
+            <li className="w-8 h-8 sm:w-16 lg:w-8 lg:h-8 bg-gray-400 rounded-full" />
+            <li className="w-8 h-8 sm:w-16 lg:w-8 lg:h-8 bg-gray-400 rounded-full" />
+            <li className="w-8 h-8 sm:w-16 lg:w-8 lg:h-8 bg-gray-400 rounded-full" />
           </ul>
         </section>
       </div>
