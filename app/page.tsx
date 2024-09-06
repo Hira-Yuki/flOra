@@ -1,5 +1,6 @@
 'use client';
 import useDebouncedSubmit from '@hooks/useDebounceSubmit';
+import useErrorState from '@hooks/useErrorState';
 import useInput from '@hooks/useInput';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
@@ -7,6 +8,7 @@ import { toast } from 'react-toastify';
 export default function Hello() {
   const email = useInput('');
   const password = useInput('');
+  const error = useErrorState();
 
   const resetForm = () => {
     email.reset();
@@ -14,16 +16,19 @@ export default function Hello() {
   };
 
   const handleSubmit = async (emailValue: string, passwordValue: string) => {
+    error.reset();
     if (!emailValue || !passwordValue) {
       toast.warning('이메일과 비밀번호를 정확히 입력해 주세요.');
       return;
     }
 
     try {
+      throw new Error('비밀번호가 일치하지 않습니다.');
       toast.success('로그인 요청!!');
-    } catch (error) {
-      toast.error('로그인 실패');
-      console.log(error);
+    } catch (err) {
+      toast.error(err.message);
+      console.log(err);
+      error.setError({ massage: err.message, isError: true });
     }
 
     resetForm();
@@ -69,6 +74,9 @@ export default function Hello() {
               value={password.value}
               onChange={password.onChange}
             />
+            {error.isError && (
+              <span className="text-red-600 text-xs pl-2">{error.message}</span>
+            )}
             <button
               className="mt-4 md:mt-6 py-2 md:py-3 rounded-badge w-full bg-sky-400"
               type="submit"

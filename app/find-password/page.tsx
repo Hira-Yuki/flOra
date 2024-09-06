@@ -1,31 +1,27 @@
 'use client';
 import useDebouncedSubmit from '@hooks/useDebounceSubmit';
+import useErrorState from '@hooks/useErrorState';
 import useInput from '@hooks/useInput';
 import Link from 'next/link';
-import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 export default function FindPassword() {
   const email = useInput('');
-  const [error, setError] = useState({
-    massage: '',
-    isError: false,
-  });
+  const error = useErrorState();
 
   const handleSubmit = async (emailValue: string) => {
-    setError({ massage: '', isError: false });
+    error.reset();
     if (!emailValue) {
       toast.warning('이메일을 정확히 입력해 주세요.');
       return;
     }
 
     try {
-      throw new Error('Invalid email');
       toast.success('인증 메일 발송 성공');
     } catch (err) {
       toast.error('오류 발생');
       console.log(err);
-      setError({ massage: err.message, isError: true });
+      error.setError({ massage: err.message, isError: true });
     }
   };
 
@@ -61,7 +57,9 @@ export default function FindPassword() {
               value={email.value}
               onChange={email.onChange}
             />
-            {error.isError && <span>{error.massage}</span>}
+            {error.isError && (
+              <span className="text-red-600 text-xs pl-2">{error.message}</span>
+            )}
             <button
               className="mt-4 md:mt-6 py-2 md:py-3 rounded-badge w-full bg-sky-400"
               type="submit"
