@@ -77,10 +77,13 @@ export default function Hello() {
             </button>
           </form>
           <div className="w-full px-3 py-2">
-            <p className="font-light text-sm">
-              비밀번호를{' '}
-              <Link className="font-bold underline" href={'/find-password'}>
-                잊어버리셨나요?
+            <p className="font-light text-xs">
+              비밀번호를 잊으셨나요?{' '}
+              <Link
+                className="font-bold underline text-xs"
+                href={'/find-password'}
+              >
+                비밀번호 찾기
               </Link>
             </p>
           </div>

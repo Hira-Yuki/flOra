@@ -2,23 +2,30 @@
 import useDebouncedSubmit from '@hooks/useDebounceSubmit';
 import useInput from '@hooks/useInput';
 import Link from 'next/link';
-import React from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 export default function FindPassword() {
   const email = useInput('');
+  const [error, setError] = useState({
+    massage: '',
+    isError: false,
+  });
 
   const handleSubmit = async (emailValue: string) => {
+    setError({ massage: '', isError: false });
     if (!emailValue) {
       toast.warning('이메일을 정확히 입력해 주세요.');
       return;
     }
 
     try {
+      throw new Error('Invalid email');
       toast.success('인증 메일 발송 성공');
-    } catch (error) {
+    } catch (err) {
       toast.error('오류 발생');
-      console.log(error);
+      console.log(err);
+      setError({ massage: err.message, isError: true });
     }
   };
 
@@ -54,6 +61,7 @@ export default function FindPassword() {
               value={email.value}
               onChange={email.onChange}
             />
+            {error.isError && <span>{error.massage}</span>}
             <button
               className="mt-4 md:mt-6 py-2 md:py-3 rounded-badge w-full bg-sky-400"
               type="submit"
@@ -62,9 +70,9 @@ export default function FindPassword() {
             </button>
           </form>
           <div className="w-full px-3 py-2">
-            <p className="font-light text-sm">
+            <p className="font-light text-xs">
               처음으로{' '}
-              <Link className="font-bold underline" href={'/'}>
+              <Link className="font-bold underline text-xs" href={'/'}>
                 돌아가기
               </Link>
             </p>
