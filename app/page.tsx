@@ -64,19 +64,19 @@ export default function Hello() {
           </button>
         </div>
 
-        <section className="flex mx-auto w-3/5 sm:w-1/2 justify-center flex-col items-center">
+        <section className="flex mx-auto w-3/5 sm:w-1/2 justify-center flex-col items-center gap-8">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-6 lg:mb-10 cursor-default">
             Welcome!
           </h2>
 
           {/* 폼 영역 */}
           <form
-            className="flex justify-center flex-col gap-4 w-full"
+            className="flex justify-center flex-col gap-8 w-full items-center"
             onSubmit={onSubmit}
           >
             <input
               id="sign_email"
-              className="border border-gray-700 rounded-badge px-4 py-2"
+              className="border border-gray-700 rounded-badge px-4 py-2 lg:w-4/5"
               placeholder="e-mail"
               type="email"
               value={email.value}
@@ -84,7 +84,7 @@ export default function Hello() {
             />
             <input
               id="sign_password"
-              className="border border-gray-700 rounded-badge px-4 py-2"
+              className="border border-gray-700 rounded-badge px-4 py-2 lg:w-4/5"
               placeholder="password"
               type="password"
               value={password.value}
@@ -94,23 +94,23 @@ export default function Hello() {
               <span className="text-red-600 text-xs pl-2">{error.message}</span>
             )}
             <button
-              className="mt-4 md:mt-6 py-2 md:py-3 rounded-badge w-full bg-sky-400"
+              className="mt-4 md:mt-6 py-2 md:py-3 rounded-badge w-full bg-sky-400 lg:w-4/5"
               type="submit"
             >
               시작하기
             </button>
+            <div className="flex w-full px-3 py-2 lg:w-4/5">
+              <p className="font-light text-xs">
+                비밀번호를 잊으셨나요?{' '}
+                <Link
+                  className="font-bold underline text-xs"
+                  href={'/find-password'}
+                >
+                  비밀번호 찾기
+                </Link>
+              </p>
+            </div>
           </form>
-          <div className="w-full px-3 py-2">
-            <p className="font-light text-xs">
-              비밀번호를 잊으셨나요?{' '}
-              <Link
-                className="font-bold underline text-xs"
-                href={'/find-password'}
-              >
-                비밀번호 찾기
-              </Link>
-            </p>
-          </div>
           {/* 영역 분리 */}
           <div className="flex items-center my-4 w-full">
             <hr className="border-1 border-gray-600 w-1/6 md:w-1/5 opacity-60" />
