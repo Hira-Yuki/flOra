@@ -21,7 +21,7 @@ export default function FindPasswordForm() {
   const handleSubmit = async (emailValue: string) => {
     error.reset();
     if (!emailValue) {
-      toast.warning('이메일을 정확히 입력해 주세요.');
+      toast.warning('이메일을 입력해 주세요.');
       return;
     }
 

@@ -2,6 +2,7 @@ import useDebouncedSubmit from '@hooks/useDebounceSubmit';
 import useErrorState from '@hooks/useErrorState';
 import useInput from '@hooks/useInput';
 import { memberApi } from '@lib/api/member';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
@@ -14,6 +15,7 @@ import {
 } from './signInElements';
 
 export default function SignInForm() {
+  const router = useRouter();
   const email = useInput('');
   const password = useInput('');
   const error = useErrorState();
@@ -39,6 +41,7 @@ export default function SignInForm() {
       });
       console.log('member API 응답', data);
       toast.success(data.message);
+      router.push('/dash-board');
     } catch (err) {
       toast.error(err.message);
       console.log(err);
