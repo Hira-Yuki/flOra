@@ -2,7 +2,7 @@ import useMockApi from '@hooks/useMockApi';
 import { BASE_URL, createAxiosInstance } from '@lib/axiosInstance';
 import { AxiosError } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
-import { memberSearch, passwordConfirm } from 'mock/controller';
+import { addMember, memberSearch, passwordConfirm } from 'mock/controller';
 
 interface SignInPayload {
   email: string;
@@ -70,17 +70,18 @@ const setupMockApi = (instance: any) => {
     const requestData = JSON.parse(config.data);
     const { email, password } = requestData;
 
-    // 이메일이 매칭되지 않음 (회원가입 가능)
+    // 이메일이 등록되지 않은 경우 (회원가입 가능)
     if (!memberSearch(email)) {
-      return [200, { message: '회원가입 가능', receivedData: requestData }];
+      addMember(email, password);
+      return [200, { message: '회원가입 성공', receivedData: requestData }];
     }
 
-    // 비밀번호가 매칭되지 않음
-    if (!passwordConfirm(password)) {
+    // 비밀번호가 매칭되지 않는 경우
+    if (!passwordConfirm(email, password)) {
       return [400, { message: '비밀번호가 올바르지 않습니다.' }];
     }
 
-    // 이메일이 이미 존재하고 비밀번호가 맞음 (로그인 성공)
+    // 이메일과 비밀번호가 일치하는 경우 (로그인 성공)
     return [200, { message: '로그인 성공', receivedData: requestData }];
   });
 
@@ -94,7 +95,7 @@ const setupMockApi = (instance: any) => {
       return [400, { message: '가입된 적 없는 이메일 주소입니다.' }];
     }
 
-    // 이메일이 존재함. 인증 메일 발송 처리
+    // 이메일이 존재하는 경우, 인증 메일 발송
     return [
       200,
       {
