@@ -1,16 +1,20 @@
 import useDebouncedSubmit from '@hooks/useDebounceSubmit';
 import useErrorState from '@hooks/useErrorState';
 import useInput from '@hooks/useInput';
+import { memberApi } from '@lib/api/member';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import SignInButton from './signInElements/SignInButton';
 import SignInErrorText from './signInElements/SignInErrorText';
+import SignInFormWrapper from './signInElements/SignInFormWrapper';
 import SignInInput from './signInElements/SignInInput';
 import SignInSwitcher from './signInElements/SignInSwitcher';
 
 export default function FindPasswordForm() {
   const email = useInput('');
   const error = useErrorState();
+  const [inProcess, setInProcess] = useState(false);
 
   const handleSubmit = async (emailValue: string) => {
     error.reset();
@@ -19,12 +23,19 @@ export default function FindPasswordForm() {
       return;
     }
 
+    setInProcess(true);
+
     try {
-      toast.success('인증 메일 발송 성공');
+      const { data } = await memberApi.findPassword({ email: emailValue });
+      console.log('member API 응답', data);
+      toast.success(data.message);
     } catch (err) {
-      toast.error('오류 발생');
+      toast.error(err.message);
       console.log(err);
       error.setError({ massage: err.message, isError: true });
+    } finally {
+      email.reset();
+      setInProcess(false);
     }
   };
 
@@ -36,7 +47,7 @@ export default function FindPasswordForm() {
   };
 
   return (
-    <form className="flex flex-col gap-6 w-full" onSubmit={onSubmit}>
+    <SignInFormWrapper onSubmit={onSubmit}>
       <SignInInput
         id="sign_email"
         placeholder="e-mail"
@@ -45,12 +56,12 @@ export default function FindPasswordForm() {
         onChange={email.onChange}
       />
       {error.isError && <SignInErrorText text={error.message} />}
-      <SignInButton>이메일 발송하기</SignInButton>
+      <SignInButton inProcess={inProcess}>이메일 발송하기</SignInButton>
       <SignInSwitcher
         normalText={'처음으로'}
         linkText={'돌아가기'}
         href={'/'}
       />
-    </form>
+    </SignInFormWrapper>
   );
 }

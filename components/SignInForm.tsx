@@ -2,10 +2,12 @@ import useDebouncedSubmit from '@hooks/useDebounceSubmit';
 import useErrorState from '@hooks/useErrorState';
 import useInput from '@hooks/useInput';
 import { memberApi } from '@lib/api/member';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 
 import SignInButton from './signInElements/SignInButton';
 import SignInErrorText from './signInElements/SignInErrorText';
+import SignInFormWrapper from './signInElements/SignInFormWrapper';
 import SignInInput from './signInElements/SignInInput';
 import SignInSwitcher from './signInElements/SignInSwitcher';
 
@@ -13,6 +15,7 @@ export default function SignInForm() {
   const email = useInput('');
   const password = useInput('');
   const error = useErrorState();
+  const [inProcess, setInProcess] = useState(false);
 
   const resetForm = () => {
     email.reset();
@@ -25,21 +28,23 @@ export default function SignInForm() {
       toast.warning('이메일과 비밀번호를 정확히 입력해 주세요.');
       return;
     }
+    setInProcess(true);
 
     try {
-      const res = await memberApi.signUp({
+      const { data } = await memberApi.signUp({
         email: emailValue,
         password: passwordValue,
       });
-      console.log('로그인 요청 응답', res);
-      toast.success('로그인 요청!!');
+      console.log('member API 응답', data);
+      toast.success(data.message);
     } catch (err) {
       toast.error(err.message);
       console.log(err);
       error.setError({ massage: err.message, isError: true });
+    } finally {
+      resetForm();
+      setInProcess(false);
     }
-
-    resetForm();
   };
 
   const debouncedSubmit = useDebouncedSubmit(handleSubmit);
@@ -50,7 +55,7 @@ export default function SignInForm() {
   };
 
   return (
-    <form className="flex flex-col gap-6 w-full" onSubmit={onSubmit}>
+    <SignInFormWrapper onSubmit={onSubmit}>
       <SignInInput
         id="sign_email"
         placeholder="E-mail"
@@ -66,12 +71,12 @@ export default function SignInForm() {
         onChange={password.onChange}
       />
       {error.isError && <SignInErrorText text={error.message} />}
-      <SignInButton>시작하기</SignInButton>
+      <SignInButton inProcess={inProcess}>시작하기</SignInButton>
       <SignInSwitcher
         normalText={'비밀번호를 잊으셨나요?'}
         linkText={'비밀번호 찾기'}
         href={'/find-password'}
       />
-    </form>
+    </SignInFormWrapper>
   );
 }
