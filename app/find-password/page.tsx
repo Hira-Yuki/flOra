@@ -1,11 +1,13 @@
 'use client';
 
 import FindPasswordForm from '@components/FindPasswordForm';
-import SignInBlock from '@components/signInElements/SignInBlock';
-import SignInLogo from '@components/signInElements/SignInLogo';
-import SignInSection from '@components/signInElements/SignInSection';
-import SignInTitle from '@components/signInElements/SignInTitle';
-import SignInWrapper from '@components/signInElements/SignInWrapper';
+import {
+  SignInBlock,
+  SignInLogo,
+  SignInSection,
+  SignInTitle,
+  SignInWrapper,
+} from '@components/signInElements';
 
 export default function FindPassword() {
   return (

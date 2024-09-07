@@ -5,11 +5,13 @@ import { memberApi } from '@lib/api/member';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
-import SignInButton from './signInElements/SignInButton';
-import SignInErrorText from './signInElements/SignInErrorText';
-import SignInFormWrapper from './signInElements/SignInFormWrapper';
-import SignInInput from './signInElements/SignInInput';
-import SignInSwitcher from './signInElements/SignInSwitcher';
+import {
+  SignInButton,
+  SignInErrorText,
+  SignInFormWrapper,
+  SignInInput,
+  SignInSwitcher,
+} from './signInElements';
 
 export default function FindPasswordForm() {
   const email = useInput('');
