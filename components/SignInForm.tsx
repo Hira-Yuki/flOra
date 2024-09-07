@@ -1,6 +1,7 @@
 import useDebouncedSubmit from '@hooks/useDebounceSubmit';
 import useErrorState from '@hooks/useErrorState';
 import useInput from '@hooks/useInput';
+import { memberApi } from '@lib/api/member';
 import { toast } from 'react-toastify';
 
 import SignInButton from './signInElements/SignInButton';
@@ -26,6 +27,11 @@ export default function SignInForm() {
     }
 
     try {
+      const res = await memberApi.signUp({
+        email: emailValue,
+        password: passwordValue,
+      });
+      console.log('로그인 요청 응답', res);
       toast.success('로그인 요청!!');
     } catch (err) {
       toast.error(err.message);

@@ -9,7 +9,7 @@ module.exports = {
       '@components': path.resolve(__dirname, 'components'),
       '@hooks': path.resolve(__dirname, 'hooks'),
       '@styles': path.resolve(__dirname, 'styles'),
-      '@api': path.resolve(__dirname, 'api'),
+      '@lib': path.resolve(__dirname, 'lib'),
     };
     return config;
   },
