@@ -2,19 +2,19 @@ import { useState } from 'react';
 
 export default function useErrorState(
   initialState = {
-    massage: '',
+    message: '',
     isError: false,
   },
 ) {
   const [errorState, setError] = useState(initialState);
 
   return {
-    message: errorState.massage,
+    message: errorState.message,
     isError: errorState.isError,
     setError,
     reset: () =>
       setError({
-        massage: '',
+        message: '',
         isError: false,
       }),
   };

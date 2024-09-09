@@ -26,26 +26,41 @@ export default function SignInForm() {
     password.reset();
   };
 
-  const handleSubmit = async (emailValue: string, passwordValue: string) => {
+  const displayError = (message) => {
+    toast.warning(message);
+    error.setError({ message: message, isError: true });
+  };
+
+  const handleSubmit = async (email: string, password: string) => {
     error.reset();
-    if (!emailValue || !passwordValue) {
+    if (!email || !password) {
       toast.warning('이메일과 비밀번호를 정확히 입력해 주세요.');
       return;
     }
+
+    const passwordRegex =
+      /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};:/,.?~|])(?!.*[\s]).{8,16}$/;
+
+    if (!passwordRegex.test(password)) {
+      const message =
+        '비밀번호는 8~16자 영문 대 소문자, 숫자, 특수문자를 사용하세요.';
+
+      displayError(message);
+      return;
+    }
+
     setInProcess(true);
 
     try {
       const { data } = await memberApi.signUp({
-        email: emailValue,
-        password: passwordValue,
+        email,
+        password,
       });
-      console.log('member API 응답', data);
+
       toast.success(data.message);
       router.push('/dash-board');
     } catch (err) {
-      toast.error(err.message);
-      console.log(err);
-      error.setError({ massage: err.message, isError: true });
+      displayError(err.message);
     } finally {
       resetForm();
       setInProcess(false);

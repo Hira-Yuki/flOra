@@ -34,7 +34,7 @@ export default function FindPasswordForm() {
     } catch (err) {
       toast.error(err.message);
       console.log(err);
-      error.setError({ massage: err.message, isError: true });
+      error.setError({ message: err.message, isError: true });
     } finally {
       email.reset();
       setInProcess(false);
@@ -51,7 +51,7 @@ export default function FindPasswordForm() {
   return (
     <SignInFormWrapper onSubmit={onSubmit}>
       <SignInInput
-        id="sign_email"
+        id="find_password_email"
         placeholder="e-mail"
         type="email"
         value={email.value}
