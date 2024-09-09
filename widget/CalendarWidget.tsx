@@ -10,22 +10,12 @@ import { useEffect, useState } from 'react';
 */
 const events = [{ date: '2024-09-15' }, { date: '2024-09-22' }];
 
-const seoulTime = new Intl.DateTimeFormat('en-US', {
-  timeZone: 'Asia/Seoul',
-  year: 'numeric',
-  month: '2-digit',
-  day: '2-digit',
-  hour: '2-digit',
-  minute: '2-digit',
-  second: '2-digit',
-}).format(new Date());
-
-const initialDate = new Date(seoulTime);
-
 export default function CalendarWidget() {
   // 현재 날짜를 기준으로 상태 관리
-  const [currentDate, setCurrentDate] = useState<Date | null>(initialDate);
-  const [today, setToday] = useState<Date | null>(initialDate);
+  const [currentDate, setCurrentDate] = useState<Date | null>(
+    new Date(2024, 7, 1),
+  );
+  const [today, setToday] = useState<Date | null>(new Date(2024, 7, 1));
 
   useEffect(() => {
     setToday(new Date());
@@ -114,9 +104,9 @@ export default function CalendarWidget() {
           ).padStart(2, '0')}`;
 
           const isToday =
-            today.getFullYear() === year &&
-            today.getMonth() === currentDate.getMonth() &&
-            today.getDate() === day;
+            today?.getFullYear() === year &&
+            today?.getMonth() === currentDate.getMonth() &&
+            today?.getDate() === day;
 
           return (
             <div key={day} className="flex flex-col items-center relative">
