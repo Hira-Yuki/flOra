@@ -12,10 +12,8 @@ const events = [{ date: '2024-09-15' }, { date: '2024-09-22' }];
 
 export default function CalendarWidget() {
   // 현재 날짜를 기준으로 상태 관리
-  const [currentDate, setCurrentDate] = useState<Date | null>(
-    new Date(2024, 7, 1),
-  );
-  const [today, setToday] = useState<Date | null>(new Date(2024, 7, 1));
+  const [currentDate, setCurrentDate] = useState<Date | null>(null);
+  const [today, setToday] = useState<Date | null>(null);
 
   useEffect(() => {
     setToday(new Date());
