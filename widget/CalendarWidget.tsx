@@ -10,7 +10,17 @@ import { useEffect, useState } from 'react';
 */
 const events = [{ date: '2024-09-15' }, { date: '2024-09-22' }];
 
-const initialDate = new Date();
+const seoulTime = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'Asia/Seoul',
+  year: 'numeric',
+  month: '2-digit',
+  day: '2-digit',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+}).format(new Date());
+
+const initialDate = new Date(seoulTime);
 
 export default function CalendarWidget() {
   // 현재 날짜를 기준으로 상태 관리
