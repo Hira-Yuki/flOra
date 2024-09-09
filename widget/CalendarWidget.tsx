@@ -81,8 +81,8 @@ export default function CalendarWidget() {
       </div>
       <div className="grid grid-cols-7 text-center gap-y-1">
         {/* 요일 */}
-        {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day) => (
-          <span key={day} className="text-gray-400">
+        {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, index) => (
+          <span key={`${day}-${index}`} className="text-gray-400">
             {day}
           </span>
         ))}
