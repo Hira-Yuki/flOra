@@ -57,9 +57,9 @@ export default function ServerCalendar({
   );
 
   return (
-    <div className="bg-gray-700 rounded-2xl p-4 min-w-[422px] text-gray-100 shadow-lg">
+    <div className="bg-gray-700 rounded-2xl p-4 w-full max-w-[422px] text-gray-100 shadow-lg">
       <div className="flex justify-between items-center mb-2">
-        <span className="text-white font-semibold text-xl ml-2">
+        <span className="text-white font-semibold text-lg sm:text-xl ml-2">
           {monthName}
         </span>
         <div className="flex justify-center items-center">
@@ -82,7 +82,10 @@ export default function ServerCalendar({
       </div>
       <div className="grid grid-cols-7 text-center gap-y-1">
         {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, index) => (
-          <span key={`${day}-${index}`} className="text-gray-400">
+          <span
+            key={`${day}-${index}`}
+            className="text-gray-400 text-xs sm:text-sm"
+          >
             {day}
           </span>
         ))}
@@ -102,12 +105,12 @@ export default function ServerCalendar({
           return (
             <div key={day} className="flex flex-col items-center relative">
               <span
-                className={`flex items-center justify-center w-6 h-6 rounded-full cursor-pointer hover:bg-gray-600 transition ${isToday && 'bg-red-400'}`}
+                className={`flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 rounded-full cursor-pointer hover:bg-gray-600 transition ${isToday && 'bg-red-400'}`}
               >
                 {day}
               </span>
               {hasEvent(date) && (
-                <div className="w-1 h-1 bg-red-400 rounded-full absolute top-6"></div>
+                <div className="w-1 h-1 bg-red-400 rounded-full absolute top-6 sm:top-8"></div>
               )}
             </div>
           );

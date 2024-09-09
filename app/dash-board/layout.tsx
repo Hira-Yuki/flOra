@@ -15,7 +15,7 @@ export default function DashBoardLayout({
     <div className="h-screen w-screen flex">
       {/* 사이드바 */}
       <div
-        className={`h-full w-24 bg-gray-300 fixed md:static flex-col items-center pt-6 transition-transform transform md:translate-x-0 hidden md:flex`}
+        className={`h-full w-24 bg-gray-300 fixed md:static flex-col items-center p-6 transition-transform transform md:translate-x-0 hidden md:flex`}
       >
         <ul className="flex flex-col gap-10 h-full text-white">
           {MENU_NAMES.map((item, index) => (
@@ -32,7 +32,6 @@ export default function DashBoardLayout({
       {/* 콘텐츠 영역 */}
       <div className="flex-1 flex flex-col ml-0">
         {/* 헤더 */}
-
         <div className="h-24 w-full py-8 flex items-center justify-between">
           <div className="flex justify-center items-center ml-2">
             <h2 className="text-4xl font-bold pl-8">Dashboard</h2>
@@ -50,7 +49,7 @@ export default function DashBoardLayout({
         {/* 메인 콘텐츠 */}
         <div className="p-8">{children}</div>
         {/* 하단 메뉴 */}
-        <nav className="absolute bottom-0 text-xl md:hidden bg-slate-400 h-24 flex">
+        <div className="absolute bottom-0 text-xl md:hidden bg-slate-400 h-24 flex">
           <ul className="flex flex-row gap-10 w-screen text-white items-center justify-between px-7">
             {MENU_NAMES.map((item) => (
               <li
@@ -61,7 +60,7 @@ export default function DashBoardLayout({
               </li>
             ))}
           </ul>
-        </nav>
+        </div>
       </div>
     </div>
   );
