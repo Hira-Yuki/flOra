@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /** 
 예시 일정 데이터 
@@ -13,7 +13,11 @@ const events = [{ date: '2024-09-15' }, { date: '2024-09-22' }];
 export default function CalendarWidget() {
   // 현재 날짜를 기준으로 상태 관리
   const [currentDate, setCurrentDate] = useState(new Date());
-  const today = new Date(); // 오늘 날짜
+  const [today, setToday] = useState(new Date());
+
+  useEffect(() => {
+    setToday(new Date());
+  }, []);
 
   // 일정이 있는 날짜인지 확인하는 함수
   const hasEvent = (date: string) => {
