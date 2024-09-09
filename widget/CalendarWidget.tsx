@@ -5,7 +5,7 @@ import { Suspense, useEffect, useState } from 'react';
 import LoadingWidget from './LoadingWidget';
 import ServerCalendar from './ServerCalendar';
 
-export default function ClientCalendar() {
+export default function CalendarWidget() {
   const [timeZone, setTimeZone] = useState<string | null>(null);
   const [currentDate, setCurrentDate] = useState<Date | null>(null);
   const today = new Date();
