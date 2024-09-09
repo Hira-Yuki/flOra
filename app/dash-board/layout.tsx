@@ -36,7 +36,7 @@ export default function DashBoardLayout({
       <div className="flex-1 flex flex-col ml-0">
         {/* 헤더 */}
 
-        <div className="h-24 w-full py-8 flex items-center justify-between">
+        <div className="h-24 w-full py-8 flex items-center justify-between bg-cyan-400">
           <div className="flex justify-center items-center ml-2">
             {/* 햄버거 버튼 */}
             <button className="md:hidden p-2">
@@ -47,7 +47,7 @@ export default function DashBoardLayout({
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-10 h-10"
+                className="w-14 h-14"
               >
                 <path
                   strokeLinecap="round"
@@ -56,9 +56,9 @@ export default function DashBoardLayout({
                 />
               </svg>
             </button>
-            <h2 className="text-4xl">Dashboard</h2>
+            <h2 className="text-4xl font-bold pl-8">Dashboard</h2>
           </div>
-          <div className="flex gap-2 mr-2 text-white">
+          <div className="flex gap-6 mr-8 text-white">
             <div className="w-10 h-10 bg-gray-500 text-center flex items-center justify-center">
               검색
             </div>
@@ -69,7 +69,10 @@ export default function DashBoardLayout({
         </div>
 
         {/* 메인 콘텐츠 */}
-        <div className="p-2">{children}</div>
+        <div className="p-8">{children}</div>
+        <nav className="absolute bottom-0 text-2xl md:hidden">
+          여기에 메뉴를 만들면 되죠~~
+        </nav>
       </div>
     </div>
   );

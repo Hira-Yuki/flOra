@@ -14,6 +14,11 @@ export default function ServerCalendar({
   onNextMonth,
   today,
 }: ServerCalendarProps) {
+  /**
+   * **********************
+   * 임시 데이터임!!!!!
+   * **********************
+   */
   const events = [{ date: '2024-09-15' }, { date: '2024-09-22' }];
 
   // 일정이 있는 날짜인지 확인하는 함수
