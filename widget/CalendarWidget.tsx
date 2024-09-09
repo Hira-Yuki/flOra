@@ -12,11 +12,12 @@ const events = [{ date: '2024-09-15' }, { date: '2024-09-22' }];
 
 export default function CalendarWidget() {
   // 현재 날짜를 기준으로 상태 관리
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [today, setToday] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState<Date | null>(null);
+  const [today, setToday] = useState<Date | null>(null);
 
   useEffect(() => {
     setToday(new Date());
+    setCurrentDate(new Date());
   }, []);
 
   // 일정이 있는 날짜인지 확인하는 함수
@@ -26,10 +27,10 @@ export default function CalendarWidget() {
 
   // 현재 보고 있는 월의 이름과 년도 가져오기
   const monthName = currentDate
-    .toLocaleString('default', { month: 'short' })
-    .toUpperCase();
+    ?.toLocaleString('default', { month: 'short' })
+    ?.toUpperCase();
 
-  const year = currentDate.getFullYear();
+  const year = currentDate?.getFullYear();
 
   // 현재 월의 날짜 배열 생성
   const getDaysInMonth = (year: number, month: number) => {
@@ -42,8 +43,8 @@ export default function CalendarWidget() {
     return new Date(year, month, 1).getDay();
   };
 
-  const daysInMonth = getDaysInMonth(year, currentDate.getMonth());
-  const firstDayIndex = getFirstDayOfMonth(year, currentDate.getMonth());
+  const daysInMonth = getDaysInMonth(year, currentDate?.getMonth());
+  const firstDayIndex = getFirstDayOfMonth(year, currentDate?.getMonth());
 
   // 이전 달로 이동
   const goToPreviousMonth = () => {
