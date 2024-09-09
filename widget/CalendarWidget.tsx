@@ -10,10 +10,12 @@ import { useEffect, useState } from 'react';
 */
 const events = [{ date: '2024-09-15' }, { date: '2024-09-22' }];
 
+const initialDate = new Date();
+
 export default function CalendarWidget() {
   // 현재 날짜를 기준으로 상태 관리
-  const [currentDate, setCurrentDate] = useState<Date | null>(null);
-  const [today, setToday] = useState<Date | null>(null);
+  const [currentDate, setCurrentDate] = useState<Date | null>(initialDate);
+  const [today, setToday] = useState<Date | null>(initialDate);
 
   useEffect(() => {
     setToday(new Date());
