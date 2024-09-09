@@ -6,5 +6,5 @@
     "source.fixAll.eslint": "always",
     "source.organizeImports": "always"
   },
-  "cSpell.words": ["daisyui", "Parens", "tailwindcss", "toastify"]
+  "cSpell.words": ["daisyui", "Parens", "Pretendard", "tailwindcss", "toastify"]
 }

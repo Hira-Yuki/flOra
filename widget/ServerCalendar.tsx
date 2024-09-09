@@ -57,7 +57,7 @@ export default function ServerCalendar({
   );
 
   return (
-    <div className="bg-gray-700 rounded-2xl p-4 w-96 text-gray-100 shadow-lg">
+    <div className="bg-gray-700 rounded-2xl p-4 min-w-[422px] text-gray-100 shadow-lg">
       <div className="flex justify-between items-center mb-2">
         <span className="text-white font-semibold text-xl ml-2">
           {monthName}
@@ -102,7 +102,7 @@ export default function ServerCalendar({
           return (
             <div key={day} className="flex flex-col items-center relative">
               <span
-                className={`flex items-center justify-center w-6 h-6 rounded-full cursor-pointer hover:bg-gray-600 transition ${isToday ? 'bg-red-400' : ''}`}
+                className={`flex items-center justify-center w-6 h-6 rounded-full cursor-pointer hover:bg-gray-600 transition ${isToday && 'bg-red-400'}`}
               >
                 {day}
               </span>

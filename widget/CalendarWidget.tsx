@@ -37,7 +37,7 @@ export default function CalendarWidget() {
   };
 
   return (
-    <Suspense fallback={<LoadingWidget size={'w-96 h-52'} />}>
+    <Suspense fallback={<LoadingWidget size={'w-[422px]'} />}>
       {isReady && (
         <ServerCalendar
           timeZone={timeZone}
