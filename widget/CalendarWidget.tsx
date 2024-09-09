@@ -8,12 +8,16 @@ import ServerCalendar from './ServerCalendar';
 export default function CalendarWidget() {
   const [timeZone, setTimeZone] = useState<string | null>(null);
   const [currentDate, setCurrentDate] = useState<Date | null>(null);
-  const today = new Date();
+  const [today, setToday] = useState<Date | null>(null);
+
+  const isReady = timeZone && currentDate && today;
 
   useEffect(() => {
+    const now = new Date();
     const clientTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     setTimeZone(clientTimeZone);
-    setCurrentDate(new Date());
+    setCurrentDate(now);
+    setToday(now);
   }, []);
 
   const goToPreviousMonth = () => {
@@ -34,7 +38,7 @@ export default function CalendarWidget() {
 
   return (
     <Suspense fallback={<LoadingWidget size={'w-96 h-52'} />}>
-      {timeZone && currentDate && (
+      {isReady && (
         <ServerCalendar
           timeZone={timeZone}
           currentDate={currentDate}
