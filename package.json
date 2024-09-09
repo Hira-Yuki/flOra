@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "build": "next build",
+    "start": "next start"
   },
   "author": "",
   "license": "MIT",
