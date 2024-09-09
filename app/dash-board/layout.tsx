@@ -32,7 +32,7 @@ export default function DashBoardLayout({
       {/* 콘텐츠 영역 */}
       <div className="flex-1 flex flex-col ml-0">
         {/* 헤더 */}
-        <div className="h-24 w-full py-8 flex items-center justify-between">
+        <div className="h-24 w-full py-8 flex items-center justify-between bg-white">
           <div className="flex justify-center items-center ml-2">
             <h2 className="text-4xl font-bold pl-8">Dashboard</h2>
           </div>
@@ -47,9 +47,9 @@ export default function DashBoardLayout({
         </div>
 
         {/* 메인 콘텐츠 */}
-        <div className="p-8">{children}</div>
+        <div className="p-8 pb-32 md:pb-8 md:overflow-hidden">{children}</div>
         {/* 하단 메뉴 */}
-        <div className="absolute bottom-0 text-xl md:hidden bg-slate-400 h-24 flex">
+        <div className="fixed bottom-0 text-xl md:hidden bg-slate-400 h-24 flex">
           <ul className="flex flex-row gap-10 w-screen text-white items-center justify-between px-7">
             {MENU_NAMES.map((item) => (
               <li
