@@ -1,3 +1,5 @@
+import { MENU_NAMES } from 'constants/menu';
+
 export const metadata = {
   title: 'flOra - 대시보드',
 };
@@ -7,8 +9,7 @@ export default function DashBoardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const menuName = ['홈', '캘린더', '타이머', '플로라', '프로필'];
-  const menuNameLength = menuName.length;
+  const menuNamesLength = MENU_NAMES.length;
 
   return (
     <div className="h-screen w-screen flex">
@@ -17,10 +18,10 @@ export default function DashBoardLayout({
         className={`h-full w-24 bg-gray-300 fixed md:static flex-col items-center pt-6 transition-transform transform md:translate-x-0 hidden md:flex`}
       >
         <ul className="flex flex-col gap-10 h-full text-white">
-          {menuName.map((item, index) => (
+          {MENU_NAMES.map((item, index) => (
             <li
               key={`${item}-${index}`}
-              className={`w-14 h-14 bg-gray-500 text-center flex items-center justify-center ${index + 1 === menuNameLength && 'mt-auto mb-6'}`}
+              className={`w-14 h-14 bg-gray-500 text-center flex items-center justify-center ${index + 1 === menuNamesLength && 'mt-auto mb-6'}`}
             >
               {item}
             </li>
@@ -51,7 +52,7 @@ export default function DashBoardLayout({
         {/* 하단 메뉴 */}
         <nav className="absolute bottom-0 text-xl md:hidden bg-slate-400 h-24 flex">
           <ul className="flex flex-row gap-10 w-screen text-white items-center justify-between px-7">
-            {menuName.map((item) => (
+            {MENU_NAMES.map((item) => (
               <li
                 key={item}
                 className="w-14 h-14 bg-gray-500 text-center flex items-center justify-center"
