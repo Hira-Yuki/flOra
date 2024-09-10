@@ -21,7 +21,7 @@ module.exports = {
         indexYellow: '#FFDD94',
         indexGreen: '#D0E6A5',
         indexCyan: '#86DDE3',
-        indexRa: '#CCABD8',
+        indexLavender: '#CCABD8',
       },
     },
   },

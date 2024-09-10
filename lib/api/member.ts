@@ -19,7 +19,7 @@ interface FindPasswordPayload {
 }
 
 // member API 인스턴스 생성
-export const memberInstance = createAxiosInstance(`${BASE_URL}/user`);
+export const memberInstance = createAxiosInstance(`${BASE_URL}/members`);
 
 // 요청 인터셉터 설정 함수
 const requestInterceptor = (config: any) => {
