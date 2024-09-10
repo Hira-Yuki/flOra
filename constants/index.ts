@@ -7,7 +7,7 @@ export const MENU_NAMES = [
 ] as const;
 
 export const ROUTE_LISTS = {
-  home: '/service/dash-board',
+  dashBoard: '/service/dash-board',
   findPassword: '/find-password',
-  signIn: '/',
+  signIn: '/sign-in',
 } as const;

@@ -59,7 +59,7 @@ export default function SignInForm() {
       });
 
       toast.success(data.message);
-      router.push(ROUTE_LISTS.home);
+      router.push(ROUTE_LISTS.dashBoard);
     } catch (err) {
       displayError(err.message);
     } finally {
