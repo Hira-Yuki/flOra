@@ -20,30 +20,12 @@ export default function CalendarWidget() {
     setToday(now);
   }, []);
 
-  const goToPreviousMonth = () => {
-    if (currentDate) {
-      setCurrentDate(
-        new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1),
-      );
-    }
-  };
-
-  const goToNextMonth = () => {
-    if (currentDate) {
-      setCurrentDate(
-        new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1),
-      );
-    }
-  };
-
   return (
     <Suspense fallback={<LoadingWidget size={'w-[422px]'} />}>
       {isReady && (
         <ServerCalendar
           timeZone={timeZone}
           currentDate={currentDate}
-          onPreviousMonth={goToPreviousMonth}
-          onNextMonth={goToNextMonth}
           today={today}
         />
       )}

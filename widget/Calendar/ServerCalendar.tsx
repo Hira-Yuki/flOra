@@ -1,31 +1,16 @@
-// app/ServerCalendar.tsx
+import WidgetWrapper from '@components/widgetElements/small/WidgetWrapper';
+
 interface ServerCalendarProps {
   timeZone: string;
   currentDate: Date;
-  onPreviousMonth: () => void;
-  onNextMonth: () => void;
   today: Date;
 }
 
 export default function ServerCalendar({
   timeZone,
   currentDate,
-  onPreviousMonth,
-  onNextMonth,
   today,
 }: ServerCalendarProps) {
-  /**
-   * **********************
-   * 임시 데이터임!!!!!
-   * **********************
-   */
-  const events = [{ date: '2024-09-15' }, { date: '2024-09-22' }];
-
-  // 일정이 있는 날짜인지 확인하는 함수
-  const hasEvent = (date: string) => {
-    return events.some((event) => event.date === date);
-  };
-
   const monthName = new Intl.DateTimeFormat('en-US', {
     month: 'short',
     timeZone,
@@ -57,34 +42,17 @@ export default function ServerCalendar({
   );
 
   return (
-    <div className="bg-gray-700 rounded-2xl p-4 w-full max-w-[422px] text-gray-100 shadow-lg">
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-white font-semibold text-lg sm:text-xl ml-2">
+    <WidgetWrapper>
+      <div className="flex justify-between items-center mb-1">
+        <span className="font-semibold text-lg sm:text-xl ml-2 text-floraOlive">
           {monthName}
         </span>
-        <div className="flex justify-center items-center">
-          {/* 이전 월로 이동 버튼 */}
-          <button
-            onClick={onPreviousMonth}
-            className="text-white p-2 rounded-full hover:bg-gray-600 transition"
-          >
-            &lt;
-          </button>
-          {year}
-          {/* 다음 월로 이동 버튼 */}
-          <button
-            onClick={onNextMonth}
-            className="text-white p-2 rounded-full hover:bg-gray-600 transition"
-          >
-            &gt;
-          </button>
-        </div>
       </div>
-      <div className="grid grid-cols-7 text-center gap-y-1">
+      <div className="grid grid-cols-7 text-center gap-y-0.5">
         {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, index) => (
           <span
             key={`${day}-${index}`}
-            className="text-gray-400 text-xs sm:text-sm"
+            className={`text-mainText text-xs sm:text-sm font-bold ${day === 'S' && 'text-subText'}`}
           >
             {day}
           </span>
@@ -93,29 +61,33 @@ export default function ServerCalendar({
           <div key={`empty-${index}`} />
         ))}
         {daysInMonth.map((day) => {
-          const date = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(
+          const date = new Date(
+            currentDate.getFullYear(),
+            currentDate.getMonth(),
             day,
-          ).padStart(2, '0')}`;
-
+          );
+          const dayOfWeek = date.getDay();
           const isToday =
             today.getFullYear() === Number(year) &&
             today.getMonth() === currentDate.getMonth() &&
             today.getDate() === day;
 
+          const dayClass =
+            dayOfWeek === 0 || dayOfWeek === 6
+              ? 'text-gray-500'
+              : 'text-mainText';
+
           return (
             <div key={day} className="flex flex-col items-center relative">
               <span
-                className={`flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 rounded-full cursor-pointer hover:bg-gray-600 transition ${isToday && 'bg-red-400'}`}
+                className={`flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 rounded-full cursor-pointer hover:bg-floraWhite transition ${isToday && 'bg-floraYellow'} ${dayClass}`}
               >
                 {day}
               </span>
-              {hasEvent(date) && (
-                <div className="w-1 h-1 bg-red-400 rounded-full absolute top-6 sm:top-8"></div>
-              )}
             </div>
           );
         })}
       </div>
-    </div>
+    </WidgetWrapper>
   );
 }
