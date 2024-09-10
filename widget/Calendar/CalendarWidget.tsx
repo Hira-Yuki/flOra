@@ -2,7 +2,7 @@
 
 import { Suspense, useEffect, useState } from 'react';
 
-import LoadingWidget from './LoadingWidget';
+import LoadingWidget from '../LoadingWidget';
 import ServerCalendar from './ServerCalendar';
 
 export default function CalendarWidget() {
