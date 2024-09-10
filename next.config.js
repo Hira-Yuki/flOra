@@ -10,6 +10,7 @@ module.exports = {
       '@hooks': path.resolve(__dirname, 'hooks'),
       '@styles': path.resolve(__dirname, 'styles'),
       '@lib': path.resolve(__dirname, 'lib'),
+      '@constants': path.resolve(__dirname, 'constants'),
     };
     return config;
   },

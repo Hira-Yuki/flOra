@@ -2,6 +2,7 @@ import useDebouncedSubmit from '@hooks/useDebounceSubmit';
 import useErrorState from '@hooks/useErrorState';
 import useInput from '@hooks/useInput';
 import { memberApi } from '@lib/api/member';
+import { ROUTE_LISTS } from 'constants/index';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -58,7 +59,7 @@ export default function SignInForm() {
       });
 
       toast.success(data.message);
-      router.push('/dash-board');
+      router.push(ROUTE_LISTS.home);
     } catch (err) {
       displayError(err.message);
     } finally {
@@ -95,7 +96,7 @@ export default function SignInForm() {
       <SignInSwitcher
         normalText={'비밀번호를 잊으셨나요?'}
         linkText={'비밀번호 찾기'}
-        href={'/find-password'}
+        href={ROUTE_LISTS.findPassword}
       />
     </SignInFormWrapper>
   );

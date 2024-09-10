@@ -1,3 +1,4 @@
+import { ROUTE_LISTS } from '@constants';
 import useDebouncedSubmit from '@hooks/useDebounceSubmit';
 import useErrorState from '@hooks/useErrorState';
 import useInput from '@hooks/useInput';
@@ -62,7 +63,7 @@ export default function FindPasswordForm() {
       <SignInSwitcher
         normalText={'처음으로'}
         linkText={'돌아가기'}
-        href={'/'}
+        href={ROUTE_LISTS.signIn}
       />
     </SignInFormWrapper>
   );
