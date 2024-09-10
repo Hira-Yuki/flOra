@@ -56,7 +56,7 @@ export default function ServiceLayout({
         <ul className="flex flex-row w-screen text-white items-center justify-around">
           {MENU_ICONS.map(({ component: IconComponent, key }) => (
             <li key={key}>
-              <IconComponent className="w-10 h-10 sm:w-14 sm:h-14 text-floraOlive" />
+              <IconComponent className="w-14 h-14 text-floraOlive" />
             </li>
           ))}
         </ul>

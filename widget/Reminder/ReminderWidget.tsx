@@ -4,45 +4,48 @@ export default function ReminderWidget() {
   return (
     <WidgetWrapper>
       <div className="flex h-full">
-        <div className="pr-9 h-full">
+        <div className="pr-9 h-full min-w-32">
           <div>
-            <span className="text-white font-bold text-xs md:text-sm">SEP</span>
+            <span className="text-floraOlive font-bold text-xs md:text-sm">
+              SEP
+            </span>
           </div>
           <div>
             <span className="text-5xl text-black font-bold">22</span>
           </div>
           <div>
-            <span className="text-orange-700 font-bold">SUNDAY</span>
+            <span className="text-floraGreen font-bold">Wednesday</span>
           </div>
         </div>
         <div className="flex-1 pt-6">
           <ul className="flex flex-col gap-4 overflow-scroll max-h-56 pr-1 font-semibold">
-            <li className="text-lg leading-none pl-2 border-l-2 border-gray-400">
+            <li className="text-lg leading-none pl-2 relative">
+              {/* 가상 요소를 이용한 둥근 선 */}
+              <span className="absolute left-0 top-0 bottom-0 w-1 bg-indexRed rounded-full"></span>
               <p>Lorem ipsum dolor sit</p>
             </li>
-            <li className="text-lg leading-none pl-2 border-l-2 border-gray-400">
+            <li className="text-lg leading-none pl-2 relative">
+              <span className="absolute left-0 top-0 bottom-0 w-1 bg-indexRed rounded-full"></span>
               <p>Lorem ipsum dolor sit</p>
             </li>
-            <li className="text-lg leading-none pl-2 border-l-2 border-gray-400">
+            <li className="text-lg leading-none pl-2 relative">
+              <span className="absolute left-0 top-0 bottom-0 w-1 bg-indexYellow rounded-full"></span>
               <p>Lorem ipsum dolor sit</p>
             </li>
-            <li className="text-lg leading-none pl-2 border-l-2 border-gray-400">
-              <p>Lorem ipsum dolor sit</p>
-              <p className="text-sm font-medium mt-1">10:00-11:00</p>
-            </li>
-            <li className="text-lg leading-none pl-2 border-l-2 border-gray-400">
+            <li className="text-lg leading-none pl-2 relative">
+              <span className="absolute left-0 top-0 bottom-0 w-1 bg-indexCyan rounded-full"></span>
               <p>Lorem ipsum dolor sit</p>
             </li>
-            <li className="text-lg leading-none pl-2 border-l-2 border-gray-400">
+            <li className="text-lg leading-none pl-2 relative">
+              <span className="absolute left-0 top-0 bottom-0 w-1 bg-indexLavender rounded-full"></span>
               <p>Lorem ipsum dolor sit</p>
             </li>
-            <li className="text-lg leading-none pl-2 border-l-2 border-gray-400">
+            <li className="text-lg leading-none pl-2 relative">
+              <span className="absolute left-0 top-0 bottom-0 w-1 bg-indexGreen rounded-full"></span>
               <p>Lorem ipsum dolor sit</p>
             </li>
-            <li className="text-lg leading-none pl-2 border-l-2 border-gray-400">
-              <p>Lorem ipsum dolor sit</p>
-            </li>
-            <li className="text-lg leading-none pl-2 border-l-2 border-gray-400">
+            <li className="text-lg leading-none pl-2 relative">
+              <span className="absolute left-0 top-0 bottom-0 w-1 bg-indexGreen rounded-full"></span>
               <p>Lorem ipsum dolor sit</p>
             </li>
           </ul>
