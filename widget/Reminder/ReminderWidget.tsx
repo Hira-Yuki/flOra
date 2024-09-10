@@ -31,6 +31,9 @@ export default function ReminderWidget() {
             <li className="text-lg leading-none pl-2 relative">
               <span className="absolute left-0 top-0 bottom-0 w-1 bg-indexYellow rounded-full"></span>
               <p>Lorem ipsum dolor sit</p>
+              <p className="text-sm font-medium mt-1 text-descText">
+                10:00-11:00
+              </p>
             </li>
             <li className="text-lg leading-none pl-2 relative">
               <span className="absolute left-0 top-0 bottom-0 w-1 bg-indexCyan rounded-full"></span>
