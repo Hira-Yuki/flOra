@@ -12,7 +12,7 @@ export default function FooterMenu() {
       <ul className="flex flex-row w-screen items-center justify-around">
         {MENU_ICONS.map(({ component: IconComponent, path }) => (
           <li key={path}>
-            <Link href={path}>
+            <Link aria-label={path} href={path}>
               <IconComponent
                 className={`w-10 h-10 text-floraGreen hover:text-floraYellow ${pathname === path ? 'text-floraWhite' : 'text-floraGreen'}`}
               />

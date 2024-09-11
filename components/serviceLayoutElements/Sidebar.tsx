@@ -12,7 +12,7 @@ export default function Sidebar() {
       <ul className="flex flex-col gap-10 h-full items-center">
         {MENU_ICONS.map(({ component: IconComponent, path }) => (
           <li key={path}>
-            <Link href={path}>
+            <Link aria-label={path} href={path}>
               <IconComponent
                 className={`w-10 h-10 text-floraGreen cursor-pointer hover:text-floraYellow ${pathname === path ? 'text-floraWhite' : 'text-floraGreen'}`}
               />
