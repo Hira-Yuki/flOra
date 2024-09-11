@@ -8,14 +8,14 @@ export default function Home() {
       <Link
         href={ROUTE_LISTS.dashBoard}
         type="button"
-        className="rounded bg-slate-500 p-4 text-white"
+        className="rounded bg-floraGreen p-4 text-white"
       >
         대시보드로 가기
       </Link>
       <Link
         href={ROUTE_LISTS.signIn}
         type="button"
-        className="rounded bg-slate-500 p-4 text-white"
+        className="rounded bg-floraGreen-500 p-4 text-white"
       >
         로그인 화면으로 가기
       </Link>
