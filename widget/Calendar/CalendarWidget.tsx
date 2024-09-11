@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import LoadingWidget from '../LoadingWidget';
 import ServerCalendar from './ServerCalendar';
@@ -21,14 +21,16 @@ export default function CalendarWidget() {
   }, []);
 
   return (
-    <Suspense fallback={<LoadingWidget size={'w-[422px]'} />}>
-      {isReady && (
+    <>
+      {isReady ? (
         <ServerCalendar
           timeZone={timeZone}
           currentDate={currentDate}
           today={today}
         />
+      ) : (
+        <LoadingWidget size={'w-[422px] h-[280px]'} />
       )}
-    </Suspense>
+    </>
   );
 }

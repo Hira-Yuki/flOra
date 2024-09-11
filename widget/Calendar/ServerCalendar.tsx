@@ -18,11 +18,6 @@ export default function ServerCalendar({
     .format(currentDate)
     .toUpperCase();
 
-  const year = new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    timeZone,
-  }).format(currentDate);
-
   const getDaysInMonth = (year: number, month: number) => {
     const date = new Date(year, month + 1, 0);
     return Array.from({ length: date.getDate() }, (_, i) => i + 1);
@@ -36,6 +31,7 @@ export default function ServerCalendar({
     currentDate.getFullYear(),
     currentDate.getMonth(),
   );
+
   const firstDayIndex = getFirstDayOfMonth(
     currentDate.getFullYear(),
     currentDate.getMonth(),
@@ -67,10 +63,7 @@ export default function ServerCalendar({
             day,
           );
           const dayOfWeek = date.getDay();
-          const isToday =
-            today.getFullYear() === Number(year) &&
-            today.getMonth() === currentDate.getMonth() &&
-            today.getDate() === day;
+          const isToday = today.getDate() === day;
 
           const dayClass =
             dayOfWeek === 0 || dayOfWeek === 6
@@ -80,7 +73,8 @@ export default function ServerCalendar({
           return (
             <div key={day} className="flex flex-col items-center relative">
               <span
-                className={`flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 rounded-full cursor-pointer hover:bg-floraWhite transition ${isToday && 'bg-floraYellow'} ${dayClass}`}
+                className={`flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 font-semibold rounded-full 
+                  cursor-pointer hover:bg-floraWhite transition ${isToday && 'bg-floraYellow'} ${dayClass}`}
               >
                 {day}
               </span>
