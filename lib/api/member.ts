@@ -1,4 +1,4 @@
-import useMockApi from '@hooks/useMockApi';
+import { useMockApi } from '@hooks';
 import { BASE_URL, createAxiosInstance } from '@lib/axiosInstance';
 import { AxiosError } from 'axios';
 import MockAdapter from 'axios-mock-adapter';

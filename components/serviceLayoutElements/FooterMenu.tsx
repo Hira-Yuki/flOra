@@ -1,5 +1,5 @@
 'use client';
-import useMenuList from '@hooks/useMenuList';
+import { useMenuList } from '@hooks';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 

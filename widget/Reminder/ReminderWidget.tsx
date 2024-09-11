@@ -31,7 +31,6 @@ export default function ReminderWidget() {
               <span className="absolute left-0 top-0 bottom-0 w-1 bg-indexRed rounded-full" />
               <p className="text-ellipsis line-clamp-2">
                 Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor
-                sit Lorem ipsum dolor Lorem ipsum dolor sit sit
               </p>
             </li>
             <li className="text-lg leading-none pl-2 relative">
@@ -39,8 +38,6 @@ export default function ReminderWidget() {
               <p className="text-ellipsis line-clamp-2">
                 Lorem ipsum dolor sit Lorem ipsum dolor sit Lorem ipsum dolor
                 sit Lorem ipsum dolor Lorem ipsum dolor sit sitLorem ipsum dolor
-                sit Lorem ipsum dolor sit Lorem ipsum dolor Lorem ipsum dolor
-                sit sit
               </p>
               <p className="text-sm font-medium mt-1 text-descText">
                 10:00-11:00

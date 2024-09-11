@@ -20,7 +20,7 @@
     "baseUrl": ".",
     "paths": {
       "@components/*": ["components/*"],
-      "@hooks/*": ["hooks/*"],
+      "@hooks": ["hooks/index"],
       "@styles/*": ["styles/*"],
       "@lib/*": ["lib/*"],
       "@constants": ["constants/index"]
