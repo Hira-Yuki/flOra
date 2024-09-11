@@ -56,6 +56,7 @@ export default function MotivationWidget() {
       textarea.style.height = `${textarea.scrollHeight}px`; // 내용에 맞게 높이 설정
     }
   };
+
   const handleSave = async () => {
     try {
       // do something...
@@ -64,6 +65,7 @@ export default function MotivationWidget() {
       console.log(err);
     }
   };
+
   const handleBlur = () => {
     setIsEdit(false);
     handleSave();
@@ -95,7 +97,7 @@ export default function MotivationWidget() {
             onKeyDown={handleKeyDown}
             onFocus={handleFocus}
             onBlur={handleBlur}
-            className="bg-floraBeige font-bold w-full text-4xl line-clamp-2 outline-none resize-none enabled:border-floraYellow enabled:border-2 text-center leading-relaxed"
+            className="bg-floraBeige font-bold w-full text-4xl line-clamp-2 outline-none resize-none  enabled:-mt-1 enabled:border-floraYellow enabled:border-2 text-center leading-relaxed"
             style={{
               display: 'flex',
               justifyItems: 'center',

@@ -19,9 +19,15 @@ export default function ServiceLayout({
       <div className="z-10 w-full h-24 md:h-32 py-1 fixed flex items-center md:pl-24 transition-transform transform justify-between bg-floraWhite">
         <h2 className="text-5xl font-bold pl-8 cursor-default">Dashboard</h2>
         <div className="flex gap-2 md:gap-6 mr-2 md:mr-8">
-          <SearchIcon className={'w-10 h-10 md:w-10 md:h-10 text-floraGreen'} />
+          <SearchIcon
+            className={
+              'w-10 h-10 md:w-10 md:h-10 text-floraGreen cursor-pointer hover:text-floraYellow'
+            }
+          />
           <NotificationIcon
-            className={'w-10 h-10 md:w-10 md:h-10 text-floraGreen'}
+            className={
+              'w-10 h-10 md:w-10 md:h-10 text-floraGreen cursor-pointer hover:text-floraYellow'
+            }
           />
         </div>
       </div>
