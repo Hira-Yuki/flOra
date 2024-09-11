@@ -14,7 +14,7 @@ export default function FooterMenu() {
           <li key={path}>
             <Link href={path}>
               <IconComponent
-                className={`w-14 h-14 text-floraGreen hover:text-floraYellow ${pathname === path ? 'text-floraWhite' : 'text-floraGreen'}`}
+                className={`w-10 h-10 text-floraGreen hover:text-floraYellow ${pathname === path ? 'text-floraWhite' : 'text-floraGreen'}`}
               />
             </Link>
           </li>
