@@ -24,9 +24,9 @@ export default function CalendarWidget() {
   return (
     <WidgetWrapper>
       <div className="flex justify-between items-center mb-1">
-        <span className="font-semibold text-lg sm:text-xl ml-2 text-floraOlive">
+        <h3 className="font-semibold text-lg sm:text-xl ml-2 text-floraOlive">
           {monthName}
-        </span>
+        </h3>
       </div>
       <div className="grid grid-cols-7 text-center gap-y-0.5">
         {weekDays.map((day, index) => (

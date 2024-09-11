@@ -6,9 +6,9 @@ export default function ReminderWidget() {
       <div className="flex h-full">
         <div className="pr-9 h-full min-w-32">
           <div>
-            <span className="text-floraOlive font-bold text-xs md:text-sm">
+            <h3 className="text-floraOlive font-bold text-xs md:text-sm">
               SEP
-            </span>
+            </h3>
           </div>
           <div>
             <span className="text-5xl text-black font-bold">22</span>
