@@ -12,7 +12,7 @@ export default function DDayWidget() {
     { d_day: '2024-11-17', title: '아무날도 아닌데요' },
     { d_day: '2024-12-17', title: '테스트하려고 추가했어요.' },
   ];
-
+  const today = dayjs();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // 좌우 버튼 핸들러
@@ -43,7 +43,6 @@ export default function DDayWidget() {
           }}
         >
           {D_DAY_ITEMS.map((item, index) => {
-            const today = dayjs();
             const eventDate = dayjs(item.d_day);
             const dDayCount = eventDate.diff(today, 'day');
             return (

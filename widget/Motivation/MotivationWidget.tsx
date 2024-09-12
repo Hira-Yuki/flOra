@@ -3,13 +3,26 @@
 import AddIcon from '@components/icons/AddIcon';
 import EllipsisIcon from '@components/icons/EllipsisIcon';
 import WidgetWrapper from '@components/widgetElements/wide/WidgetWrapper';
-import { useInput } from '@hooks';
-import { useRef, useState } from 'react';
+import { useInput, useToggle } from '@hooks';
+import { useRef } from 'react';
 
 export default function MotivationWidget() {
-  const input = useInput();
-  const [isEdit, setIsEdit] = useState(false);
-  const textAreaRef = useRef(null); // textarea를 참조하기 위한 useRef
+  const input = useInput('');
+  const isEdit = useToggle(false);
+  const isOpenMenu = useToggle(false);
+  const textAreaRef = useRef(null);
+
+  const toggleMenu = () => isOpenMenu.toggleValue();
+  const closeMenu = () => isOpenMenu.setFalse();
+
+  // 텍스트에 따라 textarea의 높이를 조정하는 함수
+  const adjustTextareaHeight = () => {
+    const textarea = textAreaRef.current;
+    if (textarea) {
+      textarea.style.height = 'auto'; // 높이를 자동으로 조정
+      textarea.style.height = `${textarea.scrollHeight}px`; // 내용에 맞게 높이 설정
+    }
+  };
 
   // 텍스트가 2줄 이상이 되지 않도록 제어하는 함수
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -25,7 +38,7 @@ export default function MotivationWidget() {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault(); // 기본 줄바꿈 방지
-      setIsEdit(false); // 편집 모드 종료
+      isEdit.setFalse();
     }
   };
 
@@ -37,7 +50,8 @@ export default function MotivationWidget() {
 
   // 편집 모드를 활성화하고 textarea에 포커스를 주는 함수
   const activateEditMode = () => {
-    setIsEdit(true);
+    isEdit.setTrue();
+    closeMenu();
     setTimeout(() => {
       textAreaRef.current?.focus(); // textarea가 활성화되면 자동으로 포커스를 줌
     }, 0);
@@ -45,17 +59,8 @@ export default function MotivationWidget() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsEdit(false); // 엔터 시 편집 모드 종료
+    isEdit.setFalse(); // 엔터 시 편집 모드 종료
     handleSave();
-  };
-
-  // 텍스트에 따라 textarea의 높이를 조정하는 함수
-  const adjustTextareaHeight = () => {
-    const textarea = textAreaRef.current;
-    if (textarea) {
-      textarea.style.height = 'auto'; // 높이를 자동으로 조정
-      textarea.style.height = `${textarea.scrollHeight}px`; // 내용에 맞게 높이 설정
-    }
   };
 
   const handleSave = async () => {
@@ -68,8 +73,19 @@ export default function MotivationWidget() {
   };
 
   const handleBlur = () => {
-    setIsEdit(false);
+    isEdit.setFalse();
     handleSave();
+  };
+
+  const handleDelete = async () => {
+    try {
+      // Delete ..
+    } catch (err) {
+      //error handling
+      console.log(err);
+    } finally {
+      closeMenu();
+    }
   };
 
   return (
@@ -81,8 +97,32 @@ export default function MotivationWidget() {
         {input.value && (
           <EllipsisIcon
             className={'text-mainText w-10 h-10 cursor-pointer z-10'}
-            onClick={activateEditMode}
+            onClick={toggleMenu}
           />
+        )}
+        {isOpenMenu.value && (
+          <div
+            className="absolute top-12 -right-3 bg-floraWhite py-2 text-sm font-semibold shadow-lg"
+            onMouseLeave={closeMenu}
+          >
+            <div className="absolute bg-floraWhite w-2 h-2 border-t-1 border-l-1 transform rotate-45 -top-1 left-1 shadow-lg" />
+            <ul className="flex flex-col gap-1 w-full">
+              <li>
+                <button
+                  type="button"
+                  className="cursor-pointer mx-4"
+                  onClick={activateEditMode}
+                >
+                  수정
+                </button>
+              </li>
+              <li>
+                <button className="cursor-pointer mx-4" onClick={handleDelete}>
+                  삭제
+                </button>
+              </li>
+            </ul>
+          </div>
         )}
       </div>
       <div className="flex h-full">
@@ -98,22 +138,15 @@ export default function MotivationWidget() {
             onKeyDown={handleKeyDown}
             onFocus={handleFocus}
             onBlur={handleBlur}
-            className="bg-floraBeige font-bold w-full text-4xl line-clamp-2 outline-none resize-none  enabled:-mt-1 enabled:border-floraYellow enabled:border-2 text-center leading-relaxed"
-            style={{
-              display: 'flex',
-              justifyItems: 'center',
-              alignItems: 'center',
-              textAlign: 'center',
-              verticalAlign: 'middle',
-            }}
-            disabled={!isEdit}
+            className="flex justify-center items-center text-center align-middle bg-floraBeige font-bold w-full text-4xl line-clamp-2 outline-none resize-none enabled:-mt-1 enabled:border-floraYellow enabled:border-2 leading-relaxed"
+            disabled={!isEdit.value}
           />
-          {isEdit === false && input.value === '' ? (
+          {isEdit.value === false && input.value === '' && (
             <AddIcon
               className={'w-14 h-14 absolute cursor-pointer'}
               onClick={activateEditMode}
             />
-          ) : null}
+          )}
         </form>
       </div>
     </WidgetWrapper>
