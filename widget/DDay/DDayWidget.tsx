@@ -4,14 +4,16 @@ import WidgetWrapper from '@components/widgetElements/mini/WidgetWrapper';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 
+const D_DAY_ITEMS = [
+  { d_day: '2024-10-04', title: '프로젝트 마감' },
+  { d_day: '2024-10-05', title: '온가족 대잔치' },
+  { d_day: '2024-09-17', title: '추석' },
+  { d_day: '2024-11-17', title: '아무날도 아닌데요' },
+  { d_day: '2024-11-17', title: '테스트하려고 추가했어요.' },
+  { d_day: '2100-12-17', title: '이때쯤이면 화성 갔겠죠?' },
+];
+
 export default function DDayWidget() {
-  const D_DAY_ITEMS = [
-    { d_day: '2024-10-04', title: '프로젝트 마감' },
-    { d_day: '2024-10-05', title: '온가족 대잔치' },
-    { d_day: '2024-09-17', title: '추석' },
-    { d_day: '2024-11-17', title: '아무날도 아닌데요' },
-    { d_day: '2024-12-17', title: '테스트하려고 추가했어요.' },
-  ];
   const today = dayjs();
   const [currentIndex, setCurrentIndex] = useState(0);
 

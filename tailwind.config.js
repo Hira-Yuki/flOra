@@ -25,6 +25,13 @@ module.exports = {
       },
     },
   },
+  safelist: [
+    {
+      pattern:
+        /border-(indexRed|indexYellow|indexGreen|indexCyan|indexLavender)/,
+    },
+    { pattern: /bg-(indexRed|indexYellow|indexGreen|indexCyan|indexLavender)/ },
+  ],
   plugins: [require('daisyui')],
   daisyui: {
     themes: ['light'], // light theme, dark theme

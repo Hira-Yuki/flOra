@@ -91,7 +91,7 @@ export default function MotivationWidget() {
   return (
     <WidgetWrapper>
       <div className=" flex items-center justify-between">
-        <h3 className="font-semibold text-lg sm:text-xl ml-2 text-floraOlive h-10 z-10">
+        <h3 className="font-semibold text-lg sm:text-xl ml-2 text-floraOlive h-10">
           목표/다짐
         </h3>
         {input.value && (
@@ -102,22 +102,22 @@ export default function MotivationWidget() {
         )}
         {isOpenMenu.value && (
           <div
-            className="absolute top-12 -right-3 bg-floraWhite py-2 text-sm font-semibold shadow-lg"
+            className="absolute z-20 top-12 right-4 bg-floraWhite py-2 text-sm font-semibold shadow-lg"
             onMouseLeave={closeMenu}
           >
-            <div className="absolute bg-floraWhite w-2 h-2 border-t-1 border-l-1 transform rotate-45 -top-1 left-1 shadow-lg" />
-            <ul className="flex flex-col gap-1 w-full">
+            <div className="absolute bg-floraWhite w-2 h-2 border-t-1 border-l-1 transform rotate-45 -top-1 right-4 shadow-lg" />
+            <ul className="flex flex-col gap-3 w-full py-2 justify-around">
               <li>
                 <button
                   type="button"
-                  className="cursor-pointer mx-4"
+                  className="cursor-pointer px-8"
                   onClick={activateEditMode}
                 >
                   수정
                 </button>
               </li>
               <li>
-                <button className="cursor-pointer mx-4" onClick={handleDelete}>
+                <button className="cursor-pointer px-8" onClick={handleDelete}>
                   삭제
                 </button>
               </li>
