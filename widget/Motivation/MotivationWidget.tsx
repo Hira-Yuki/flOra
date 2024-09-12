@@ -2,6 +2,7 @@
 
 import AddIcon from '@components/icons/AddIcon';
 import EllipsisIcon from '@components/icons/EllipsisIcon';
+import WidgetWrapper from '@components/widgetElements/wide/WidgetWrapper';
 import { useInput } from '@hooks';
 import { useRef, useState } from 'react';
 
@@ -72,7 +73,7 @@ export default function MotivationWidget() {
   };
 
   return (
-    <div className="bg-floraBeige rounded-2xl p-4 w-full max-w-[868px] h-[300px] text-mainText shadow-gray-200 shadow-lg relative">
+    <WidgetWrapper>
       <div className=" flex items-center justify-between">
         <h3 className="font-semibold text-lg sm:text-xl ml-2 text-floraOlive h-10 z-10">
           목표/다짐
@@ -115,6 +116,6 @@ export default function MotivationWidget() {
           ) : null}
         </form>
       </div>
-    </div>
+    </WidgetWrapper>
   );
 }

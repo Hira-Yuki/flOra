@@ -1,4 +1,5 @@
 import CalendarWidget from 'widget/Calendar/CalendarWidget';
+import DDayWidget from 'widget/DDay/DDayWidget';
 import MotivationWidget from 'widget/Motivation/MotivationWidget';
 import ReminderWidget from 'widget/Reminder/ReminderWidget';
 
@@ -8,6 +9,7 @@ export default function DashBoard() {
       <CalendarWidget />
       <ReminderWidget />
       <MotivationWidget />
+      <DDayWidget />
     </div>
   );
 }
