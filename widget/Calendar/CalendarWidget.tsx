@@ -1,4 +1,5 @@
 import WidgetWrapper from '@components/widgetElements/small/WidgetWrapper';
+import WidgetHeader from '@components/widgetElements/WidgetHeader';
 import dayjs, { Dayjs } from 'dayjs';
 
 const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'] as const;
@@ -24,9 +25,7 @@ export default function CalendarWidget() {
   return (
     <WidgetWrapper>
       <div className="flex justify-between items-center mb-1">
-        <h3 className="font-semibold text-lg sm:text-xl ml-2 text-floraOlive">
-          {monthName}
-        </h3>
+        <WidgetHeader title={monthName} />
       </div>
       <div className="grid grid-cols-7 text-center gap-y-0.5">
         {weekDays.map((day, index) => (

@@ -3,6 +3,7 @@
 import AddIcon from '@components/icons/AddIcon';
 import EllipsisIcon from '@components/icons/EllipsisIcon';
 import WidgetWrapper from '@components/widgetElements/wide/WidgetWrapper';
+import WidgetHeader from '@components/widgetElements/WidgetHeader';
 import { useInput, useToggle } from '@hooks';
 import { useRef } from 'react';
 
@@ -91,9 +92,7 @@ export default function MotivationWidget() {
   return (
     <WidgetWrapper>
       <div className=" flex items-center justify-between">
-        <h3 className="font-semibold text-lg sm:text-xl ml-2 text-floraOlive h-10">
-          목표/다짐
-        </h3>
+        <WidgetHeader title={'목표/다짐'} />
         {input.value && (
           <EllipsisIcon
             className={'text-mainText w-10 h-10 cursor-pointer z-10'}

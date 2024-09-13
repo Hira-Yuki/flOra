@@ -1,12 +1,13 @@
 'use client';
 import CustomCheckbox from '@components/CustomCheckbox';
 import WidgetWrapper from '@components/widgetElements/wide/WidgetWrapper';
+import WidgetHeader from '@components/widgetElements/WidgetHeader';
 
 export default function TaskManager({ title }) {
   return (
     <WidgetWrapper>
       <div>
-        <h3 className="font-bold text-lg pb-4 text-floraGreen">{title}</h3>
+        <WidgetHeader title={title} />
       </div>
       <div className="flex flex-col gap-2 overflow-scroll max-h-56">
         <CustomCheckbox indexColor={'indexRed'} text="해야할 것 레드" />

@@ -36,7 +36,7 @@ export default function ServiceLayout({
         <Sidebar />
         {/* 메인 콘텐츠 */}
         <div className="pl-0 pt-24 md:pl-24 pb-24 md:pb-0 transition-transform transform w-full bg-floraWhite">
-          {children}
+          <div className="p-8 mt-2">{children}</div>
         </div>
       </div>
       {/* 하단 메뉴 */}

@@ -1,6 +1,7 @@
 'use client';
 
 import WidgetWrapper from '@components/widgetElements/mini/WidgetWrapper';
+import WidgetHeader from '@components/widgetElements/WidgetHeader';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 
@@ -33,9 +34,7 @@ export default function DDayWidget() {
   return (
     <WidgetWrapper>
       <div className="flex items-center justify-between">
-        <h3 className="font-semibold text-lg sm:text-xl ml-2 text-floraOlive h-10 z-10">
-          D-DAY
-        </h3>
+        <WidgetHeader title={'D-DAY'} />
       </div>
       <div className="relative overflow-hidden w-full">
         <div
