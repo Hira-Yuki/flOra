@@ -1,6 +1,6 @@
 export default function WidgetWrapper({ children }) {
   return (
-    <div className="bg-floraBeige rounded-2xl p-4 w-full max-w-[668px] h-[300px] text-mainText shadow-gray-200 shadow-lg relative">
+    <div className="bg-floraBeige rounded-2xl p-4 w-full h-[300px] text-mainText shadow-gray-200 shadow-lg relative">
       {children}
     </div>
   );

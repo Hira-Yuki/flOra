@@ -14,10 +14,7 @@ export default function TaskManager({ title }) {
         <CustomCheckbox indexColor={'indexGreen'} text="해야할 것 그린" />
         <CustomCheckbox indexColor={'indexYellow'} text="해야할 것 엘로" />
         <CustomCheckbox indexColor={'indexCyan'} text="해야할 것 시안" />
-        <CustomCheckbox
-          indexColor={'indexLavender'}
-          text="해야할 것 라벤더 해야할 것 라벤더"
-        />
+        <CustomCheckbox indexColor={'indexLavender'} text="해야할 것 라벤더" />
       </div>
     </WidgetWrapper>
   );
