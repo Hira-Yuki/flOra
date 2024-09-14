@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-require-imports */
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin'); // plugin을 올바르게 정의합니다.
+
 module.exports = {
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
@@ -26,7 +28,30 @@ module.exports = {
     },
   },
   safelist: [],
-  plugins: [require('daisyui')],
+  plugins: [
+    require('daisyui'),
+    plugin(function ({ addUtilities }) {
+      addUtilities({
+        '.scrollbar-custom': {
+          /* 스크롤바 최소화 */
+          '&::-webkit-scrollbar': {
+            width: '6px',
+            height: '6px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: '#cccccc',
+            borderRadius: '10px',
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            backgroundColor: '#999999',
+          },
+          '&::-webkit-scrollbar-track': {
+            backgroundColor: 'transparent',
+          },
+        },
+      });
+    }),
+  ],
   daisyui: {
     themes: ['light'], // light theme, dark theme
   },
