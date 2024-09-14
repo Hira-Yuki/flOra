@@ -9,7 +9,7 @@ export default function FooterMenu() {
 
   return (
     <div className="bg-floraOlive h-24 w-full fixed bottom-0 md:hidden flex justify-center">
-      <ul className="flex flex-row w-screen items-center justify-around">
+      <ul className="flex flex-row w-full items-center justify-around">
         {MENU_ICONS.map(({ component: IconComponent, path }) => (
           <li key={path}>
             <Link aria-label={path} href={path}>
