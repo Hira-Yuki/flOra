@@ -1,3 +1,4 @@
+import ArrowDown from '@components/icons/ArrowDown';
 import { useState } from 'react';
 
 import AccordionButton from './AccordionButton';
@@ -6,7 +7,7 @@ export default function TimerAccordion() {
   const [activeTab, setActiveTab] = useState('study'); // 현재 활성화된 탭 상태
   const [isMenuOpen, setIsMenuOpen] = useState(false); // 아코디언 메뉴 열기/닫기 상태
 
-  // 각 탭에 대한 콘텐츠 데이터
+  // 각 탭에 대한 콘텐츠 데이터 더미 ...
   const menuData = {
     study: [
       'example-todolist - Study-Routine',
@@ -32,13 +33,14 @@ export default function TimerAccordion() {
   };
   return (
     <div className="relative">
-      <div className="flex items-center">
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="text-black font-semibold cursor-pointer"
-        >
+      <div
+        className="flex items-center cursor-pointer"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        <label className="text-black font-semibold cursor-pointer">
           example - math 1
-        </button>
+        </label>
+        <ArrowDown />
       </div>
       {isMenuOpen && (
         <div className="absolute top-full left-0 bg-floraGreen rounded-md shadow-lg p-4 z-10 font-medium max-w-72">
