@@ -95,7 +95,7 @@ export default function PicFrameWidget() {
             <img
               src={uploadedImage}
               alt="Uploaded"
-              className="w-full h-full object-cover rounded-lg"
+              className="w-full h-full object-contain rounded-lg"
             />
           )}
           <input
