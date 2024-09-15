@@ -17,7 +17,7 @@ export default function ServiceLayout({
     <div className="h-screen w-screen flex flex-col">
       {/* 헤더 */}
       <div className="z-10 w-full h-24 md:h-32 py-1 fixed flex items-center md:pl-24 transition-transform transform justify-between bg-floraWhite">
-        <h2 className="text-4xl md:text-5xl font-bold pl-8 cursor-default">
+        <h2 className="text-3xl md:text-5xl font-bold pl-8 cursor-default">
           Dashboard
         </h2>
         <div className="flex gap-2 md:gap-6 mr-2 md:mr-8">

@@ -53,8 +53,10 @@ export default function TimerWidget() {
       <div className="flex justify-between items-center mb-1">
         <WidgetHeader title={'타이머'} />
       </div>
-      <div className="flex flex-col items-center pt-10 gap-2">
-        <div className="text-4xl font-bold mb-4">{time.format('HH:mm:ss')}</div>
+      <div className="flex flex-col justify-center items-center pt-10 gap-2">
+        <div className="text-4xl text-center font-bold">
+          {time.format('HH:mm:ss')}
+        </div>
         <TimerAccordion />
         <div className="flex gap-4">
           <div

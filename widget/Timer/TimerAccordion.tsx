@@ -34,16 +34,16 @@ export default function TimerAccordion() {
   return (
     <div className="relative">
       <div
-        className="flex items-center cursor-pointer"
+        className="flex items-center justify-center cursor-pointer"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
-        <label className="text-black font-semibold cursor-pointer">
+        <label className="text-mainText font-semibold cursor-pointer">
           example - math 1
         </label>
         <ArrowDown />
       </div>
       {isMenuOpen && (
-        <div className="absolute top-full left-0 bg-floraGreen rounded-md shadow-lg p-4 z-10 font-medium max-w-72">
+        <div className="absolute top-full left-0 bg-floraGreen rounded-md shadow-lg p-2 z-10 font-medium max-w-72">
           <div className="flex h-11 space-x-2 overflow-x-auto w-full">
             <AccordionButton
               label="스터디 루틴"

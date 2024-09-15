@@ -49,7 +49,7 @@ export default function DDayWidget() {
             return (
               <div
                 key={index}
-                className="flex flex-col justify-center items-center content-center gap-4 min-w-full mt-16"
+                className="flex flex-col justify-center items-center content-center gap-2 min-w-full mt-16"
               >
                 <p className="text-black font-bold text-4xl">D-{dDayCount}</p>
                 <p className="text-lg text-mainText font-semibold">
