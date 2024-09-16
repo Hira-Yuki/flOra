@@ -1,7 +1,7 @@
 import GoBackButton from '@components/not-foundElements/GoBackButton';
 
 export const metadata = {
-  title: 'flOra - Not found',
+  title: 'Not found',
 };
 
 export default function NotFound() {

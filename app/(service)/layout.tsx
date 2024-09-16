@@ -1,10 +1,12 @@
 import NotificationIcon from '@components/icons/NotificationIcon';
 import SearchIcon from '@components/icons/SearchIcon';
 import FooterMenu from '@components/serviceLayoutElements/FooterMenu';
+import LayoutHeader from '@components/serviceLayoutElements/LayoutHeader';
 import Sidebar from '@components/serviceLayoutElements/Sidebar';
+import { Metadata } from 'next';
 
-export const metadata = {
-  title: 'flOra - 대시보드',
+export const metadata: Metadata = {
+  title: { template: '%s | flOra', default: 'Loading | flOra' },
 };
 
 export default function ServiceLayout({
@@ -18,7 +20,7 @@ export default function ServiceLayout({
       {/* 헤더 */}
       <div className="z-10 w-full h-24 md:h-32 py-1 fixed flex items-center md:pl-24 transition-transform transform justify-between bg-floraWhite">
         <h2 className="text-3xl md:text-5xl font-bold pl-8 cursor-default">
-          Dashboard
+          <LayoutHeader />
         </h2>
         <div className="flex gap-2 md:gap-6 mr-2 md:mr-8">
           <SearchIcon
