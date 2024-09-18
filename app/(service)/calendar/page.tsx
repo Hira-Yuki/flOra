@@ -4,7 +4,7 @@ import Toolbar from '@components/Calendar/Toolbar';
 import { INDEX_COLORS } from '@constants';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Calendar, dayjsLocalizer, Views } from 'react-big-calendar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
@@ -15,21 +15,27 @@ const localizer = dayjsLocalizer(dayjs);
 // 샘플 이벤트 데이터
 const events = [
   {
+    id: '1',
     title: '회의',
-    start: new Date(2024, 8, 1, 10, 0), // 2024년 9월 1일 10시
-    end: new Date(2024, 8, 1, 12, 0), // 2024년 9월 1일 12시
-    color: 'indexCyan', // 이벤트 색상
+    start: dayjs('2024-09-01 10:30').toDate(), // 2024년 9월 1일 10시 30분
+    end: dayjs('2024-09-01 12:00').toDate(), // 2024년 9월 1일 12시
+    allDay: false,
+    color: 'indexCyan',
   },
   {
+    id: '2',
     title: '추석 연휴',
-    start: new Date(2024, 8, 16, 0, 0),
-    end: new Date(2024, 8, 18, 23, 59),
+    start: dayjs('2024-09-14 00:00').toDate(),
+    end: dayjs('2024-09-18 23:59').toDate(),
+    allDay: true,
     color: 'indexRed',
   },
   {
+    id: '3',
     title: '가족 모임',
-    start: new Date(2024, 8, 17, 2, 0),
-    end: new Date(2024, 8, 17, 17, 0),
+    start: dayjs('2024-10-05 00:00').toDate(),
+    end: dayjs('2024-10-05 23:59').toDate(),
+    allDay: true,
     color: 'indexLavender',
   },
 ];
@@ -39,25 +45,15 @@ const eventStyleGetter = (event) => {
 };
 
 export default function CalendarPage() {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(dayjs().toDate());
   const [view, setView] = useState(Views.MONTH);
 
-  const onNavigate = useCallback(
-    (newDate) => {
-      console.log('Navigating to: ', newDate);
-      setDate(newDate);
-    },
-    [setDate],
-  );
+  const onNavigate = useCallback((newDate) => setDate(newDate), [setDate]);
   const onView = useCallback((newView) => setView(newView), [view]);
 
-  useEffect(() => {
-    console.log('Date has been updated: ', date);
-  }, [date]);
-
   return (
-    <div className="grid grid-cols-4 gap-6">
-      <div className="col-span-2">
+    <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 h-full">
+      <div className="col-span-1 lg:col-span-2 h-full">
         <Calendar
           date={date}
           events={events}
@@ -67,13 +63,14 @@ export default function CalendarPage() {
           eventPropGetter={eventStyleGetter}
           components={{
             toolbar: Toolbar,
-            header: Header, // 요일 헤더를 커스텀
+            header: Header,
           }}
           onNavigate={onNavigate}
           onView={onView}
           view={view}
           style={{
-            height: 678,
+            maxHeight: 678,
+            height: '100%',
             width: '100%',
             backgroundColor: '#F6F3ED',
             borderRadius: '1rem',
@@ -81,8 +78,8 @@ export default function CalendarPage() {
           }}
         />
       </div>
-      <div className="col-span-1">1</div>
-      <div className="col-span-1">1</div>
+      <div className="col-span-1">11234</div>
+      <div className="col-span-1">11234</div>
     </div>
   );
 }

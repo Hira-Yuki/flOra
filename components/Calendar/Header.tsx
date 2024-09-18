@@ -1,7 +1,23 @@
 export default function Header(props) {
-  const { label } = props;
-  const dayShort = label.charAt(0); // 요일의 첫 글자만 표시
+  const { label }: { label: string } = props;
+
+  if (label.length === 3) {
+    const dayShort = label.charAt(0);
+    return (
+      <div className="text-center font-medium text-lg text-mainText">
+        {dayShort}
+      </div>
+    );
+  }
+
+  const [date, day] = label.split(' ');
+  const slicedDay = day.charAt(0);
+
   return (
-    <div className="text-center font-medium text-lg text-mainText">{label}</div>
+    <div className="text-center font-medium text-lg text-mainText">
+      <div>
+        {date} - {slicedDay}
+      </div>
+    </div>
   );
 }

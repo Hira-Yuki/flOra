@@ -35,12 +35,12 @@ export default function ServiceLayout({
           />
         </div>
       </div>
-      <div className="flex">
+      <div className="flex h-full">
         {/* 사이드바 */}
         <Sidebar />
         {/* 메인 콘텐츠 */}
-        <div className="pl-0 pt-24 md:pl-24 pb-24 md:pb-0 transition-transform transform w-full bg-floraWhite">
-          <div className="p-8 mt-2">{children}</div>
+        <div className="pl-0 pt-24 md:pl-24 pb-24 md:pb-0 transition-transform transform w-full h-full bg-floraWhite">
+          <div className="p-8 mt-2 h-full">{children}</div>
         </div>
       </div>
       {/* 하단 메뉴 */}
