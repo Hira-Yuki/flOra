@@ -1,4 +1,5 @@
 'use client';
+import Day from '@components/Calendar/Day';
 import Header from '@components/Calendar/Header';
 import Toolbar from '@components/Calendar/Toolbar';
 import { INDEX_COLORS } from '@constants';
@@ -64,6 +65,9 @@ export default function CalendarPage() {
           components={{
             toolbar: Toolbar,
             header: Header,
+            month: {
+              dateHeader: Day,
+            },
           }}
           onNavigate={onNavigate}
           onView={onView}
