@@ -19,7 +19,6 @@ export default function DDayWidget() {
   const pathname = usePathname();
   const today = dayjs();
   const [currentIndex, setCurrentIndex] = useState(0);
-
   const isCalendar = pathname === '/calendar';
 
   console.log(isCalendar);
@@ -36,7 +35,9 @@ export default function DDayWidget() {
   };
 
   return (
-    <div className="bg-floraGreen rounded-2xl p-4 h-full shadow-gray-200 shadow-lg relative">
+    <div
+      className={`${isCalendar ? 'bg-floraGreen' : 'bg-floraBeige'} rounded-2xl p-4 h-full shadow-gray-200 shadow-lg relative`}
+    >
       <div className="flex items-center justify-between">
         <h3
           className={`font-semibold text-lg sm:text-xl ml-2 ${isCalendar ? 'text-floraYellow' : 'text-floraOlive'} h-10`}

@@ -1,5 +1,6 @@
 'use client';
 import Day from '@components/Calendar/Day';
+import Diary from '@components/Calendar/Diary';
 import Header from '@components/Calendar/Header';
 import TodoList from '@components/Calendar/TodoList';
 import Toolbar from '@components/Calendar/Toolbar';
@@ -110,7 +111,7 @@ export default function CalendarPage() {
         <DDayWidget />
       </div>
       <div className="col-span-3 row-span-2 h-full">
-        <div className="bg-green-400">Diary</div>
+        <Diary />
       </div>
     </div>
   );
