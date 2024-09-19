@@ -1,9 +1,10 @@
 'use client';
 
-import WidgetHeader from '@components/widgetElements/WidgetHeader';
-import WidgetWrapper from '@components/widgetElements/WidgetWrapper';
 import dayjs from 'dayjs';
+import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+
+import DDayItem from './DDayItem';
 
 const D_DAY_ITEMS = [
   { d_day: '2024-10-04', title: '프로젝트 마감' },
@@ -15,10 +16,13 @@ const D_DAY_ITEMS = [
 ];
 
 export default function DDayWidget() {
+  const pathname = usePathname();
   const today = dayjs();
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // 좌우 버튼 핸들러
+  const isCalendar = pathname === '/calendar';
+
+  console.log(isCalendar);
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? D_DAY_ITEMS.length - 1 : prevIndex - 1,
@@ -32,12 +36,19 @@ export default function DDayWidget() {
   };
 
   return (
-    <WidgetWrapper>
+    <div className="bg-floraGreen rounded-2xl p-4 h-full shadow-gray-200 shadow-lg relative">
       <div className="flex items-center justify-between">
-        <WidgetHeader title={'D-DAY'} />
+        <h3
+          className={`font-semibold text-lg sm:text-xl ml-2 ${isCalendar ? 'text-floraYellow' : 'text-floraOlive'} h-10`}
+        >
+          D-DAY
+        </h3>
       </div>
       <div className="flex">
-        <button onClick={handlePrev} className="text-mainText text-2xl">
+        <button
+          onClick={handlePrev}
+          className={`${isCalendar ? 'text-white' : 'text-mainText'} text-2xl`}
+        >
           &lt;
         </button>
         <div className="overflow-hidden w-full">
@@ -47,30 +58,20 @@ export default function DDayWidget() {
               transform: `translateX(-${currentIndex * 100}%)`,
             }}
           >
-            {D_DAY_ITEMS.map((item, index) => {
-              const eventDate = dayjs(item.d_day);
-              const dDayCount = eventDate.diff(today, 'day');
-              return (
-                <div
-                  key={index}
-                  className="flex flex-col justify-center items-center content-center gap-2 min-w-full"
-                >
-                  <p className="text-black font-bold text-4xl">D-{dDayCount}</p>
-                  <p className="text-lg text-mainText font-semibold">
-                    {item.title}
-                  </p>
-                  <p className="text-sm text-descText font-semibold">
-                    {eventDate.format('YYYY-MM-DD')}
-                  </p>
-                </div>
-              );
-            })}
+            <DDayItem
+              items={D_DAY_ITEMS}
+              today={today}
+              isCalendar={isCalendar}
+            />
           </div>
         </div>
-        <button onClick={handleNext} className="text-mainText text-2xl">
+        <button
+          onClick={handleNext}
+          className={`${isCalendar ? 'text-white' : 'text-mainText'} text-2xl`}
+        >
           &gt;
         </button>
       </div>
-    </WidgetWrapper>
+    </div>
   );
 }
