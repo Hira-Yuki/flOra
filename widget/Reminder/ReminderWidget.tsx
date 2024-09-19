@@ -1,4 +1,4 @@
-import WidgetWrapper from '@components/widgetElements/small/WidgetWrapper';
+import WidgetWrapper from '@components/widgetElements/WidgetWrapper';
 
 export default function ReminderWidget() {
   return (

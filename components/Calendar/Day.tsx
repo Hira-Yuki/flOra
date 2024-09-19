@@ -11,6 +11,7 @@ export default function Day(props) {
     <div className="pt-1">
       <span
         className={`rounded-full p-1 font-medium ${isToday && 'bg-floraYellow'}`}
+        onClick={props.onDrillDown}
       >
         {label}
       </span>

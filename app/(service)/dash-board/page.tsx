@@ -1,12 +1,12 @@
 import AccumulatedTimeWidget from 'widget/AccumulatedTime/AccumulatedTimeWidget';
 import CalendarWidget from 'widget/Calendar/CalendarWidget';
 import DDayWidget from 'widget/DDay/DDayWidget';
-import LargeTaskManager from 'widget/LargeTaskManager/LargeTaskManager';
+import LargeTaskManagerWidget from 'widget/LargeTaskManager/LargeTaskManagerWidget';
 import MotivationWidget from 'widget/Motivation/MotivationWidget';
 import MyCharacterWidget from 'widget/MyCharacter/MyCharacterWidget';
 import PicFrameWidget from 'widget/PicFrame/PicFrameWidget';
 import ReminderWidget from 'widget/Reminder/ReminderWidget';
-import TaskManager from 'widget/TaskManager/TaskManager';
+import TaskManagerWidget from 'widget/TaskManager/TaskManagerWidget';
 import TimerWidget from 'widget/Timer/TimerWidget';
 
 export default function DashBoard() {
@@ -25,19 +25,19 @@ export default function DashBoard() {
         <DDayWidget />
       </div>
       <div className="col-span-4 sm:col-span-4 md:col-span-6 lg: xl:col-span-6 2xl:col-span-3 row-span-1">
-        <TaskManager title={'스터디 루틴'} />
+        <TaskManagerWidget title={'스터디 루틴'} />
       </div>
       <div className="col-span-4 sm:col-span-4 md:col-span-6 lg: xl:col-span-6 2xl:col-span-3 row-span-1">
-        <TaskManager title={'라이프 루틴'} />
+        <TaskManagerWidget title={'라이프 루틴'} />
       </div>
       <div className="col-span-4 sm:col-span-4 md:col-span-6 lg:col-span-6 xl:col-span-6 2xl:col-span-2 row-span-1">
         <PicFrameWidget />
       </div>
       <div className="col-span-4 sm:col-span-4 md:col-span-6 lg: xl:col-span-6 2xl:col-span-3 row-span-2">
-        <LargeTaskManager title={'스터디 비루틴'} />
+        <LargeTaskManagerWidget title={'스터디 비루틴'} />
       </div>
       <div className="col-span-4 sm:col-span-4 md:col-span-6 lg: xl:col-span-6 2xl:col-span-3 row-span-2">
-        <LargeTaskManager title={'라이프 비루틴'} />
+        <LargeTaskManagerWidget title={'라이프 비루틴'} />
       </div>
       <div className="col-span-4 sm:col-span-4 md:col-span-6 lg:col-span-6 xl:col-span-6 2xl:col-span-2 row-span-1">
         <TimerWidget />

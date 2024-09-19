@@ -1,5 +1,5 @@
-import WidgetWrapper from '@components/widgetElements/small/WidgetWrapper';
 import WidgetHeader from '@components/widgetElements/WidgetHeader';
+import WidgetWrapper from '@components/widgetElements/WidgetWrapper';
 import dayjs, { Dayjs } from 'dayjs';
 
 const weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'] as const;

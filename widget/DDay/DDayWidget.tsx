@@ -1,7 +1,7 @@
 'use client';
 
-import WidgetWrapper from '@components/widgetElements/mini/WidgetWrapper';
 import WidgetHeader from '@components/widgetElements/WidgetHeader';
+import WidgetWrapper from '@components/widgetElements/WidgetWrapper';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 
@@ -36,42 +36,38 @@ export default function DDayWidget() {
       <div className="flex items-center justify-between">
         <WidgetHeader title={'D-DAY'} />
       </div>
-      <div className="relative overflow-hidden w-full">
-        <div
-          className="flex transition-transform duration-500"
-          style={{
-            transform: `translateX(-${currentIndex * 100}%)`,
-          }}
-        >
-          {D_DAY_ITEMS.map((item, index) => {
-            const eventDate = dayjs(item.d_day);
-            const dDayCount = eventDate.diff(today, 'day');
-            return (
-              <div
-                key={index}
-                className="flex flex-col justify-center items-center content-center gap-2 min-w-full mt-16"
-              >
-                <p className="text-black font-bold text-4xl">D-{dDayCount}</p>
-                <p className="text-lg text-mainText font-semibold">
-                  {item.title}
-                </p>
-                <p className="text-sm text-descText font-semibold">
-                  {eventDate.format('YYYY-MM-DD')}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-        <button
-          onClick={handlePrev}
-          className="absolute top-1/2 left-0 transform -translate-y-1/2 text-mainText text-2xl"
-        >
+      <div className="flex">
+        <button onClick={handlePrev} className="text-mainText text-2xl">
           &lt;
         </button>
-        <button
-          onClick={handleNext}
-          className="absolute top-1/2 right-0 transform -translate-y-1/2 text-mainText text-2xl"
-        >
+        <div className="overflow-hidden w-full">
+          <div
+            className="flex transition-transform duration-500"
+            style={{
+              transform: `translateX(-${currentIndex * 100}%)`,
+            }}
+          >
+            {D_DAY_ITEMS.map((item, index) => {
+              const eventDate = dayjs(item.d_day);
+              const dDayCount = eventDate.diff(today, 'day');
+              return (
+                <div
+                  key={index}
+                  className="flex flex-col justify-center items-center content-center gap-2 min-w-full"
+                >
+                  <p className="text-black font-bold text-4xl">D-{dDayCount}</p>
+                  <p className="text-lg text-mainText font-semibold">
+                    {item.title}
+                  </p>
+                  <p className="text-sm text-descText font-semibold">
+                    {eventDate.format('YYYY-MM-DD')}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <button onClick={handleNext} className="text-mainText text-2xl">
           &gt;
         </button>
       </div>

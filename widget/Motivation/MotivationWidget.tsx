@@ -2,8 +2,8 @@
 
 import AddIcon from '@components/icons/AddIcon';
 import EllipsisIcon from '@components/icons/EllipsisIcon';
-import WidgetWrapper from '@components/widgetElements/wide/WidgetWrapper';
 import WidgetHeader from '@components/widgetElements/WidgetHeader';
+import WidgetWrapper from '@components/widgetElements/WidgetWrapper';
 import { useInput, useToggle } from '@hooks';
 import { useRef } from 'react';
 

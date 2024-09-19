@@ -11,12 +11,12 @@ export default function Header(props) {
   }
 
   const [date, day] = label.split(' ');
-  const slicedDay = day.charAt(0);
+  // const slicedDay = day.charAt(0);
 
   return (
-    <div className="text-center font-medium text-lg text-mainText">
+    <div className="text-center font-semibold text-md text-mainText">
       <div>
-        {date} - {slicedDay}
+        {day} {date}
       </div>
     </div>
   );

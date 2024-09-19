@@ -1,5 +1,5 @@
-import WidgetWrapper from '@components/widgetElements/mini/WidgetWrapper';
 import WidgetHeader from '@components/widgetElements/WidgetHeader';
+import WidgetWrapper from '@components/widgetElements/WidgetWrapper';
 
 export default function MyCharacterWidget() {
   return (

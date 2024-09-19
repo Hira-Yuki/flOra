@@ -1,8 +1,8 @@
 'use client';
 import SmallStartTimer from '@components/icons/SmallStartTimer';
 import SmallStopTimer from '@components/icons/SmallStopTimer';
-import WidgetWrapper from '@components/widgetElements/small/WidgetWrapper';
 import WidgetHeader from '@components/widgetElements/WidgetHeader';
+import WidgetWrapper from '@components/widgetElements/WidgetWrapper';
 import { useToggle } from '@hooks';
 import dayjs, { Dayjs } from 'dayjs';
 import { useEffect, useRef, useState } from 'react';
