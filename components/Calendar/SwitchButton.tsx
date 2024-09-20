@@ -4,6 +4,7 @@ export default function SwitchButton({
   label2,
   func1,
   func2,
+  goToday = null,
   isCalendar = false,
 }) {
   return (
@@ -12,6 +13,7 @@ export default function SwitchButton({
         <button
           type="button"
           className="bg-floraOlive rounded-badge w-[70px] mr-3 text-white active:bg-floraGreen hover:opacity-70"
+          onClick={goToday}
         >
           오늘
         </button>

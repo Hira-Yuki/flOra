@@ -26,7 +26,7 @@ export default function CustomCheckbox({
 
   if (checked.value) {
     return (
-      <div className="flex justify-center items-center gap-4">
+      <div className="flex justify-center items-center gap-2">
         <div
           className={`w-6 h-6 ${borderClass[indexColor]} ${bgClass[indexColor]} border-2 rounded-md relative opacity-40 hover:opacity-80 cursor-pointer`}
           onClick={checked.toggleValue}
@@ -43,7 +43,7 @@ export default function CustomCheckbox({
   }
 
   return (
-    <div className="flex justify-center items-center gap-4">
+    <div className="flex justify-center items-center gap-2">
       <div
         className={`w-6 h-6 ${borderClass[indexColor]} border-[3px] rounded-md hover:opacity-60 cursor-pointer`}
         onClick={checked.toggleValue}

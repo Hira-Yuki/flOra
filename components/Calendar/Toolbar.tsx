@@ -1,3 +1,5 @@
+import ArrowLeft from '@components/icons/ArrowLeft';
+import ArrowRight from '@components/icons/ArrowRight';
 import dayjs from 'dayjs';
 
 import SwitchButton from './SwitchButton';
@@ -8,16 +10,13 @@ export default function Toolbar(toolbar) {
   }
 
   const isViewMonth = toolbar.view === 'month';
-  const currentDate = toolbar.date;
 
   const goPrev = () => {
-    const newDate = dayjs(currentDate).subtract(1, toolbar.view).toDate();
-    toolbar.onNavigate(null, newDate);
+    toolbar.onNavigate('PREV');
   };
 
   const goNext = () => {
-    const newDate = dayjs(currentDate).add(1, toolbar.view).toDate();
-    toolbar.onNavigate(null, newDate);
+    toolbar.onNavigate('NEXT');
   };
 
   const label = dayjs(toolbar.date).format('MMM YYYY').toUpperCase();
@@ -31,14 +30,15 @@ export default function Toolbar(toolbar) {
         label2={'주'}
         func1={() => toolbar.onView('month')}
         func2={() => toolbar.onView('week')}
+        goToday={() => toolbar.onNavigate('TODAY')}
       />
       <div className="flex justify-center gap-4 text-4xl items-center">
         <button type="button" className="w-8" onClick={goPrev}>
-          &lt;
+          <ArrowLeft className={'w-8 h-8 text-mainText'} />
         </button>
         <h3 className="font-bold">{label}</h3>
         <button type="button" className="w-8" onClick={goNext}>
-          &gt;
+          <ArrowRight className={'w-8 h-8 text-mainText'} />
         </button>
       </div>
     </div>

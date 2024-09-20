@@ -86,7 +86,7 @@ export default function PicFrameWidget() {
           {/* 이미지가 없을 때만 AddIcon을 보여줌 */}
           {!uploadedImage && (
             <AddIcon
-              className="w-14 h-14 relative -top-10 cursor-pointer"
+              className="w-14 h-14 relative -top-3 cursor-pointer"
               onClick={handleAdd}
             />
           )}

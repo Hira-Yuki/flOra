@@ -24,7 +24,7 @@ export default function Diary() {
           </h3>
         </div>
         <div>
-          <ul className="flex flex-col gap-4 overflow-scroll max-h-56 p-2 font-semibold">
+          <ul className="flex flex-col gap-4 overflow-scroll max-h-56 p-3 font-semibold">
             <li className="text-lg leading-none pl-2 relative">
               <span className="absolute left-0 top-0 bottom-0 w-1 bg-indexYellow rounded-full" />
               <p className="text-ellipsis line-clamp-2">

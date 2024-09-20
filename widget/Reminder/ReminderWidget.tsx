@@ -19,6 +19,7 @@ export default function ReminderWidget() {
         </div>
         <div className="flex-1 pt-6">
           <ul className="flex flex-col gap-4 overflow-scroll max-h-56 pr-1 font-semibold">
+            {/* pl-4로 바꿔야함 */}
             <li className="text-lg leading-none pl-2 relative">
               {/* 커스텀 둥근 선 보더 */}
               <span className="absolute left-0 top-0 bottom-0 w-1 bg-indexRed rounded-full" />

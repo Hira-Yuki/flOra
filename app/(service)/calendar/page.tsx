@@ -27,6 +27,30 @@ const events = [
     color: 'indexCyan',
   },
   {
+    id: '1',
+    title: '회의',
+    start: dayjs('2024-09-02 10:30').toDate(), // 2024년 9월 1일 10시 30분
+    end: dayjs('2024-09-02 12:00').toDate(), // 2024년 9월 1일 12시
+    allDay: false,
+    color: 'indexCyan',
+  },
+  {
+    id: '1',
+    title: '회의',
+    start: dayjs('2024-09-02 11:30').toDate(), // 2024년 9월 1일 10시 30분
+    end: dayjs('2024-09-02 13:00').toDate(), // 2024년 9월 1일 12시
+    allDay: false,
+    color: 'indexCyan',
+  },
+  {
+    id: '1',
+    title: '회의',
+    start: dayjs('2024-09-03 12:30').toDate(), // 2024년 9월 1일 10시 30분
+    end: dayjs('2024-09-03 16:00').toDate(), // 2024년 9월 1일 12시
+    allDay: false,
+    color: 'indexCyan',
+  },
+  {
     id: '2',
     title: '추석 연휴',
     start: dayjs('2024-09-14 00:00').toDate(),
@@ -48,6 +72,8 @@ const eventStyleGetter = (event) => {
   return {
     style: {
       backgroundColor: INDEX_COLORS[event.color] || '#c2c2c2',
+      border: 'none',
+      color: '#3c3c3c',
     },
   };
 };

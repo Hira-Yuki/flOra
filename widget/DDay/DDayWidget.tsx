@@ -21,7 +21,6 @@ export default function DDayWidget() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const isCalendar = pathname === '/calendar';
 
-  console.log(isCalendar);
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === 0 ? D_DAY_ITEMS.length - 1 : prevIndex - 1,

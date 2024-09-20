@@ -23,14 +23,14 @@ export default function TodoList({ title, subTitle }) {
           <li>
             <CustomCheckbox
               line1={false}
-              text="두줄 이상이면 이렇게 나올거에요... 하핳.... 하하핳...으하하핳....."
+              text="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa, eius reiciendis earum debitis veritatis doloremque omnis eaque maxime soluta aperiam! Veniam repellendus vero sunt aperiam explicabo perspiciatis autem officiis cupiditate."
             />
           </li>
           <li>
-            <CustomCheckbox />
+            <CustomCheckbox text="Lorem ipsum, dolor sit amet" />
           </li>
           <li>
-            <CustomCheckbox />
+            <CustomCheckbox text="Lorem ipsum, dolor sit amet" />
           </li>
         </ul>
       </div>

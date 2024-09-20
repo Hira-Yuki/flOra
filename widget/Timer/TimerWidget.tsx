@@ -53,12 +53,12 @@ export default function TimerWidget() {
       <div className="flex justify-between items-center mb-1">
         <WidgetHeader title={'타이머'} />
       </div>
-      <div className="flex flex-col justify-center items-center pt-10 gap-2">
+      <div className="flex flex-col justify-center items-center py-2 gap-2">
         <div className="text-4xl text-center font-bold">
           {time.format('HH:mm:ss')}
         </div>
         <TimerAccordion />
-        <div className="flex gap-4">
+        <div className="flex pb-4 gap-4">
           <div
             className="cursor-pointer hover:opacity-60"
             onClick={handleStartStop}
