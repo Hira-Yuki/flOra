@@ -1,5 +1,5 @@
 'use client';
-import CustomCheckbox from '@components/CustomCheckbox';
+import CustomCheckbox from '@components/CustomElements/CustomCheckbox';
 import WidgetHeader from '@components/widgetElements/WidgetHeader';
 import WidgetWrapper from '@components/widgetElements/WidgetWrapper';
 

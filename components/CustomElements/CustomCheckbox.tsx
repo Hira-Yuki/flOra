@@ -1,3 +1,4 @@
+import { bgClass, borderClass } from '@constants';
 import { useToggle } from '@hooks';
 
 export default function CustomCheckbox({
@@ -7,22 +8,6 @@ export default function CustomCheckbox({
   line1 = true,
 }) {
   const checked = useToggle(initialValue);
-
-  const borderClass = {
-    indexRed: 'border-indexRed',
-    indexYellow: 'border-indexYellow',
-    indexGreen: 'border-indexGreen',
-    indexCyan: 'border-indexCyan',
-    indexLavender: 'border-indexLavender',
-  };
-
-  const bgClass = {
-    indexRed: 'bg-indexRed',
-    indexYellow: 'bg-indexYellow',
-    indexGreen: 'bg-indexGreen',
-    indexCyan: 'bg-indexCyan',
-    indexLavender: 'bg-indexLavender',
-  };
 
   if (checked.value) {
     return (

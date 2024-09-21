@@ -14,3 +14,19 @@ export const INDEX_COLORS = {
   indexCyan: '#86DDE3',
   indexLavender: '#CCABD8',
 } as const;
+
+export const borderClass = {
+  indexRed: 'border-indexRed',
+  indexYellow: 'border-indexYellow',
+  indexGreen: 'border-indexGreen',
+  indexCyan: 'border-indexCyan',
+  indexLavender: 'border-indexLavender',
+} as const;
+
+export const bgClass = {
+  indexRed: 'bg-indexRed',
+  indexYellow: 'bg-indexYellow',
+  indexGreen: 'bg-indexGreen',
+  indexCyan: 'bg-indexCyan',
+  indexLavender: 'bg-indexLavender',
+} as const;

@@ -4,7 +4,10 @@ import Diary from '@components/Calendar/Diary';
 import Header from '@components/Calendar/Header';
 import TodoList from '@components/Calendar/TodoList';
 import Toolbar from '@components/Calendar/Toolbar';
+import BigCancelIcon from '@components/icons/BigCancelIcon';
+import GreenAddIcon from '@components/icons/GreenAddIcon';
 import { INDEX_COLORS } from '@constants';
+import { useToggle } from '@hooks';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import { useCallback, useState } from 'react';
@@ -23,30 +26,6 @@ const events = [
     title: '회의',
     start: dayjs('2024-09-01 10:30').toDate(), // 2024년 9월 1일 10시 30분
     end: dayjs('2024-09-01 12:00').toDate(), // 2024년 9월 1일 12시
-    allDay: false,
-    color: 'indexCyan',
-  },
-  {
-    id: '1',
-    title: '회의',
-    start: dayjs('2024-09-02 10:30').toDate(), // 2024년 9월 1일 10시 30분
-    end: dayjs('2024-09-02 12:00').toDate(), // 2024년 9월 1일 12시
-    allDay: false,
-    color: 'indexCyan',
-  },
-  {
-    id: '1',
-    title: '회의',
-    start: dayjs('2024-09-02 11:30').toDate(), // 2024년 9월 1일 10시 30분
-    end: dayjs('2024-09-02 13:00').toDate(), // 2024년 9월 1일 12시
-    allDay: false,
-    color: 'indexCyan',
-  },
-  {
-    id: '1',
-    title: '회의',
-    start: dayjs('2024-09-03 12:30').toDate(), // 2024년 9월 1일 10시 30분
-    end: dayjs('2024-09-03 16:00').toDate(), // 2024년 9월 1일 12시
     allDay: false,
     color: 'indexCyan',
   },
@@ -81,6 +60,7 @@ const eventStyleGetter = (event) => {
 export default function CalendarPage() {
   const [date, setDate] = useState<Date>(dayjs().toDate());
   const [view, setView] = useState<'month' | 'week'>(Views.MONTH);
+  const addToggle = useToggle();
 
   const onNavigate = useCallback(
     (newDate: Date) => setDate(newDate),
@@ -138,6 +118,12 @@ export default function CalendarPage() {
       </div>
       <div className="col-span-3 row-span-2 h-full">
         <Diary />
+      </div>
+      <div
+        className={`absolute bottom-6 right-6 cursor-pointer transition-transform duration-700 ease-in-out ${addToggle.value ? '-rotate-180' : 'rotate-180'}`}
+        onClick={addToggle.toggleValue}
+      >
+        {addToggle.value ? <BigCancelIcon /> : <GreenAddIcon />}
       </div>
     </div>
   );

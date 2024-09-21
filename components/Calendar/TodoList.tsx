@@ -1,4 +1,4 @@
-import CustomCheckbox from '@components/CustomCheckbox';
+import CustomCheckbox from '@components/CustomElements/CustomCheckbox';
 import { useToggle } from '@hooks';
 
 import SwitchButton from './SwitchButton';
