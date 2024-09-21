@@ -1,5 +1,20 @@
-import { bgClass, borderClass } from '@constants';
 import { useToggle } from '@hooks';
+
+const borderClass = {
+  indexRed: 'border-indexRed',
+  indexYellow: 'border-indexYellow',
+  indexGreen: 'border-indexGreen',
+  indexCyan: 'border-indexCyan',
+  indexLavender: 'border-indexLavender',
+} as const;
+
+const bgClass = {
+  indexRed: 'bg-indexRed',
+  indexYellow: 'bg-indexYellow',
+  indexGreen: 'bg-indexGreen',
+  indexCyan: 'bg-indexCyan',
+  indexLavender: 'bg-indexLavender',
+} as const;
 
 export default function CustomCheckbox({
   initialValue = false,

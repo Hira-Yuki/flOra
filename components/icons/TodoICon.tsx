@@ -1,4 +1,4 @@
-export default function TodoICon() {
+export default function TodoIcon() {
   return (
     <svg
       width="24"

@@ -1,16 +1,22 @@
 'use client';
+import CustomHeader from '@components/Calendar/CustomHeader';
 import Diary from '@components/Calendar/Diary';
 import TodoList from '@components/Calendar/TodoList';
-import BigCancelIcon from '@components/icons/BigCancelIcon';
-import ClockIcon from '@components/icons/ClockIcon';
-import EventIcon from '@components/icons/EventIcon';
-import GreenAddIcon from '@components/icons/GreenAddIcon';
-import PenIcon from '@components/icons/PenIcon';
-import TodoICon from '@components/icons/TodoICon';
+import {
+  BigCancelIcon,
+  ClockIcon,
+  EventIcon,
+  GreenAddIcon,
+  PenIcon,
+  TodoIcon,
+} from '@components/icons';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import FullCalendar from '@fullcalendar/react';
+import timeGridPlugin from '@fullcalendar/timegrid';
 import { useToggle } from '@hooks';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import DDayWidget from 'widget/DDay/DDayWidget';
 
@@ -46,28 +52,23 @@ const events = [
 
 export default function CalendarPage() {
   const addMenuToggle = useToggle();
-  const calendarRef = useRef(null);
-  let calendarApi;
-
-  useEffect(() => {
-    calendarApi = calendarRef.current.getApi();
-  }, [calendarApi]);
+  const calendarRef = useRef<FullCalendar>();
 
   return (
     <div className="grid grid-cols-8 grid-rows-7 gap-6 h-full">
       <div className="col-span-4 row-span-5 rounded-2xl bg-floraBeige h-full p-6 overflow-scroll">
-        {/* <FullCalendar
+        <CustomHeader calendarRef={calendarRef} />
+        <FullCalendar
           ref={calendarRef}
+          fixedWeekCount={false}
+          timeZone={'Asia/seoul'}
+          locale={'en'}
           plugins={[dayGridPlugin, timeGridPlugin]}
           initialView="dayGridMonth"
-          headerToolbar={{
-            left: 'prev,next today',
-            center: 'title',
-            right: 'dayGridMonth,timeGridWeek',
-          }}
+          headerToolbar={false}
           height="auto"
           events={events}
-        /> */}
+        />
       </div>
       <div className="col-span-2 row-span-7 h-full">
         <TodoList title={'To do List'} subTitle={'Study'} />
@@ -94,7 +95,7 @@ export default function CalendarPage() {
                 </li>
                 <li>
                   <button type="button" className="flex gap-2 hover:opacity-70">
-                    <TodoICon />
+                    <TodoIcon />
                     <span>투두</span>
                   </button>
                 </li>
