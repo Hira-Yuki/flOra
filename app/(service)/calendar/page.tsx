@@ -56,7 +56,7 @@ export default function CalendarPage() {
 
   return (
     <div className="grid grid-cols-8 grid-rows-7 gap-6 h-full">
-      <div className="col-span-4 row-span-5 rounded-2xl bg-floraBeige h-full p-6 overflow-scroll">
+      <div className="col-span-4 row-span-5 rounded-2xl bg-floraBeige h-full p-4 overflow-scroll">
         <CustomHeader calendarRef={calendarRef} />
         <FullCalendar
           ref={calendarRef}

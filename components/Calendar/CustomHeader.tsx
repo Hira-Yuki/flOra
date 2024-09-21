@@ -1,3 +1,4 @@
+'use client';
 import { ArrowLeft, ArrowRight } from '@components/icons';
 import { RefObject } from '@fullcalendar/core/preact';
 import FullCalendar from '@fullcalendar/react';
