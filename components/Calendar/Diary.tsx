@@ -1,4 +1,5 @@
 import CustomBorderItem from '@components/CustomElements/CustomBorderItem';
+import PenIcon from '@components/icons/PenIcon';
 
 export default function Diary() {
   // 임시 데이터
@@ -29,7 +30,7 @@ export default function Diary() {
           <div className="flex flex-col">
             <div className="flex justify-between p-4 pl-6 text-lg text-mainText font-bold">
               <h3>일기의 제목이 있는 풍경</h3>
-              <div>ic</div>
+              <PenIcon />
             </div>
             <div className="text-right text-descText font-medium pr-6">
               2024-09-20

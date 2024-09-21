@@ -5,7 +5,11 @@ import Header from '@components/Calendar/Header';
 import TodoList from '@components/Calendar/TodoList';
 import Toolbar from '@components/Calendar/Toolbar';
 import BigCancelIcon from '@components/icons/BigCancelIcon';
+import ClockIcon from '@components/icons/ClockIcon';
+import EventIcon from '@components/icons/EventIcon';
 import GreenAddIcon from '@components/icons/GreenAddIcon';
+import PenIcon from '@components/icons/PenIcon';
+import TodoICon from '@components/icons/TodoICon';
 import { INDEX_COLORS } from '@constants';
 import { useToggle } from '@hooks';
 import dayjs from 'dayjs';
@@ -60,7 +64,7 @@ const eventStyleGetter = (event) => {
 export default function CalendarPage() {
   const [date, setDate] = useState<Date>(dayjs().toDate());
   const [view, setView] = useState<'month' | 'week'>(Views.MONTH);
-  const addToggle = useToggle();
+  const addMenuToggle = useToggle();
 
   const onNavigate = useCallback(
     (newDate: Date) => setDate(newDate),
@@ -119,11 +123,51 @@ export default function CalendarPage() {
       <div className="col-span-3 row-span-2 h-full">
         <Diary />
       </div>
-      <div
-        className={`absolute bottom-6 right-6 cursor-pointer transition-transform duration-700 ease-in-out ${addToggle.value ? '-rotate-180' : 'rotate-180'}`}
-        onClick={addToggle.toggleValue}
-      >
-        {addToggle.value ? <BigCancelIcon /> : <GreenAddIcon />}
+      <div className="absolute bottom-6 right-6 cursor-pointer">
+        <div className="relative flex flex-col gap-6">
+          {addMenuToggle.value && (
+            <div className="bg-transparent text-lg flex flex-col gap-2 absolute bottom-20 -left-16">
+              <ul className="bg-white px-4 py-2 rounded-xl flex flex-col gap-6">
+                <li>
+                  <button type="button" className="flex gap-2 hover:opacity-70">
+                    <EventIcon />
+                    <span>이벤트</span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" className="flex gap-2 hover:opacity-70">
+                    <TodoICon />
+                    <span>투두</span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" className="flex gap-2 hover:opacity-70">
+                    <ClockIcon />
+                    <span>디데이</span>
+                  </button>
+                </li>
+              </ul>
+              <div className="bg-white px-4 py-1 rounded-xl">
+                <button type="button" className="flex gap-2 hover:opacity-70">
+                  <PenIcon />
+                  <span>일기</span>
+                </button>
+              </div>
+            </div>
+          )}
+          <div
+            className={`transition-transform duration-300 ease-in-out hover:opacity-75 ${addMenuToggle.value ? 'rotate-45' : '-rotate-90'}`}
+            onClick={addMenuToggle.toggleValue}
+          >
+            {addMenuToggle.value ? (
+              <BigCancelIcon />
+            ) : (
+              <div>
+                <GreenAddIcon />
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
