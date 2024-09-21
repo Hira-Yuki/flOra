@@ -13,6 +13,10 @@
   "license": "MIT",
   "description": "",
   "dependencies": {
+    "@fullcalendar/core": "^6.1.15",
+    "@fullcalendar/daygrid": "^6.1.15",
+    "@fullcalendar/react": "^6.1.15",
+    "@fullcalendar/timegrid": "^6.1.15",
     "axios": "^1.7.7",
     "axios-mock-adapter": "^2.0.0",
     "daisyui": "^4.12.10",

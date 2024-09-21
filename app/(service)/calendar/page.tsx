@@ -1,27 +1,20 @@
 'use client';
-import Day from '@components/Calendar/Day';
 import Diary from '@components/Calendar/Diary';
-import Header from '@components/Calendar/Header';
 import TodoList from '@components/Calendar/TodoList';
-import Toolbar from '@components/Calendar/Toolbar';
 import BigCancelIcon from '@components/icons/BigCancelIcon';
 import ClockIcon from '@components/icons/ClockIcon';
 import EventIcon from '@components/icons/EventIcon';
 import GreenAddIcon from '@components/icons/GreenAddIcon';
 import PenIcon from '@components/icons/PenIcon';
 import TodoICon from '@components/icons/TodoICon';
-import { INDEX_COLORS } from '@constants';
 import { useToggle } from '@hooks';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
-import { useCallback, useState } from 'react';
-import { Calendar, dayjsLocalizer, Views } from 'react-big-calendar';
+import { useEffect, useRef } from 'react';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import DDayWidget from 'widget/DDay/DDayWidget';
 
 dayjs.extend(timezone);
-
-const localizer = dayjsLocalizer(dayjs);
 
 // 샘플 이벤트 데이터
 const events = [
@@ -51,65 +44,30 @@ const events = [
   },
 ];
 
-const eventStyleGetter = (event) => {
-  return {
-    style: {
-      backgroundColor: INDEX_COLORS[event.color] || '#c2c2c2',
-      border: 'none',
-      color: '#3c3c3c',
-    },
-  };
-};
-
 export default function CalendarPage() {
-  const [date, setDate] = useState<Date>(dayjs().toDate());
-  const [view, setView] = useState<'month' | 'week'>(Views.MONTH);
   const addMenuToggle = useToggle();
+  const calendarRef = useRef(null);
+  let calendarApi;
 
-  const onNavigate = useCallback(
-    (newDate: Date) => setDate(newDate),
-    [setDate],
-  );
-  const onView = useCallback(
-    (newView: 'month' | 'week') => setView(newView),
-    [view],
-  );
-
-  const onDrillDown = useCallback(
-    (newDate) => {
-      setDate(newDate);
-      setView(Views.WEEK);
-    },
-    [setDate, setView],
-  );
+  useEffect(() => {
+    calendarApi = calendarRef.current.getApi();
+  }, [calendarApi]);
 
   return (
     <div className="grid grid-cols-8 grid-rows-7 gap-6 h-full">
-      <div className="col-span-4 row-span-5 rounded-2xl bg-floraBeige h-full">
-        <Calendar
-          date={date}
+      <div className="col-span-4 row-span-5 rounded-2xl bg-floraBeige h-full p-6 overflow-scroll">
+        {/* <FullCalendar
+          ref={calendarRef}
+          plugins={[dayGridPlugin, timeGridPlugin]}
+          initialView="dayGridMonth"
+          headerToolbar={{
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek',
+          }}
+          height="auto"
           events={events}
-          localizer={localizer}
-          startAccessor="start"
-          endAccessor="end"
-          onDrillDown={onDrillDown}
-          eventPropGetter={eventStyleGetter}
-          components={{
-            toolbar: Toolbar,
-            header: Header,
-            month: {
-              dateHeader: Day,
-            },
-          }}
-          onNavigate={onNavigate}
-          onView={onView}
-          view={view}
-          style={{
-            height: '100%',
-            width: '100%',
-            padding: '1rem',
-          }}
-        />
+        /> */}
       </div>
       <div className="col-span-2 row-span-7 h-full">
         <TodoList title={'To do List'} subTitle={'Study'} />
