@@ -16,4 +16,3 @@ export { default as SearchIcon } from './SearchIcon';
 export { default as SmallStartTimer } from './SmallStartTimer';
 export { default as SmallStopTimer } from './SmallStopTimer';
 export { default as TimerIcon } from './TimerIcon';
-export { default as TodoIcon } from './TodoIcon';
