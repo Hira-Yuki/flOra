@@ -8,7 +8,7 @@ import {
 } from '@components/icons';
 import { useToggle } from '@hooks';
 
-export default function FloatButtons() {
+export default function FloatButtons({ modalController }) {
   const addMenuToggle = useToggle();
 
   return (
@@ -18,7 +18,11 @@ export default function FloatButtons() {
           <div className="bg-transparent text-lg flex flex-col gap-2 absolute bottom-20 -left-16">
             <ul className="bg-white px-4 py-2 rounded-xl flex flex-col gap-6">
               <li>
-                <button type="button" className="flex gap-2 hover:opacity-70">
+                <button
+                  type="button"
+                  className="flex gap-2 hover:opacity-70"
+                  onClick={modalController.setTrue}
+                >
                   <EventIcon />
                   <span>이벤트</span>
                 </button>
@@ -48,13 +52,7 @@ export default function FloatButtons() {
           className={`transition-transform duration-300 ease-in-out hover:opacity-75 ${addMenuToggle.value ? 'rotate-45' : '-rotate-90'}`}
           onClick={addMenuToggle.toggleValue}
         >
-          {addMenuToggle.value ? (
-            <BigCancelIcon />
-          ) : (
-            <div>
-              <GreenAddIcon />
-            </div>
-          )}
+          {addMenuToggle.value ? <BigCancelIcon /> : <GreenAddIcon />}
         </div>
       </div>
     </div>

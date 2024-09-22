@@ -21,26 +21,42 @@ const events = [
   {
     id: '1',
     title: '회의',
-    start: dayjs('2024-09-01 10:30').toDate(), // 2024년 9월 1일 10시 30분
-    end: dayjs('2024-09-01 12:00').toDate(), // 2024년 9월 1일 12시
+    start: dayjs('2024-09-01 10:30').format(), // 2024년 9월 1일 10시 30분
+    end: dayjs('2024-09-01 12:00').format(), // 2024년 9월 1일 12시
+    allDay: false,
+    color: '#FA897B',
+  },
+  {
+    id: '2',
+    title: '회의2',
+    start: dayjs('2024-09-02 10:30', 'Asia/Seoul').format(), // 2024년 9월 2일 10시 30분
+    end: dayjs('2024-09-02 12:00', 'Asia/Seoul').format(), // 2024년 9월 2일 12시
     allDay: false,
     color: 'indexCyan',
   },
   {
-    id: '2',
+    id: '3',
     title: '추석 연휴',
-    start: dayjs('2024-09-14 00:00').toDate(),
-    end: dayjs('2024-09-18 23:59').toDate(),
+    start: dayjs('2024-09-14 00:00').format(),
+    end: dayjs('2024-09-18 23:59').format(),
     allDay: true,
     color: 'indexRed',
   },
   {
-    id: '3',
+    id: '4',
     title: '가족 모임',
-    start: dayjs('2024-10-05 00:00').toDate(),
-    end: dayjs('2024-10-05 23:59').toDate(),
+    start: dayjs('2024-10-05 00:00').format(),
+    end: dayjs('2024-10-05 23:59').format(),
     allDay: true,
     color: 'indexLavender',
+  },
+  {
+    id: '5',
+    title: '회의2',
+    start: dayjs('2024-09-02 14:30').format(), // 2024년 9월 2일 10시 30분
+    end: dayjs('2024-09-02 15:00').format(), // 2024년 9월 2일 12시
+    allDay: false,
+    color: 'indexCyan',
   },
 ];
 
@@ -58,7 +74,7 @@ export default function FloraCalendar() {
         locale={initialize.lc}
         plugins={initialize.plugins}
         initialView={initialize.initialView}
-        headerToolbar={false}
+        headerToolbar={false} // 커스텀 툴바를 사용하기 위해 비활성화
         height={initialize.height}
         events={events}
         views={{
