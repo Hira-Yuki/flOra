@@ -3,7 +3,6 @@ import Diary from '@components/Calendar/Diary';
 import FloatButtons from '@components/Calendar/FloatButtons';
 import FloraCalendar from '@components/Calendar/FloraCalendar';
 import TodoList from '@components/Calendar/TodoList';
-import CustomModal from '@components/CustomElements/CustomModal';
 import { useToggle } from '@hooks';
 import DDayWidget from 'widget/DDay/DDayWidget';
 
@@ -27,9 +26,6 @@ export default function CalendarPage() {
         <Diary />
       </div>
       <FloatButtons modalController={modalController} />
-      <CustomModal aria_label={'모달 컨텐츠'} modalController={modalController}>
-        내용
-      </CustomModal>
     </div>
   );
 }

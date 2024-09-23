@@ -1,3 +1,4 @@
+import CustomModal from '@components/CustomElements/CustomModal';
 import {
   BigCancelIcon,
   ClockIcon,
@@ -55,6 +56,48 @@ export default function FloatButtons({ modalController }) {
           {addMenuToggle.value ? <BigCancelIcon /> : <GreenAddIcon />}
         </div>
       </div>
+      <CustomModal aria_label={'모달 컨텐츠'} modalController={modalController}>
+        {/* 이벤트/투두 변경 버튼 */}
+        <div className="flex gap-3 text-mainText text-lg font-medium">
+          <button
+            type="button"
+            className="w-24 h-9 border border-floraYellow bg-floraYellow rounded-badge"
+          >
+            이벤트
+          </button>
+          <button
+            type="button"
+            className="w-24 h-9 border border-objectGray rounded-badge"
+          >
+            투두
+          </button>
+        </div>
+        <form>
+          <div className="flex justify-center items-center">
+            <input
+              type="text"
+              placeholder="제목 입력"
+              className="px-2 mt-6 mb-4 text-[32px] font-bold"
+            />
+            <div className="flex gap-1 justify-center items-center">
+              <label htmlFor="is_set_todo" className="cursor-pointer">
+                디데이로 등록
+              </label>
+              <input type="checkbox" className="hidden peer" />
+              <label className="relative w-4 h-4 border border-mainText peer-checked:before:content-['✓'] peer-checked:before:absolute before:-top-1.5 before:text-mainText cursor-pointer" />
+            </div>
+          </div>
+          <hr />
+          <div className="mt-6">
+            <label>하루종일</label> 여부, 시작, 종료, 인덱스 컬러
+          </div>
+          <hr />
+          <div>
+            <div>메모</div>
+            <button type="button">저장</button>
+          </div>
+        </form>
+      </CustomModal>
     </div>
   );
 }

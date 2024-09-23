@@ -19,6 +19,7 @@ module.exports = {
         mainText: '#3c3c3c',
         descText: '#666666',
         subText: '#929292',
+        objectGray: '#cecece',
         indexRed: '#FF5641',
         indexYellow: '#FFAE00',
         indexGreen: '#8CD300',

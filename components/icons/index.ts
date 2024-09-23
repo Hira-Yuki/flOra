@@ -5,6 +5,7 @@ export { default as ArrowRight } from './ArrowRight';
 export { default as BigCancelIcon } from './BigCancelIcon';
 export { default as CalendarIcon } from './CalendarIcon';
 export { default as ClockIcon } from './ClockIcon';
+export { default as CloseIcon } from './CloseIcon';
 export { default as DashBoardIcon } from './DashBoardIcon';
 export { default as EllipsisIcon } from './EllipsisIcon';
 export { default as EventIcon } from './EventIcon';
