@@ -1,4 +1,5 @@
 import CustomCheckbox from '@components/CustomElements/CustomCheckbox';
+import WidgetWrapper from '@components/widgetElements/WidgetWrapper';
 import { useToggle } from '@hooks';
 
 import SwitchButton from './SwitchButton';
@@ -6,7 +7,7 @@ import SwitchButton from './SwitchButton';
 export default function TodoList({ title, subTitle }) {
   const isRoutine = useToggle(true);
   return (
-    <div className="w-full h-full bg-floraBeige rounded-2xl p-8">
+    <WidgetWrapper>
       <SwitchButton
         isSwitch={isRoutine.value}
         label1={'루틴'}
@@ -34,6 +35,6 @@ export default function TodoList({ title, subTitle }) {
           </li>
         </ul>
       </div>
-    </div>
+    </WidgetWrapper>
   );
 }

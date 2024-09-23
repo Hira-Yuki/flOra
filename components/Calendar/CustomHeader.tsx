@@ -68,7 +68,7 @@ export default function CustomHeader({
         func2={() => handleViewChange('timeGridWeek')}
         goToday={handleToday}
       />
-      <div className="flex justify-center gap-4 text-4xl items-center">
+      <div className="flex justify-center gap-4 text-[32px] items-center">
         <button type="button" className="w-8" onClick={handlePrev}>
           <ArrowLeft className={'w-8 h-8 text-mainText'} />
         </button>

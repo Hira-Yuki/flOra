@@ -8,11 +8,11 @@ export const ROUTE_LISTS = {
 } as const;
 
 export const INDEX_COLORS = {
-  indexRed: '#FA897B',
-  indexYellow: '#FFDD94',
-  indexGreen: '#D0E6A5',
-  indexCyan: '#86DDE3',
-  indexLavender: '#CCABD8',
+  indexRed: '#FF5641',
+  indexYellow: '#FFAE00',
+  indexGreen: '#8CD300',
+  indexCyan: '#22D3DE',
+  indexLavender: '#A155BD',
 } as const;
 
 export const borderClass = {

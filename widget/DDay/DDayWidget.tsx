@@ -1,5 +1,6 @@
 'use client';
 
+import WidgetWrapper from '@components/widgetElements/WidgetWrapper';
 import dayjs from 'dayjs';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
@@ -34,8 +35,8 @@ export default function DDayWidget() {
   };
 
   return (
-    <div
-      className={`${isCalendar ? 'bg-floraGreen' : 'bg-floraBeige'} rounded-2xl p-4 h-full shadow-gray-200 shadow-lg relative`}
+    <WidgetWrapper
+      bgColor={`${isCalendar ? 'bg-floraGreen' : 'bg-floraBeige'}`}
     >
       <div className="flex items-center justify-between">
         <h3
@@ -72,6 +73,6 @@ export default function DDayWidget() {
           &gt;
         </button>
       </div>
-    </div>
+    </WidgetWrapper>
   );
 }
