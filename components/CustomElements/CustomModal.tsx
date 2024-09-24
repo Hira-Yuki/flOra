@@ -1,7 +1,7 @@
 import { CloseIcon } from '@components/icons';
 import Modal from 'react-modal';
 
-export default function CustomModal({ children, modalController, aria_label }) {
+export default function CustomModal({ children, modalController }) {
   const { value: isModalOpen, setFalse: close } = modalController;
 
   const customStyles = {
@@ -27,7 +27,6 @@ export default function CustomModal({ children, modalController, aria_label }) {
         isOpen={isModalOpen}
         onRequestClose={close}
         style={customStyles}
-        contentLabel={aria_label}
         shouldCloseOnOverlayClick={false}
       >
         <div className="relative p-8">

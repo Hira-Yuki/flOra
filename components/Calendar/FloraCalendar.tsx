@@ -112,7 +112,7 @@ export default function FloraCalendar() {
   // 이벤트 스타일을 변경하는 함수
   const applyTimeGridStyles = (info: any) => {
     const eventEl = info.el;
-
+    eventEl.style.fontSize = '12px';
     // allDay 이벤트는 스타일을 변경하지 않음
     if (!info.event.allDay) {
       // timeGrid에서만 스타일을 적용
@@ -124,7 +124,7 @@ export default function FloraCalendar() {
         eventEl.style.backgroundColor = `${info.event.backgroundColor || info.event.color}80`; // 80은 투명도 설정
 
         // 왼쪽 보더만 설정
-        eventEl.style.borderLeft = `5px solid ${info.event.borderColor || info.event.color}`;
+        eventEl.style.borderLeft = `4px solid ${info.event.borderColor || info.event.color}`;
         eventEl.style.borderRadius = '0'; // 둥근 테두리 제거
         eventEl.style.borderRight = 'none'; // 오른쪽 보더 제거
         eventEl.style.borderTop = 'none'; // 상단 보더 제거
