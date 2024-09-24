@@ -65,7 +65,7 @@ export default function FloatButtons({ modalController }) {
           {addMenuToggle.value ? <BigCancelIcon /> : <GreenAddIcon />}
         </div>
       </div>
-      {/*  */}
+      {/* <------------------> */}
       <CustomModal modalController={modalController}>
         {/* 이벤트/투두 변경 버튼 */}
         <div className="flex pl-1 gap-3 text-mainText font-medium">
@@ -103,7 +103,9 @@ export default function FloatButtons({ modalController }) {
           <hr />
           <div className="mt-6 flex flex-col">
             <ToggleSwitch label={'하루종일'} />
-            <CustomDatePicker />
+            <CustomDatePicker label={'시작'} />
+            <CustomDatePicker label={'종료'} />
+            인덱스 컬러
           </div>
           <hr />
           <div>

@@ -4,9 +4,11 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 
-export default function CustomDatePicker() {
+import TimePicker from './CustomTimePicker';
+
+export default function CustomDatePicker({ label }) {
   const [startDate, setStartDate] = useState(dayjs().toDate());
-  const [viewMonth, setViewMonth] = useState(dayjs().month()); // 현재 보고 있는 달을 상태로 저장
+  const [viewMonth, setViewMonth] = useState(dayjs().month());
 
   const onChange = (date) => {
     setStartDate(date);
@@ -14,12 +16,13 @@ export default function CustomDatePicker() {
 
   return (
     <div className="flex items-center gap-4">
-      <label className="text-right ml-3 w-14">시작</label>
-      <div>
+      <label className="text-right ml-3 w-14">{label}</label>
+      <div className="flex">
         <DatePicker
           selected={startDate}
           onChange={onChange}
           portalId="root"
+          dateFormat="YYYY. MM. dd"
           renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
             <div className="flex justify-between items-center px-2 py-2">
               <span className="text-sm font-bold text-floraOlive">
@@ -54,9 +57,8 @@ export default function CustomDatePicker() {
                 : 'opacity-60' // 선택된 달이 아니면 흐리게 처리
           }
         />
-        <input type="time" />
+        <TimePicker />
       </div>
-      종료, 인덱스 컬러
     </div>
   );
 }

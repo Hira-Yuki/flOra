@@ -47,12 +47,12 @@
 } */
 
 .react-datepicker-popper[data-placement^='bottom'] .react-datepicker__triangle {
-  fill: #f0f0f0;
-  color: #f0f0f0;
+  fill: #f9f9f9;
+  color: #f9f9f9;
 }
 .react-datepicker-popper[data-placement^='top'] .react-datepicker__triangle {
-  fill: #fff;
-  color: #fff;
+  fill: #f9f9f9;
+  color: #f9f9f9;
 }
 
 .react-datepicker__header {
@@ -219,7 +219,7 @@ h2.react-datepicker__current-month {
   .react-datepicker-time__input-container
   .react-datepicker-time__input
   input {
-  width: auto;
+  width: 100%;
 }
 .react-datepicker__input-time-container
   .react-datepicker-time__input-container
