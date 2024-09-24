@@ -4,9 +4,7 @@ export default function useInput(initialValue: string = '') {
   const [value, setValue] = useState<string>(initialValue);
 
   // 입력 변경 핸들러
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
+  const handleChange = (event) => {
     setValue(event.target.value);
   };
 

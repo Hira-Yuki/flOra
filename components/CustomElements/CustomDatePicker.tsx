@@ -4,11 +4,11 @@ import dayjs from 'dayjs';
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 
+import CustomDatePickerInput from './CustomDatePickerInput';
 import TimePicker from './CustomTimePicker';
 
 export default function CustomDatePicker({ label }) {
   const [startDate, setStartDate] = useState(dayjs().toDate());
-  const [viewMonth, setViewMonth] = useState(dayjs().month());
 
   const onChange = (date) => {
     setStartDate(date);
@@ -23,6 +23,7 @@ export default function CustomDatePicker({ label }) {
           onChange={onChange}
           portalId="root"
           dateFormat="YYYY. MM. dd"
+          customInput={<CustomDatePickerInput />}
           renderCustomHeader={({ date, decreaseMonth, increaseMonth }) => (
             <div className="flex justify-between items-center px-2 py-2">
               <span className="text-sm font-bold text-floraOlive">
@@ -32,7 +33,7 @@ export default function CustomDatePicker({ label }) {
                 <button
                   onClick={() => {
                     decreaseMonth();
-                    setViewMonth(dayjs(date).subtract(1, 'month').month()); // 월이 변경될 때 상태 업데이트
+                    setStartDate(dayjs(date).subtract(1, 'month').toDate());
                   }}
                   className="mr-2"
                 >
@@ -41,7 +42,7 @@ export default function CustomDatePicker({ label }) {
                 <button
                   onClick={() => {
                     increaseMonth();
-                    setViewMonth(dayjs(date).add(1, 'month').month()); // 월이 변경될 때 상태 업데이트
+                    setStartDate(dayjs(date).add(1, 'month').toDate());
                   }}
                 >
                   <ArrowRight className={'w-[18px] h-[18px]'} />
@@ -50,15 +51,14 @@ export default function CustomDatePicker({ label }) {
             </div>
           )}
           formatWeekDay={(day) => day[0]} // 요일을 한 글자로 표시
-          dayClassName={
-            (date) =>
-              dayjs(date).month() === viewMonth // 현재 보고 있는 달과 비교
-                ? '' // 현재 보고 있는 달이면 스타일을 변경하지 않음
-                : 'opacity-60' // 선택된 달이 아니면 흐리게 처리
-          }
+          dayClassName={(date) => {
+            return dayjs(date).month() === dayjs(startDate).month() // 현재 보고 있는 달과 비교
+              ? '' // 현재 보고 있는 달이면 스타일을 변경하지 않음
+              : 'opacity-60'; // 선택된 달이 아니면 흐리게 처리
+          }}
         />
-        <TimePicker />
       </div>
+      <TimePicker />
     </div>
   );
 }
