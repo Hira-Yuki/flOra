@@ -41,11 +41,15 @@ export default function CustomCheckbox({
       <label
         htmlFor={checkBoxId}
         className={`min-w-6 min-h-6 ${borderClass[indexColor]} ${checked.value && `${bgClass[indexColor]}`} peer-checked:${bgClass[indexColor]} peer-checked:opacity-40 border-[3px] rounded-md hover:opacity-80 cursor-pointer`}
-      />
-      <label
-        htmlFor={checkBoxId}
-        className="absolute w-2 h-4 border-b-[3px] border-r-[3px] border-white transform rotate-45 left-2 top-1 hidden peer-checked:block"
-      />
+      >
+        {checked.value && (
+          <label
+            htmlFor={checkBoxId}
+            className="absolute w-2 h-4 border-b-[3px] border-r-[3px] border-white transform rotate-45 left-2"
+          />
+        )}
+      </label>
+
       <label
         htmlFor={checkBoxId}
         className={`text-black peer-checked:text-subText peer-checked:line-through ${line1 ? 'line-clamp-1' : 'line-clamp-2'} overflow-ellipsis cursor-pointer`}

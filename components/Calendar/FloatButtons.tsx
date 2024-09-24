@@ -1,3 +1,4 @@
+import CustomDatePicker from '@components/CustomElements/CustomDatePicker';
 import CustomModal from '@components/CustomElements/CustomModal';
 import ToggleSwitch from '@components/CustomElements/ToggleSwitch';
 import {
@@ -67,16 +68,16 @@ export default function FloatButtons({ modalController }) {
       {/*  */}
       <CustomModal modalController={modalController}>
         {/* 이벤트/투두 변경 버튼 */}
-        <div className="flex gap-3 text-mainText text-lg font-medium">
+        <div className="flex pl-1 gap-3 text-mainText font-medium">
           <button
             type="button"
-            className="w-24 h-9 border border-floraYellow bg-floraYellow rounded-badge"
+            className="w-[90px] h-[34px] border border-floraYellow bg-floraYellow rounded-badge"
           >
             이벤트
           </button>
           <button
             type="button"
-            className="w-24 h-9 border border-objectGray rounded-badge"
+            className="w-[90px] h-[34px] border border-objectGray rounded-badge"
           >
             투두
           </button>
@@ -86,7 +87,7 @@ export default function FloatButtons({ modalController }) {
             <input
               type="text"
               placeholder="제목 입력"
-              className="px-2 mt-6 mb-4 text-[32px] font-bold focus:outline-none"
+              className="px-3 mt-6 mb-4 text-[32px] font-bold focus:outline-none"
             />
             <div className="flex gap-1 justify-center items-center">
               <label htmlFor="is_set_todo" className="cursor-pointer">
@@ -102,7 +103,7 @@ export default function FloatButtons({ modalController }) {
           <hr />
           <div className="mt-6 flex flex-col">
             <ToggleSwitch label={'하루종일'} />
-            시작, 종료, 인덱스 컬러
+            <CustomDatePicker />
           </div>
           <hr />
           <div>

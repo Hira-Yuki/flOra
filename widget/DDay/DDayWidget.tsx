@@ -2,7 +2,6 @@
 
 import WidgetWrapper from '@components/widgetElements/WidgetWrapper';
 import dayjs from 'dayjs';
-import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 import DDayItem from './DDayItem';
@@ -17,10 +16,8 @@ const D_DAY_ITEMS = [
 ];
 
 export default function DDayWidget() {
-  const pathname = usePathname();
   const today = dayjs();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const isCalendar = pathname === '/calendar';
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
@@ -35,21 +32,16 @@ export default function DDayWidget() {
   };
 
   return (
-    <WidgetWrapper
-      bgColor={`${isCalendar ? 'bg-floraGreen' : 'bg-floraBeige'}`}
-    >
+    <WidgetWrapper bgColor={'bg-floraGreen'}>
       <div className="flex items-center justify-between">
         <h3
-          className={`font-semibold text-lg sm:text-xl ml-2 ${isCalendar ? 'text-floraYellow' : 'text-floraOlive'} h-10`}
+          className={`font-semibold text-lg sm:text-xl ml-2 text-floraYellow h-10`}
         >
           D-DAY
         </h3>
       </div>
       <div className="flex">
-        <button
-          onClick={handlePrev}
-          className={`${isCalendar ? 'text-white' : 'text-mainText'} text-2xl`}
-        >
+        <button onClick={handlePrev} className={`text-white text-2xl`}>
           &lt;
         </button>
         <div className="overflow-hidden w-full">
@@ -59,17 +51,10 @@ export default function DDayWidget() {
               transform: `translateX(-${currentIndex * 100}%)`,
             }}
           >
-            <DDayItem
-              items={D_DAY_ITEMS}
-              today={today}
-              isCalendar={isCalendar}
-            />
+            <DDayItem items={D_DAY_ITEMS} today={today} />
           </div>
         </div>
-        <button
-          onClick={handleNext}
-          className={`${isCalendar ? 'text-white' : 'text-mainText'} text-2xl`}
-        >
+        <button onClick={handleNext} className={`text-white text-2xl`}>
           &gt;
         </button>
       </div>

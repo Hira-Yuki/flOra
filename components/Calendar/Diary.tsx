@@ -6,7 +6,7 @@ export default function Diary() {
   const Diary = false;
 
   return (
-    <div className="bg-floraBeige rounded-2xl h-full text-mainText shadow-gray-200 shadow-lg overflow-hidden grid grid-cols-3">
+    <div className="bg-floraBeige rounded-2xl h-full text-mainText overflow-hidden grid grid-cols-3">
       {/* 이미지 */}
       <div className="col-span-1">
         {Diary ? (

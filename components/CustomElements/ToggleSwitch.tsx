@@ -6,8 +6,8 @@ export default function ToggleSwitch({ label, initialValue = false }) {
   const checked = useToggle(initialValue);
   const id = useId();
   return (
-    <div className="flex items-center gap-4">
-      <label htmlFor={id} className="cursor-pointer">
+    <div className="flex items-center gap-4 ">
+      <label htmlFor={id} className="cursor-pointer text-right ml-3">
         {label}
       </label>
       <input
