@@ -8,10 +8,14 @@ export default function useInput(initialValue: string = '') {
     setValue(event.target.value);
   };
 
+  const setValues = (value) => {
+    setValue(value);
+  };
   // 값과 핸들러를 반환
   return {
     value,
     onChange: handleChange,
     reset: () => setValue(initialValue),
+    setValues,
   };
 }

@@ -1,25 +1,25 @@
 import { ArrowLeft, ArrowRight } from '@components/icons';
 import '@styles/custom-react-datepicker.css';
 import dayjs from 'dayjs';
-import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 
 import CustomDatePickerInput from './CustomDatePickerInput';
-import TimePicker from './CustomTimePicker';
+import CustomTimePicker from './CustomTimePicker';
 
-export default function CustomDatePicker({ label }) {
-  const [startDate, setStartDate] = useState(dayjs().toDate());
-
-  const onChange = (date) => {
-    setStartDate(date);
-  };
-
+export default function CustomDatePicker({
+  label,
+  value,
+  onChange,
+  type,
+  startDate,
+  state,
+}) {
   return (
     <div className="flex items-center gap-4">
       <label className="text-right ml-3 w-14">{label}</label>
       <div className="flex">
         <DatePicker
-          selected={startDate}
+          selected={value}
           onChange={onChange}
           portalId="root"
           dateFormat="YYYY. MM. dd"
@@ -33,7 +33,7 @@ export default function CustomDatePicker({ label }) {
                 <button
                   onClick={() => {
                     decreaseMonth();
-                    setStartDate(dayjs(date).subtract(1, 'month').toDate());
+                    onChange(dayjs(date).subtract(1, 'month').toDate());
                   }}
                   className="mr-2"
                 >
@@ -42,7 +42,7 @@ export default function CustomDatePicker({ label }) {
                 <button
                   onClick={() => {
                     increaseMonth();
-                    setStartDate(dayjs(date).add(1, 'month').toDate());
+                    onChange(dayjs(date).add(1, 'month').toDate());
                   }}
                 >
                   <ArrowRight className={'w-[18px] h-[18px]'} />
@@ -52,13 +52,20 @@ export default function CustomDatePicker({ label }) {
           )}
           formatWeekDay={(day) => day[0]} // 요일을 한 글자로 표시
           dayClassName={(date) => {
-            return dayjs(date).month() === dayjs(startDate).month() // 현재 보고 있는 달과 비교
+            return dayjs(date).month() === dayjs(value).month() // 현재 보고 있는 달과 비교
               ? '' // 현재 보고 있는 달이면 스타일을 변경하지 않음
               : 'opacity-60'; // 선택된 달이 아니면 흐리게 처리
           }}
         />
       </div>
-      <TimePicker />
+      {!state.isAllDay && (
+        <CustomTimePicker
+          startDate={startDate}
+          value={value}
+          handleDate={onChange}
+          type={type}
+        />
+      )}
     </div>
   );
 }

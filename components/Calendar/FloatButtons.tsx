@@ -1,6 +1,3 @@
-import CustomDatePicker from '@components/CustomElements/CustomDatePicker';
-import CustomModal from '@components/CustomElements/CustomModal';
-import ToggleSwitch from '@components/CustomElements/ToggleSwitch';
 import {
   BigCancelIcon,
   ClockIcon,
@@ -9,6 +6,7 @@ import {
   PenIcon,
   TodoIcon,
 } from '@components/icons';
+import EventCreateModal from '@components/ModalContents/EventCreateModal';
 import { useToggle } from '@hooks';
 
 export default function FloatButtons({ modalController }) {
@@ -66,54 +64,9 @@ export default function FloatButtons({ modalController }) {
         </div>
       </div>
       {/* <------------------> */}
-      <CustomModal modalController={modalController}>
-        {/* 이벤트/투두 변경 버튼 */}
-        <div className="flex pl-1 gap-3 text-mainText font-medium">
-          <button
-            type="button"
-            className="w-[90px] h-[34px] border border-floraYellow bg-floraYellow rounded-badge"
-          >
-            이벤트
-          </button>
-          <button
-            type="button"
-            className="w-[90px] h-[34px] border border-objectGray rounded-badge"
-          >
-            투두
-          </button>
-        </div>
-        <form>
-          <div className="flex justify-center items-center">
-            <input
-              type="text"
-              placeholder="제목 입력"
-              className="px-3 mt-6 mb-4 text-[32px] font-bold focus:outline-none"
-            />
-            <div className="flex gap-1 justify-center items-center">
-              <label htmlFor="is_set_todo" className="cursor-pointer">
-                디데이로 등록
-              </label>
-              <input id="is_set_todo" type="checkbox" className="hidden peer" />
-              <label
-                htmlFor="is_set_todo"
-                className="relative w-4 h-4 border border-mainText peer-checked:before:content-['✓'] peer-checked:before:absolute before:-top-1.5 before:text-mainText cursor-pointer"
-              />
-            </div>
-          </div>
-          <hr />
-          <div className="mt-6 flex flex-col">
-            <ToggleSwitch label={'하루종일'} />
-            <CustomDatePicker label={'시작'} />
-            <CustomDatePicker label={'종료'} />
-            인덱스 컬러
-          </div>
-          <hr />
-          <div>
-            <div>메모</div>
-            <button type="button">저장</button>
-          </div>
-        </form>
-      </CustomModal>
+      {modalController.value && (
+        <EventCreateModal modalController={modalController} />
+      )}
     </div>
   );
 }
