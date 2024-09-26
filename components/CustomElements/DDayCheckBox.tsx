@@ -8,8 +8,11 @@ export default function DDayCheckBox({ label, checked, onChange }) {
   };
 
   return (
-    <div className="flex gap-1 justify-center items-center">
-      <label htmlFor={checkId} className="cursor-pointer">
+    <div className="flex gap-1 justify-center items-center min-w-[116px]">
+      <label
+        htmlFor={checkId}
+        className="cursor-pointer block whitespace-nowrap"
+      >
         {label}
       </label>
       <input

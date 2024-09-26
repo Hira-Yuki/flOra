@@ -38,7 +38,11 @@ export default function FloatButtons({ modalController }) {
                 </button>
               </li>
               <li>
-                <button type="button" className="flex gap-2 hover:opacity-70">
+                <button
+                  type="button"
+                  className="flex gap-2 hover:opacity-70"
+                  onClick={() => callModal('todo')}
+                >
                   <TodoIcon />
                   <span>투두</span>
                 </button>

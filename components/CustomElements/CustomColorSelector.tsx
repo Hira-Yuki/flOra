@@ -27,7 +27,7 @@ export default function CustomColorSelector({ label, indexColor, onChange }) {
 
   return (
     <div className="flex items-center gap-4 mb-6">
-      <label className="text-right ml-3 w-14 text-descText">{label}</label>
+      <label className="text-right ml-3 w-16 text-descText">{label}</label>
       <fieldset className="flex gap-4">
         {colorOptions.map(({ id, value, color }) => (
           <div key={id}>

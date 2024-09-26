@@ -15,7 +15,7 @@ type IndexColor =
   | 'indexCyan'
   | 'indexLavender';
 
-interface TodoFormType {
+interface TodoEventType {
   title: string;
   isDDay: boolean;
   isAllDay: boolean;
@@ -26,7 +26,7 @@ interface TodoFormType {
 }
 
 export default function CreateEventForm() {
-  const [state, setState] = useState<TodoFormType>({
+  const [state, setState] = useState<TodoEventType>({
     title: '',
     isDDay: false,
     isAllDay: false,
@@ -74,7 +74,7 @@ export default function CreateEventForm() {
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center w-full">
         <ModalFormTitleInput
           value={state.title}
           onChange={(e) => stateHandler('title', e.target.value)}
@@ -118,7 +118,6 @@ export default function CreateEventForm() {
       </div>
       <hr />
       <div>
-        {/* 리미트가 필요할까 ???? */}
         <input
           value={state.memo}
           onChange={(e) => stateHandler('memo', e.target.value)}

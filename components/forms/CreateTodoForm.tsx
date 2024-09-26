@@ -1,5 +1,9 @@
 import CreateTodoTypeSelector from '@components/CustomElements/CreateTodoTypeSelector';
+import CustomColorSelector from '@components/CustomElements/CustomColorSelector';
+import CustomDatePicker from '@components/CustomElements/CustomDatePicker';
+import CustomRoutineSelector from '@components/CustomElements/CustomRoutineSelector';
 import ModalFormTitleInput from '@components/CustomElements/ModalFormTitleInput';
+import ModalSaveButton from '@components/CustomElements/ModalSaveButton';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -16,23 +20,27 @@ type createType = 'studyRoutine' | 'study' | 'lifeRoutine' | 'life';
 interface TodoFormType {
   title: string;
   createType: createType;
-  isAllDay: boolean;
   start: Date;
   end: Date;
   indexColor: IndexColor;
   memo: string;
+  day_of_week: string[];
 }
 
 export default function CreateTodoForm() {
   const [state, setState] = useState<TodoFormType>({
     title: '',
     createType: 'studyRoutine',
-    isAllDay: false,
     start: dayjs().second(0).toDate(),
     end: dayjs().second(0).toDate(),
     indexColor: 'indexRed',
     memo: '',
+    day_of_week: [],
   });
+
+  // 폼에 담을 때는 isRoutine도 담아야햄
+  const isRoutine =
+    state.createType === 'studyRoutine' || state.createType === 'lifeRoutine';
 
   console.log(state);
 
@@ -74,7 +82,7 @@ export default function CreateTodoForm() {
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="flex justify-center items-center">
+      <div className="flex items-center">
         <ModalFormTitleInput
           value={state.title}
           onChange={(e) => stateHandler('title', e.target.value)}
@@ -88,6 +96,54 @@ export default function CreateTodoForm() {
         />
       </div>
       <hr />
+      <div className="mt-6 flex flex-col gap-3">
+        <CustomDatePicker
+          timePicker={false}
+          value={state.start}
+          startDate={state.start}
+          state={state}
+          endDate={state.end}
+          onChange={(value) => stateHandler('start', value)}
+          type="start"
+          label={'시작 날짜'}
+        />
+        <CustomDatePicker
+          timePicker={false}
+          value={state.end}
+          state={state}
+          onChange={(value) => stateHandler('end', value)}
+          type="end"
+          startDate={state.start}
+          endDate={state.end}
+          label={'종료 날짜'}
+        />
+        {/* 루틴일 때 ?????  */}
+        {isRoutine && (
+          <CustomRoutineSelector
+            label={'반복'}
+            day_of_week={state.day_of_week}
+            onChange={(value) => stateHandler('day_of_week', value)}
+          />
+        )}
+        <CustomColorSelector
+          indexColor={state.indexColor}
+          onChange={(value) => stateHandler('indexColor', value)}
+          label={'인덱스'}
+        />
+      </div>
+      <hr />
+      <div>
+        <input
+          value={state.memo}
+          onChange={(e) => stateHandler('memo', e.target.value)}
+          type="text"
+          placeholder="메모"
+          className="block outline-none p-3 w-full"
+        />
+        <div className="flex flex-row-reverse">
+          <ModalSaveButton onClick={onSubmit} />
+        </div>
+      </div>
     </form>
   );
 }

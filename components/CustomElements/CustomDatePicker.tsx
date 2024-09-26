@@ -14,10 +14,11 @@ export default function CustomDatePicker({
   startDate,
   state,
   endDate,
+  timePicker = true,
 }) {
   return (
     <div className="flex items-center gap-4">
-      <label className="text-right ml-3 w-14 text-descText">{label}</label>
+      <label className="text-right ml-3 w-16 text-descText">{label}</label>
       <div className="flex">
         <DatePicker
           selected={value}
@@ -59,7 +60,7 @@ export default function CustomDatePicker({
           }}
         />
       </div>
-      {!state.isAllDay && (
+      {state.isAllDay && timePicker && (
         <CustomTimePicker
           endDate={endDate}
           startDate={startDate}

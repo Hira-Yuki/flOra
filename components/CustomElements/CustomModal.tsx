@@ -29,7 +29,7 @@ export default function CustomModal({ children, modalController }) {
         style={customStyles}
         shouldCloseOnOverlayClick={false}
       >
-        <div className="relative p-8">
+        <div className="relative p-8 w-[543px]">
           <button
             type="button"
             className="absolute top-0 right-0"

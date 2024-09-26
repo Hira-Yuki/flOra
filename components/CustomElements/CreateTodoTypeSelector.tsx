@@ -30,10 +30,10 @@ export default function CreateTodoTypeSelector({ value, onChange }) {
 
   return (
     <div className="flex gap-4">
-      <label className="cursor-pointer text-right ml-3 text-descText">
+      <label className="cursor-pointer text-right ml-3 w-16 text-descText">
         투두목록
       </label>
-      <div className="grid grid-cols-2 grid-rows-2 mb-6">
+      <div className="grid grid-cols-2 grid-rows-2 ">
         {typeOptions.map(({ id, label, value: optionValue }) => (
           <div key={id} className="col-span-1 row-span-1 gap-1 mb-3">
             <input
