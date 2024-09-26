@@ -48,14 +48,14 @@ export default function EventCreateModal({
 
       // end 시간이 start 시간보다 이전일 경우
       if (key === 'end' && endTime.isBefore(startTime)) {
-        const newEndTime = startTime.add(30, 'minute'); // 30분 추가
+        const newEndTime = startTime.add(1, 'minute'); // 30분 추가
         toast.warn('종료시간이 시작시간보다 이전이에요.');
         return { ...prev, end: newEndTime.toDate() };
       }
 
       // start 시간이 변경되었을 때, end가 start보다 이전이면 end를 start + 30분으로 설정
       if (key === 'start' && endTime.isBefore(startTime)) {
-        const newEndTime = startTime.add(30, 'minute'); // 30분 추가
+        const newEndTime = startTime.add(1, 'minute'); // 30분 추가
         toast.warn('시작시간이 종료시간보다 뒤에요.');
         return { ...prev, start: value, end: newEndTime.toDate() };
       }
@@ -110,6 +110,7 @@ export default function EventCreateModal({
             value={state.start}
             startDate={state.start}
             state={state}
+            endDate={state.end}
             onChange={(value) => stateHandler('start', value)}
             type="start"
             label={'시작'}
@@ -120,14 +121,21 @@ export default function EventCreateModal({
             onChange={(value) => stateHandler('end', value)}
             type="end"
             startDate={state.start}
+            endDate={state.end}
             label={'종료'}
           />
-          <CustomColorSelector label={'인덱스'} />
+          <CustomColorSelector
+            indexColor={state.indexColor}
+            onChange={(value) => stateHandler('indexColor', value)}
+            label={'인덱스'}
+          />
         </div>
         <hr />
         <div>
           {/* 리미트가 필요할까 ???? */}
           <input
+            value={state.memo}
+            onChange={(e) => stateHandler('memo', e.target.value)}
             type="text"
             placeholder="메모"
             className="block outline-none p-3 w-full"

@@ -1,6 +1,6 @@
-import { useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 
-export default function CustomColorSelector({ label }) {
+export default function CustomColorSelector({ label, indexColor, onChange }) {
   const idPrefix = useId(); // 공통 접두사로 고유한 ID 생성
   const colorOptions = [
     { id: `${idPrefix}-red`, value: 'indexRed', color: 'bg-indexRed' },
@@ -14,11 +14,16 @@ export default function CustomColorSelector({ label }) {
     },
   ];
 
-  const [selectedColor, setSelectedColor] = useState('indexRed');
+  const [selectedColor, setSelectedColor] = useState(indexColor || 'indexRed');
 
-  const onChange = ({ target }) => {
+  const onChangeHandler = ({ target }) => {
     setSelectedColor(target.value);
   };
+
+  // 선택된 색상이 바뀔 때 부모에게 값 전달
+  useEffect(() => {
+    onChange(selectedColor);
+  }, [selectedColor]);
 
   return (
     <div className="flex items-center gap-4 mb-6">
@@ -33,7 +38,7 @@ export default function CustomColorSelector({ label }) {
               value={value}
               className="sr-only peer"
               checked={selectedColor === value}
-              onChange={onChange}
+              onChange={onChangeHandler}
             />
             <ColorLabel peerId={id} color={color} />
           </div>

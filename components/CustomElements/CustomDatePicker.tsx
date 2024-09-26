@@ -13,6 +13,7 @@ export default function CustomDatePicker({
   type,
   startDate,
   state,
+  endDate,
 }) {
   return (
     <div className="flex items-center gap-4">
@@ -60,6 +61,7 @@ export default function CustomDatePicker({
       </div>
       {!state.isAllDay && (
         <CustomTimePicker
+          endDate={endDate}
           startDate={startDate}
           value={value}
           handleDate={onChange}
