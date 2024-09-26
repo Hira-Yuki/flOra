@@ -8,15 +8,17 @@ import {
 } from '@components/icons';
 import EventCreateModal from '@components/ModalContents/EventCreateModal';
 import { useToggle } from '@hooks';
+import { useState } from 'react';
 
 export default function FloatButtons({ modalController }) {
   const addMenuToggle = useToggle();
-
-  const callModal = () => {
+  const [options, setOPtions] = useState<'event' | 'todo'>();
+  const callModal = (option) => {
     modalController.setTrue();
     addMenuToggle.setFalse();
 
     // 동적으로 모달 내용 변경...
+    setOPtions(option);
   };
 
   return (
@@ -29,7 +31,7 @@ export default function FloatButtons({ modalController }) {
                 <button
                   type="button"
                   className="flex gap-2 hover:opacity-70"
-                  onClick={() => callModal()}
+                  onClick={() => callModal('event')}
                 >
                   <EventIcon />
                   <span>이벤트</span>
@@ -65,7 +67,7 @@ export default function FloatButtons({ modalController }) {
       </div>
       {/* <------------------> */}
       {modalController.value && (
-        <EventCreateModal modalController={modalController} />
+        <EventCreateModal options={options} modalController={modalController} />
       )}
     </div>
   );

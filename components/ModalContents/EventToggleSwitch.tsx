@@ -1,6 +1,6 @@
 interface CustomRadioToggleProps {
   selectedOption: string; // 선택된 옵션
-  onChange: (value: string) => void; // 옵션이 변경될 때 실행될 함수
+  onChange: (value: 'event' | 'todo') => void;
 }
 
 export default function EventToggleSwitch({

@@ -10,7 +10,10 @@ export default function ToggleSwitch({ label, checked, onChange }) {
 
   return (
     <div className="flex items-center gap-4 ">
-      <label htmlFor={id} className="cursor-pointer text-right ml-3">
+      <label
+        htmlFor={id}
+        className="cursor-pointer text-right ml-3 text-descText"
+      >
         {label}
       </label>
       <input

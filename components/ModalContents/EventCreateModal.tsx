@@ -1,5 +1,6 @@
 import CustomModal from '@components/CustomElements/CustomModal';
 import CreateEventForm from '@components/forms/CreateEventForm';
+import CreateTodoForm from '@components/forms/CreateTodoForm';
 import { useState } from 'react';
 
 import EventToggleSwitch from './EventToggleSwitch';
@@ -17,12 +18,14 @@ interface EventCreateModalProps {
     setTrue: () => void;
     setFalse: () => void;
   };
+  options?: 'event' | 'todo';
 }
 
 export default function EventCreateModal({
   modalController,
+  options = 'event',
 }: EventCreateModalProps) {
-  const [isEvent, setIsEvent] = useState('event');
+  const [isEvent, setIsEvent] = useState(options);
 
   return (
     <CustomModal modalController={modalController}>
@@ -32,7 +35,7 @@ export default function EventCreateModal({
         onChange={(value) => setIsEvent(value)}
       />
       {/* 이벤트 생성 폼 */}
-      <CreateEventForm />
+      {isEvent === 'event' ? <CreateEventForm /> : <CreateTodoForm />}
     </CustomModal>
   );
 }

@@ -1,9 +1,5 @@
-import CustomColorSelector from '@components/CustomElements/CustomColorSelector';
-import CustomDatePicker from '@components/CustomElements/CustomDatePicker';
-import DDayCheckBox from '@components/CustomElements/DDayCheckBox';
+import CreateTodoTypeSelector from '@components/CustomElements/CreateTodoTypeSelector';
 import ModalFormTitleInput from '@components/CustomElements/ModalFormTitleInput';
-import ModalSaveButton from '@components/CustomElements/ModalSaveButton';
-import ToggleSwitch from '@components/CustomElements/ToggleSwitch';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -15,9 +11,11 @@ type IndexColor =
   | 'indexCyan'
   | 'indexLavender';
 
+type createType = 'studyRoutine' | 'study' | 'lifeRoutine' | 'life';
+
 interface TodoFormType {
   title: string;
-  isDDay: boolean;
+  createType: createType;
   isAllDay: boolean;
   start: Date;
   end: Date;
@@ -25,16 +23,18 @@ interface TodoFormType {
   memo: string;
 }
 
-export default function CreateEventForm() {
+export default function CreateTodoForm() {
   const [state, setState] = useState<TodoFormType>({
     title: '',
-    isDDay: false,
+    createType: 'studyRoutine',
     isAllDay: false,
     start: dayjs().second(0).toDate(),
     end: dayjs().second(0).toDate(),
     indexColor: 'indexRed',
     memo: '',
   });
+
+  console.log(state);
 
   const stateHandler = (key, value) => {
     setState((prev) => {
@@ -79,57 +79,15 @@ export default function CreateEventForm() {
           value={state.title}
           onChange={(e) => stateHandler('title', e.target.value)}
         />
-        <DDayCheckBox
-          checked={state.isDDay}
-          onChange={(checked) => stateHandler('isDDay', checked)}
-          label={'디데이로 등록'}
-        />
       </div>
       <hr />
       <div className="mt-6 flex flex-col gap-3">
-        <ToggleSwitch
-          checked={state.isAllDay}
-          onChange={(checked) => stateHandler('isAllDay', checked)}
-          label={'하루종일'}
-        />
-        <CustomDatePicker
-          value={state.start}
-          startDate={state.start}
-          state={state}
-          endDate={state.end}
-          onChange={(value) => stateHandler('start', value)}
-          type="start"
-          label={'시작'}
-        />
-        <CustomDatePicker
-          value={state.end}
-          state={state}
-          onChange={(value) => stateHandler('end', value)}
-          type="end"
-          startDate={state.start}
-          endDate={state.end}
-          label={'종료'}
-        />
-        <CustomColorSelector
-          indexColor={state.indexColor}
-          onChange={(value) => stateHandler('indexColor', value)}
-          label={'인덱스'}
+        <CreateTodoTypeSelector
+          value={state.createType}
+          onChange={(value) => stateHandler('createType', value)}
         />
       </div>
       <hr />
-      <div>
-        {/* 리미트가 필요할까 ???? */}
-        <input
-          value={state.memo}
-          onChange={(e) => stateHandler('memo', e.target.value)}
-          type="text"
-          placeholder="메모"
-          className="block outline-none p-3 w-full"
-        />
-        <div className="flex flex-row-reverse">
-          <ModalSaveButton onClick={onSubmit} />
-        </div>
-      </div>
     </form>
   );
 }

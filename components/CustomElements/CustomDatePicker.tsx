@@ -17,7 +17,7 @@ export default function CustomDatePicker({
 }) {
   return (
     <div className="flex items-center gap-4">
-      <label className="text-right ml-3 w-14">{label}</label>
+      <label className="text-right ml-3 w-14 text-descText">{label}</label>
       <div className="flex">
         <DatePicker
           selected={value}

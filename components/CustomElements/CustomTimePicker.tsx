@@ -12,7 +12,7 @@ export default function CustomTimePicker({
 }: {
   value: Date;
   handleDate: (update: Date) => void;
-  startDate?: Date; // start 시간은 optional, end 시간일 때 비교를 위해 전달
+  startDate?: Date;
   endDate?: Date;
   type: 'start' | 'end';
 }) {
