@@ -13,6 +13,8 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 
+export const dynamic = 'force-dynamic';
+
 export default function ResetPasswordForm() {
   const password = useInput('');
   const passwordConfirm = useInput('');
