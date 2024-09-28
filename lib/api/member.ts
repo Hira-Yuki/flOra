@@ -74,6 +74,8 @@ export const memberApi = {
   findPassword: (payload: FindPasswordPayload) =>
     memberInstance.post('/password', payload),
   signOut: () => memberInstance.post('/signout'),
+  resetPassword: (memberId: string, newPassword: string) =>
+    memberInstance.put(`/${memberId}/password`, newPassword),
 };
 
 // mock member API
