@@ -4,6 +4,7 @@ import {
   SignInErrorText,
   SignInFormWrapper,
   SignInInput,
+  SignInSwitcher,
 } from '@components/signInElements';
 import { passwordRegex, ROUTE_LISTS } from '@constants';
 import { useDebouncedSubmit, useErrorState, useInput } from '@hooks';
@@ -87,6 +88,11 @@ export default function ResetPasswordForm() {
       />
       {error.isError && <SignInErrorText text={error.message} />}
       <SignInButton inProcess={inProcess}>비밀번호 재설정</SignInButton>
+      <SignInSwitcher
+        normalText={'로그인 페이지로'}
+        linkText={'이동'}
+        href={ROUTE_LISTS.signIn}
+      />
     </SignInFormWrapper>
   );
 }
