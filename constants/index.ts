@@ -4,7 +4,6 @@ export const ROUTE_LISTS = {
   signIn: '/sign-in',
   calendar: '/calendar',
   timer: '/timer',
-  flora: '/flora',
 } as const;
 
 export const INDEX_COLORS = {

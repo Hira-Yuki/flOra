@@ -12,9 +12,11 @@
     "datepicker",
     "daygrid",
     "fullcalendar",
+    "httponly",
     "Parens",
     "preact",
     "Pretendard",
+    "signout",
     "tailwindcss",
     "timegrid",
     "toastify"

@@ -55,7 +55,7 @@ export default function SignInForm() {
         email,
         password,
       });
-
+      console.log(data);
       toast.success(data.message);
       router.push(ROUTE_LISTS.dashBoard);
     } catch (err) {

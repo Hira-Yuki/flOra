@@ -1,7 +1,7 @@
-import { useMockApi } from '@hooks';
 import { BASE_URL, createAxiosInstance } from '@lib/axiosInstance';
 import { AxiosError } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import useCookie from 'hooks/useCookie';
 import { addMember, memberSearch, passwordConfirm } from 'mock/controller';
 
 interface SignInPayload {
@@ -18,11 +18,24 @@ interface FindPasswordPayload {
   email: string;
 }
 
+// 쿠키 설정
+const cookie = useCookie();
+
 // member API 인스턴스 생성
 export const memberInstance = createAxiosInstance(`${BASE_URL}/members`);
 
 // 요청 인터셉터 설정 함수
 const requestInterceptor = (config: any) => {
+  const Authorization = cookie.getCookie('Authorization');
+
+  if (Authorization) {
+    const newConfig = {
+      ...config,
+      headers: { Authorization },
+    };
+    console.log('Auth member API 요청 인터셉터:', newConfig);
+    return newConfig;
+  }
   console.log('member API 요청 인터셉터:', config);
   return config;
 };
@@ -30,6 +43,11 @@ const requestInterceptor = (config: any) => {
 // 응답 인터셉터 설정 함수
 const responseInterceptor = (response: any) => {
   console.log('member API 응답 인터셉터:', response);
+  cookie.setCookie('Authorization', response.headers.authorization, {
+    path: '/',
+    secure: '/',
+    httponly: true,
+  });
   return response;
 };
 
@@ -55,6 +73,7 @@ export const memberApi = {
     memberInstance.post<SignInResponse>('/signup', payload),
   findPassword: (payload: FindPasswordPayload) =>
     memberInstance.post('/password', payload),
+  signOut: () => memberInstance.post('/signout'),
 };
 
 // mock member API
@@ -107,4 +126,4 @@ const setupMockApi = (instance: any) => {
 };
 
 // Mock API 설정
-if (useMockApi) setupMockApi(memberInstance);
+// if (useMockApi) setupMockApi(memberInstance);

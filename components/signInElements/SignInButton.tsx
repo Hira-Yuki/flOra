@@ -4,7 +4,7 @@ const LoadingSpinner = () => (
 export default function SignInButton({ children, inProcess }) {
   return (
     <button
-      className={`bg-gray-800 text-white rounded-badge py-3 w-full mt-4 hover:bg-gray-700 transition flex items-center justify-center ${inProcess ? 'cursor-not-allowed opacity-50' : 'hover:bg-gray-700'}`}
+      className={`bg-floraGreen text-white rounded-badge py-6 w-full mt-4 hover:opacity-80 transition flex items-center justify-center ${inProcess && 'cursor-not-allowed opacity-50'}`}
       disabled={inProcess}
       type="submit"
     >
