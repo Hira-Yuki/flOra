@@ -1,8 +1,8 @@
 export const metadata = {
-  title: 'flOra - 비밀번호 찾기',
+  title: '비밀번호 재설정',
 };
 
-export default function FindPasswordLayout({
+export default function ResetPasswordLayout({
   children,
 }: {
   children: React.ReactNode;

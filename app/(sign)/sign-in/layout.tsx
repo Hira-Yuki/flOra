@@ -1,8 +1,8 @@
 export const metadata = {
-  title: '비밀번호 찾기',
+  title: '나만의 시간관리',
 };
 
-export default function FindPasswordLayout({
+export default function SignInLayout({
   children,
 }: {
   children: React.ReactNode;
