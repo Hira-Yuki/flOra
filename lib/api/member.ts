@@ -31,7 +31,10 @@ const requestInterceptor = (config: any) => {
   if (Authorization) {
     const newConfig = {
       ...config,
-      headers: { Authorization },
+      headers: {
+        ...config.headers, // 기존 헤더 유지
+        Authorization,
+      },
     };
     console.log('Auth member API 요청 인터셉터:', newConfig);
     return newConfig;
@@ -43,11 +46,15 @@ const requestInterceptor = (config: any) => {
 // 응답 인터셉터 설정 함수
 const responseInterceptor = (response: any) => {
   console.log('member API 응답 인터셉터:', response);
-  cookie.setCookie('Authorization', response.headers.authorization, {
-    path: '/',
-    secure: '/',
-    httponly: true,
-  });
+  const token = response.headers.authorization;
+  if (token) {
+    cookie.setCookie('Authorization', response.headers.authorization, {
+      path: '/',
+      secure: '/',
+      httponly: true,
+    });
+  }
+
   return response;
 };
 
@@ -76,6 +83,8 @@ export const memberApi = {
   signOut: () => memberInstance.post('/signout'),
   resetPassword: (memberId: string, newPassword: string) =>
     memberInstance.put(`/${memberId}/password`, newPassword),
+  getMemberData: (memberId: string, config = {}) =>
+    memberInstance.get(`/${memberId}`, config),
 };
 
 // mock member API

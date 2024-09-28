@@ -1,5 +1,3 @@
-import { SignInTitle } from '@components/signInElements';
-
 export const metadata = {
   title: '비밀번호 재설정',
 };
@@ -9,10 +7,5 @@ export default function ResetPasswordLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <>
-      <SignInTitle text={'비밀번호 재설정'} />
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

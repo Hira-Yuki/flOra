@@ -3,7 +3,7 @@ import { useMenuList } from '@hooks';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-export default function Sidebar() {
+export default function Sidebar({ memberPicUrl }) {
   const pathname = usePathname();
   const MENU_ICONS = useMenuList();
 
@@ -14,13 +14,13 @@ export default function Sidebar() {
           <li key={path}>
             <Link aria-label={path} href={path}>
               <IconComponent
-                className={`w-10 h-10 text-floraGreen cursor-pointer hover:text-floraYellow ${pathname === path ? 'text-floraWhite' : 'text-floraGreen'}`}
+                className={`w-9 h-9 text-floraGreen cursor-pointer hover:text-floraYellow ${pathname === path ? 'text-floraWhite' : 'text-floraGreen'}`}
               />
             </Link>
           </li>
         ))}
-        <li className="w-14 h-14 rounded-full bg-floraWhite text-center flex items-center justify-center mt-auto mb-8">
-          프로필
+        <li className="w-11 h-11 rounded-full bg-floraWhite text-center flex items-center justify-center mt-auto mb-8 cursor-pointer">
+          <img src={memberPicUrl} className="w-full h-full object-cover" />
         </li>
       </ul>
     </div>
