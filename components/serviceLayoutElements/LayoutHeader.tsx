@@ -16,8 +16,6 @@ export default function LayoutHeader() {
         return 'Calendar';
       case ROUTE_LISTS.timer:
         return 'Timer';
-      case ROUTE_LISTS.flora:
-        return 'Flora';
       default:
         return 'Loading...';
     }

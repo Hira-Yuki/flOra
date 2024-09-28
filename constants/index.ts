@@ -29,3 +29,6 @@ export const bgClass = {
   indexCyan: 'bg-indexCyan',
   indexLavender: 'bg-indexLavender',
 } as const;
+
+export const passwordRegex =
+  /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};:/,.?~|])(?!.*[\s]).{8,16}$/;

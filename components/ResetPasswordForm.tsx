@@ -5,7 +5,7 @@ import {
   SignInFormWrapper,
   SignInInput,
 } from '@components/signInElements';
-import { ROUTE_LISTS } from '@constants';
+import { passwordRegex, ROUTE_LISTS } from '@constants';
 import { useDebouncedSubmit, useErrorState, useInput } from '@hooks';
 import { memberApi } from '@lib/api/member';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -23,7 +23,7 @@ export default function ResetPasswordForm() {
 
   const memberId = param.get('mi');
 
-  const displayError = (message) => {
+  const displayError = (message: string) => {
     toast.warning(message);
     error.setError({ message: message, isError: true });
   };
@@ -34,8 +34,6 @@ export default function ResetPasswordForm() {
       toast.warning('새 비밀번호를 입력해 주세요.');
       return;
     }
-    const passwordRegex =
-      /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};:/,.?~|])(?!.*[\s]).{8,16}$/;
 
     if (!passwordRegex.test(password.value)) {
       const message =

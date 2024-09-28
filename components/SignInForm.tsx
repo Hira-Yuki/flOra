@@ -1,6 +1,6 @@
 import { useDebouncedSubmit, useErrorState, useInput } from '@hooks';
 import { memberApi } from '@lib/api/member';
-import { ROUTE_LISTS } from 'constants/index';
+import { passwordRegex, ROUTE_LISTS } from 'constants/index';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -25,7 +25,7 @@ export default function SignInForm() {
     password.reset();
   };
 
-  const displayError = (message) => {
+  const displayError = (message: string) => {
     toast.warning(message);
     error.setError({ message: message, isError: true });
   };
@@ -36,9 +36,6 @@ export default function SignInForm() {
       toast.warning('이메일과 비밀번호를 정확히 입력해 주세요.');
       return;
     }
-
-    const passwordRegex =
-      /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()_+\-=[\]{};:/,.?~|])(?!.*[\s]).{8,16}$/;
 
     if (!passwordRegex.test(password)) {
       const message =
