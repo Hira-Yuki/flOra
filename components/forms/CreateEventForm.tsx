@@ -74,7 +74,7 @@ export default function CreateEventForm() {
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="flex justify-center items-center w-full">
+      <div className="flex items-center w-full justify-between">
         <ModalFormTitleInput
           value={state.title}
           onChange={(e) => stateHandler('title', e.target.value)}

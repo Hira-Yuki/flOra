@@ -42,8 +42,6 @@ export default function CreateTodoForm() {
   const isRoutine =
     state.createType === 'studyRoutine' || state.createType === 'lifeRoutine';
 
-  console.log(state);
-
   const stateHandler = (key, value) => {
     setState((prev) => {
       const startTime = dayjs(key === 'start' ? value : prev.start);
