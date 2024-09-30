@@ -47,8 +47,8 @@ const errorInterceptor = (error: AxiosError) => {
   );
 };
 
-const header = Authorization?.split(' ')[1];
-const token = parseJwt(header);
+const jwt = Authorization?.split(' ')[1];
+const token = parseJwt(jwt);
 const memberId = token?.memberId;
 
 // 요청 인터셉터 생성

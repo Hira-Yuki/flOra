@@ -96,19 +96,17 @@ export default function CreateTodoForm() {
       <hr />
       <div className="mt-6 flex flex-col gap-3">
         <CustomDatePicker
-          timePicker={false}
+          isAllDay={false}
           value={state.start}
           startDate={state.start}
-          state={state}
           endDate={state.end}
           onChange={(value) => stateHandler('start', value)}
           type="start"
           label={'시작 날짜'}
         />
         <CustomDatePicker
-          timePicker={false}
+          isAllDay={false}
           value={state.end}
-          state={state}
           onChange={(value) => stateHandler('end', value)}
           type="end"
           startDate={state.start}
