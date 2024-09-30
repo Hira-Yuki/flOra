@@ -69,7 +69,6 @@ export default function CreateTodoForm() {
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    // 뭔가 한다....
     const formData = {
       isRoutine,
       title: state.title,
@@ -83,6 +82,7 @@ export default function CreateTodoForm() {
 
     try {
       // 서버 호출 ~~~~
+      console.log('생성된 폼데이터 :', formData);
     } catch (error) {
       console.error(error);
     }

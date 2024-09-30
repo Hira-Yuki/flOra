@@ -4,6 +4,7 @@ import MockAdapter from 'axios-mock-adapter';
 import useCookie from 'hooks/useCookie';
 import { parseJwt } from 'util/jwt';
 
+// API 인스턴스 생성
 export const eventInstance = createAxiosInstance(`${BASE_URL}/members`);
 
 const cookie = useCookie();

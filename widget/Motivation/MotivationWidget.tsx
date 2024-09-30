@@ -5,16 +5,18 @@ import EllipsisIcon from '@components/icons/EllipsisIcon';
 import WidgetHeader from '@components/widgetElements/WidgetHeader';
 import WidgetWrapper from '@components/widgetElements/WidgetWrapper';
 import { useInput, useToggle } from '@hooks';
-import { useRef } from 'react';
+import { motivationAPI } from '@lib/api/motivation';
+import { useEffect, useRef } from 'react';
+import { toast } from 'react-toastify';
 
 export default function MotivationWidget() {
   const input = useInput('');
   const isEdit = useToggle(false);
   const isOpenMenu = useToggle(false);
   const textAreaRef = useRef(null);
-
   const toggleMenu = () => isOpenMenu.toggleValue();
   const closeMenu = () => isOpenMenu.setFalse();
+  const isModify = useToggle(false);
 
   // 텍스트에 따라 textarea의 높이를 조정하는 함수
   const adjustTextareaHeight = () => {
@@ -40,6 +42,8 @@ export default function MotivationWidget() {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault(); // 기본 줄바꿈 방지
       isEdit.setFalse();
+      isModify.setFalse();
+      handleSave();
     }
   };
 
@@ -52,6 +56,7 @@ export default function MotivationWidget() {
   // 편집 모드를 활성화하고 textarea에 포커스를 주는 함수
   const activateEditMode = () => {
     isEdit.setTrue();
+    isModify.setTrue();
     closeMenu();
     setTimeout(() => {
       textAreaRef.current?.focus(); // textarea가 활성화되면 자동으로 포커스를 줌
@@ -67,6 +72,15 @@ export default function MotivationWidget() {
   const handleSave = async () => {
     try {
       // do something...
+      const form = { content: input.value };
+      if (isModify.value) {
+        const { data } = await motivationAPI.modifyMotivation(form);
+        toast.success(data);
+        isModify.setFalse();
+      } else {
+        const { data } = await motivationAPI.createMotivation(form);
+        toast.success(data);
+      }
     } catch (err) {
       // do something...
       console.log(err);
@@ -81,13 +95,29 @@ export default function MotivationWidget() {
   const handleDelete = async () => {
     try {
       // Delete ..
+      const { data } = await motivationAPI.deleteMotivation();
+      toast.success(data);
+      input.reset();
     } catch (err) {
       //error handling
       console.log(err);
+      toast.error(err.message);
     } finally {
       closeMenu();
     }
   };
+
+  useEffect(() => {
+    const getMotivation = async () => {
+      try {
+        const { data } = await motivationAPI.getMotivation();
+        input.setValues(data.content);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMotivation();
+  }, []);
 
   return (
     <WidgetWrapper>
