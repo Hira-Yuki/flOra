@@ -53,10 +53,14 @@ export default function MotivationWidget() {
     e.target.setSelectionRange(length, length); // 커서를 텍스트 끝으로 이동
   };
 
+  const activeModify = () => {
+    isModify.setTrue();
+    activateEditMode();
+  };
+
   // 편집 모드를 활성화하고 textarea에 포커스를 주는 함수
   const activateEditMode = () => {
     isEdit.setTrue();
-    isModify.setTrue();
     closeMenu();
     setTimeout(() => {
       textAreaRef.current?.focus(); // textarea가 활성화되면 자동으로 포커스를 줌
@@ -140,7 +144,7 @@ export default function MotivationWidget() {
                 <button
                   type="button"
                   className="cursor-pointer px-8"
-                  onClick={activateEditMode}
+                  onClick={activeModify}
                 >
                   수정
                 </button>
