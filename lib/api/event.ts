@@ -60,6 +60,7 @@ eventInstance.interceptors.response.use(responseInterceptor, errorInterceptor);
 export const eventAPI = {
   createEvent: (payload) => eventInstance.post(`/${memberId}/events`, payload),
   getEvents: () => eventInstance.get(`/${memberId}/events`),
+  getDDay: () => eventInstance.get(`/${memberId}/events/dday`),
 };
 
 const setupMockApi = (instance: any) => {

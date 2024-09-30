@@ -1,33 +1,38 @@
 'use client';
 
 import WidgetWrapper from '@components/widgetElements/WidgetWrapper';
-import dayjs from 'dayjs';
-import { useState } from 'react';
+import { eventAPI } from '@lib/api/event';
+import { useEffect, useState } from 'react';
 
 import DDayItem from './DDayItem';
 
-const D_DAY_ITEMS = [
-  { d_day: '2024-10-04', title: '프로젝트 마감' },
-  { d_day: '2024-10-05', title: '온가족 대잔치' },
-  { d_day: '2024-09-17', title: '추석' },
-  { d_day: '2024-11-17', title: '아무날도 아닌데요' },
-  { d_day: '2024-11-17', title: '테스트하려고 추가했어요.' },
-  { d_day: '2100-12-17', title: '이때쯤이면 화성 갔겠죠?' },
-];
-
 export default function DDayWidget() {
-  const today = dayjs();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [dDays, setDDays] = useState([]);
+
+  useEffect(() => {
+    const getDDay = async () => {
+      try {
+        const { data } = await eventAPI.getDDay();
+        setDDays(data);
+      } catch (err) {
+        console.log(err);
+        // 에러가 발생하면 DDay 객체를 빈 배열로 초기화
+        setDDays([]);
+      }
+    };
+    getDDay();
+  }, []);
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? D_DAY_ITEMS.length - 1 : prevIndex - 1,
+      prevIndex === 0 ? dDays.length - 1 : prevIndex - 1,
     );
   };
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === D_DAY_ITEMS.length - 1 ? 0 : prevIndex + 1,
+      prevIndex === dDays.length - 1 ? 0 : prevIndex + 1,
     );
   };
 
@@ -51,7 +56,7 @@ export default function DDayWidget() {
               transform: `translateX(-${currentIndex * 100}%)`,
             }}
           >
-            <DDayItem items={D_DAY_ITEMS} today={today} />
+            <DDayItem items={dDays} />
           </div>
         </div>
         <button onClick={handleNext} className={`text-white text-2xl`}>

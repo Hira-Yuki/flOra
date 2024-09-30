@@ -23,93 +23,9 @@ const initialize = {
   plugins: [dayGridPlugin, timeGridPlugin],
 };
 
-// 샘플 이벤트 데이터
-// const events = [
-//   {
-//     id: '1',
-//     title: '회의',
-//     start: dayjs('2024-09-01 19:30').format(), // 2024년 9월 1일 10시 30분
-//     end: dayjs('2024-09-01 21:00').format(), // 2024년 9월 1일 12시
-//     allDay: false,
-//     color: '#FF5641',
-//   },
-//   {
-//     id: '2',
-//     title: '회의2',
-//     start: dayjs('2024-09-02 19:30', 'Asia/Seoul').format(), // 2024년 9월 2일 10시 30분
-//     end: dayjs('2024-09-02 21:00', 'Asia/Seoul').format(), // 2024년 9월 2일 12시
-//     allDay: false,
-//     color: '#FFAE00',
-//   },
-//   {
-//     id: '3',
-//     title: '추석 연휴',
-//     start: dayjs('2024-09-14').format(),
-//     end: dayjs('2024-09-18').format(),
-//     allDay: true,
-//     color: '#8CD300',
-//   },
-//   {
-//     id: '4',
-//     title: '가족 모임',
-//     start: dayjs('2024-10-05').format(),
-//     end: dayjs('2024-10-05').format(),
-//     allDay: true,
-//     color: '#22D3DE',
-//   },
-//   {
-//     id: '5',
-//     title: '회의 3',
-//     start: '2024-09-22T14:30:00', // 2024년 9월 2일 10시 30분
-//     end: '2024-09-22T16:30:00', // 2024년 9월 2일 12시
-//     allDay: false,
-//     color: '#A155BD',
-//   },
-//   {
-//     id: '6',
-//     title: '회의 4',
-//     start: '2024-09-22T17:30:00', // 2024년 9월 2일 10시 30분
-//     end: '2024-09-22T19:30:00', // 2024년 9월 2일 12시
-//     allDay: false,
-//     color: '#A155BD',
-//   },
-//   {
-//     id: '6',
-//     title: '회의 4',
-//     start: '2024-09-22T17:30:00', // 2024년 9월 2일 10시 30분
-//     end: '2024-09-22T19:30:00', // 2024년 9월 2일 12시
-//     allDay: false,
-//     color: '#A155BD',
-//   },
-//   {
-//     id: '6',
-//     title: '회의 4',
-//     start: '2024-09-22T17:30:00', // 2024년 9월 2일 10시 30분
-//     end: '2024-09-22T19:30:00', // 2024년 9월 2일 12시
-//     allDay: false,
-//     color: '#A155BD',
-//   },
-//   {
-//     id: '6',
-//     title: '회의 4',
-//     start: '2024-09-22T17:30:00', // 2024년 9월 2일 10시 30분
-//     end: '2024-09-22T19:30:00', // 2024년 9월 2일 12시
-//     allDay: false,
-//     color: '#A155BD',
-//   },
-//   {
-//     id: '6',
-//     title: '회의 4',
-//     start: '2024-09-22T17:30:00', // 2024년 9월 2일 10시 30분
-//     end: '2024-09-22T19:30:00', // 2024년 9월 2일 12시
-//     allDay: false,
-//     color: '#A155BD',
-//   },
-// ];
-
 export default function FloraCalendar() {
   const calendarRef = useRef<FullCalendar>();
-  const [events, setEvents] = useState(null);
+  const [events, setEvents] = useState([]);
 
   useEffect(() => {
     const getEvent = async () => {
