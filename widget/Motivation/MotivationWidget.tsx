@@ -13,10 +13,11 @@ export default function MotivationWidget() {
   const input = useInput('');
   const isEdit = useToggle(false);
   const isOpenMenu = useToggle(false);
+  const isModify = useToggle(false);
   const textAreaRef = useRef(null);
+
   const toggleMenu = () => isOpenMenu.toggleValue();
   const closeMenu = () => isOpenMenu.setFalse();
-  const isModify = useToggle(false);
 
   // 텍스트에 따라 textarea의 높이를 조정하는 함수
   const adjustTextareaHeight = () => {
@@ -42,7 +43,6 @@ export default function MotivationWidget() {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault(); // 기본 줄바꿈 방지
       isEdit.setFalse();
-      isModify.setFalse();
       handleSave();
     }
   };
@@ -81,7 +81,6 @@ export default function MotivationWidget() {
       if (isModify.value) {
         const { data } = await motivationAPI.modifyMotivation(form);
         toast.success(data);
-        isModify.setFalse();
       } else {
         const { data } = await motivationAPI.createMotivation(form);
         toast.success(data);
@@ -89,6 +88,8 @@ export default function MotivationWidget() {
     } catch (err) {
       // do something...
       console.log(err);
+    } finally {
+      isModify.setFalse();
     }
   };
 
@@ -119,6 +120,7 @@ export default function MotivationWidget() {
         input.setValues(data.content);
       } catch (err) {
         console.log(err);
+        input.setValues('');
       }
     };
     getMotivation();
@@ -172,8 +174,8 @@ export default function MotivationWidget() {
             onKeyDown={handleKeyDown}
             onFocus={handleFocus}
             onBlur={handleBlur}
-            className="flex justify-center items-center text-center align-middle bg-floraBeige font-bold w-full text-4xl line-clamp-2 outline-none resize-none enabled:-mt-1 enabled:border-floraYellow enabled:border-2 leading-relaxed"
             disabled={!isEdit.value}
+            className="flex justify-center items-center text-center align-middle bg-floraBeige font-bold w-full text-4xl line-clamp-2 outline-none resize-none enabled:-mt-1 enabled:border-floraYellow enabled:border-2 leading-relaxed"
           />
           {isEdit.value === false && input.value === '' && (
             <AddIcon
