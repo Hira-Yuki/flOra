@@ -20,8 +20,8 @@ type createType = 'studyRoutine' | 'study' | 'lifeRoutine' | 'life';
 interface TodoFormType {
   title: string;
   createType: createType;
-  start: Date;
-  end: Date;
+  start: Date | string;
+  end: Date | string;
   indexColor: IndexColor;
   memo: string;
   day_of_week: string[];
@@ -70,6 +70,16 @@ export default function CreateTodoForm() {
     event.preventDefault();
 
     // 뭔가 한다....
+    const formData = {
+      isRoutine,
+      title: state.title,
+      startDateTime: state.start,
+      endDateTime: state.end,
+      indexColor: state.indexColor,
+      description: state.memo,
+      isComplete: false,
+      day_of_week: state.day_of_week,
+    };
 
     try {
       // 서버 호출 ~~~~

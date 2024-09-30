@@ -4,10 +4,6 @@ import MockAdapter from 'axios-mock-adapter';
 import useCookie from 'hooks/useCookie';
 import { parseJwt } from 'util/jwt';
 
-/**
- * 이벤트 API를 호출하기 위한 기본 인터페이스
- *  @todo members API와 URL을 공유하는가?? 확인할 것.
- */
 export const eventInstance = createAxiosInstance(`${BASE_URL}/members`);
 
 const cookie = useCookie();
