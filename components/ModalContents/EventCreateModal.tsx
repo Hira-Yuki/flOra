@@ -35,7 +35,11 @@ export default function EventCreateModal({
         onChange={(value) => setIsEvent(value)}
       />
       {/* 이벤트 생성 폼 */}
-      {isEvent === 'event' ? <CreateEventForm /> : <CreateTodoForm />}
+      {isEvent === 'event' ? (
+        <CreateEventForm modalController={modalController} />
+      ) : (
+        <CreateTodoForm />
+      )}
     </CustomModal>
   );
 }

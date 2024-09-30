@@ -1,17 +1,13 @@
 import { BASE_URL, createAxiosInstance } from '@lib/axiosInstance';
 import { AxiosError } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import dayjs from 'dayjs';
 import useCookie from 'hooks/useCookie';
 import { addMember, memberSearch, passwordConfirm } from 'mock/controller';
 
 interface SignInPayload {
   email: string;
   password: string;
-}
-
-interface SignInResponse {
-  state: number;
-  message: string;
 }
 
 interface FindPasswordPayload {
@@ -46,12 +42,14 @@ const requestInterceptor = (config: any) => {
 // 응답 인터셉터 설정 함수
 const responseInterceptor = (response: any) => {
   console.log('member API 응답 인터셉터:', response);
-  const token = response.headers.authorization;
+  const token = response.headers?.authorization;
   if (token) {
     cookie.setCookie('Authorization', response.headers.authorization, {
       path: '/',
       secure: '/',
       httponly: true,
+      sameSite: 'Strict',
+      expires: dayjs().add(1, 'hour').toDate(),
     });
   }
 
@@ -76,8 +74,7 @@ memberInstance.interceptors.response.use(responseInterceptor, errorInterceptor);
 
 // member API
 export const memberApi = {
-  signUp: (payload: SignInPayload) =>
-    memberInstance.post<SignInResponse>('/signup', payload),
+  signUp: (payload: SignInPayload) => memberInstance.post('/signup', payload),
   findPassword: (payload: FindPasswordPayload) =>
     memberInstance.post('/password', payload),
   signOut: () => memberInstance.post('/signout'),

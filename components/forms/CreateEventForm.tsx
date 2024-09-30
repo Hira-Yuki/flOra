@@ -27,7 +27,7 @@ interface TodoEventType {
   memo: string;
 }
 
-export default function CreateEventForm() {
+export default function CreateEventForm({ modalController }) {
   const [state, setState] = useState<TodoEventType>({
     title: '',
     isDDay: false,
@@ -65,19 +65,35 @@ export default function CreateEventForm() {
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    let formData = { ...state, indexColor: INDEX_COLORS[state.indexColor] };
+    let formData = {
+      title: state.title,
+      isDDay: state.isDDay,
+      isAllDay: state.isAllDay,
+      startDateTime: state.start,
+      endDateTime: state.end,
+      indexColor: INDEX_COLORS[state.indexColor],
+      description: state.memo,
+    };
     if (formData.isAllDay) {
       formData = {
         ...formData,
-        start: dayjs(formData.start).hour(0).minute(0).second(0).toDate(),
-        end: dayjs(formData.end).hour(23).minute(59).second(59).toDate(),
+        startDateTime: dayjs(formData.startDateTime)
+          .hour(0)
+          .minute(0)
+          .second(0)
+          .toDate(),
+        endDateTime: dayjs(formData.endDateTime)
+          .hour(23)
+          .minute(59)
+          .second(59)
+          .toDate(),
       };
     }
-    console.log(formData);
     try {
       // 서버 호출 ~~~~
-      const response = eventAPI.createEvent(formData);
-      console.log(response);
+      const { data } = await eventAPI.createEvent(formData);
+      modalController.setFalse();
+      toast.success(data);
     } catch (error) {
       console.error(error);
     }

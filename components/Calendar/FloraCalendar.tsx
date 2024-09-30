@@ -1,10 +1,11 @@
 import dayGridPlugin from '@fullcalendar/daygrid';
 import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { eventAPI } from '@lib/api/event';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import CustomHeader from './CustomHeader';
 
@@ -23,91 +24,114 @@ const initialize = {
 };
 
 // 샘플 이벤트 데이터
-const events = [
-  {
-    id: '1',
-    title: '회의',
-    start: dayjs('2024-09-01 19:30').format(), // 2024년 9월 1일 10시 30분
-    end: dayjs('2024-09-01 21:00').format(), // 2024년 9월 1일 12시
-    allDay: false,
-    color: '#FF5641',
-  },
-  {
-    id: '2',
-    title: '회의2',
-    start: dayjs('2024-09-02 19:30', 'Asia/Seoul').format(), // 2024년 9월 2일 10시 30분
-    end: dayjs('2024-09-02 21:00', 'Asia/Seoul').format(), // 2024년 9월 2일 12시
-    allDay: false,
-    color: '#FFAE00',
-  },
-  {
-    id: '3',
-    title: '추석 연휴',
-    start: dayjs('2024-09-14').format(),
-    end: dayjs('2024-09-18').format(),
-    allDay: true,
-    color: '#8CD300',
-  },
-  {
-    id: '4',
-    title: '가족 모임',
-    start: dayjs('2024-10-05').format(),
-    end: dayjs('2024-10-05').format(),
-    allDay: true,
-    color: '#22D3DE',
-  },
-  {
-    id: '5',
-    title: '회의 3',
-    start: '2024-09-22T14:30:00', // 2024년 9월 2일 10시 30분
-    end: '2024-09-22T16:30:00', // 2024년 9월 2일 12시
-    allDay: false,
-    color: '#A155BD',
-  },
-  {
-    id: '6',
-    title: '회의 4',
-    start: '2024-09-22T17:30:00', // 2024년 9월 2일 10시 30분
-    end: '2024-09-22T19:30:00', // 2024년 9월 2일 12시
-    allDay: false,
-    color: '#A155BD',
-  },
-  {
-    id: '6',
-    title: '회의 4',
-    start: '2024-09-22T17:30:00', // 2024년 9월 2일 10시 30분
-    end: '2024-09-22T19:30:00', // 2024년 9월 2일 12시
-    allDay: false,
-    color: '#A155BD',
-  },
-  {
-    id: '6',
-    title: '회의 4',
-    start: '2024-09-22T17:30:00', // 2024년 9월 2일 10시 30분
-    end: '2024-09-22T19:30:00', // 2024년 9월 2일 12시
-    allDay: false,
-    color: '#A155BD',
-  },
-  {
-    id: '6',
-    title: '회의 4',
-    start: '2024-09-22T17:30:00', // 2024년 9월 2일 10시 30분
-    end: '2024-09-22T19:30:00', // 2024년 9월 2일 12시
-    allDay: false,
-    color: '#A155BD',
-  },
-  {
-    id: '6',
-    title: '회의 4',
-    start: '2024-09-22T17:30:00', // 2024년 9월 2일 10시 30분
-    end: '2024-09-22T19:30:00', // 2024년 9월 2일 12시
-    allDay: false,
-    color: '#A155BD',
-  },
-];
+// const events = [
+//   {
+//     id: '1',
+//     title: '회의',
+//     start: dayjs('2024-09-01 19:30').format(), // 2024년 9월 1일 10시 30분
+//     end: dayjs('2024-09-01 21:00').format(), // 2024년 9월 1일 12시
+//     allDay: false,
+//     color: '#FF5641',
+//   },
+//   {
+//     id: '2',
+//     title: '회의2',
+//     start: dayjs('2024-09-02 19:30', 'Asia/Seoul').format(), // 2024년 9월 2일 10시 30분
+//     end: dayjs('2024-09-02 21:00', 'Asia/Seoul').format(), // 2024년 9월 2일 12시
+//     allDay: false,
+//     color: '#FFAE00',
+//   },
+//   {
+//     id: '3',
+//     title: '추석 연휴',
+//     start: dayjs('2024-09-14').format(),
+//     end: dayjs('2024-09-18').format(),
+//     allDay: true,
+//     color: '#8CD300',
+//   },
+//   {
+//     id: '4',
+//     title: '가족 모임',
+//     start: dayjs('2024-10-05').format(),
+//     end: dayjs('2024-10-05').format(),
+//     allDay: true,
+//     color: '#22D3DE',
+//   },
+//   {
+//     id: '5',
+//     title: '회의 3',
+//     start: '2024-09-22T14:30:00', // 2024년 9월 2일 10시 30분
+//     end: '2024-09-22T16:30:00', // 2024년 9월 2일 12시
+//     allDay: false,
+//     color: '#A155BD',
+//   },
+//   {
+//     id: '6',
+//     title: '회의 4',
+//     start: '2024-09-22T17:30:00', // 2024년 9월 2일 10시 30분
+//     end: '2024-09-22T19:30:00', // 2024년 9월 2일 12시
+//     allDay: false,
+//     color: '#A155BD',
+//   },
+//   {
+//     id: '6',
+//     title: '회의 4',
+//     start: '2024-09-22T17:30:00', // 2024년 9월 2일 10시 30분
+//     end: '2024-09-22T19:30:00', // 2024년 9월 2일 12시
+//     allDay: false,
+//     color: '#A155BD',
+//   },
+//   {
+//     id: '6',
+//     title: '회의 4',
+//     start: '2024-09-22T17:30:00', // 2024년 9월 2일 10시 30분
+//     end: '2024-09-22T19:30:00', // 2024년 9월 2일 12시
+//     allDay: false,
+//     color: '#A155BD',
+//   },
+//   {
+//     id: '6',
+//     title: '회의 4',
+//     start: '2024-09-22T17:30:00', // 2024년 9월 2일 10시 30분
+//     end: '2024-09-22T19:30:00', // 2024년 9월 2일 12시
+//     allDay: false,
+//     color: '#A155BD',
+//   },
+//   {
+//     id: '6',
+//     title: '회의 4',
+//     start: '2024-09-22T17:30:00', // 2024년 9월 2일 10시 30분
+//     end: '2024-09-22T19:30:00', // 2024년 9월 2일 12시
+//     allDay: false,
+//     color: '#A155BD',
+//   },
+// ];
 
 export default function FloraCalendar() {
   const calendarRef = useRef<FullCalendar>();
+  const [events, setEvents] = useState(null);
+
+  useEffect(() => {
+    const getEvent = async () => {
+      const { data } = await eventAPI.getEvents();
+
+      // 데이터가 배열인지 확인하고, 배열이 아닐 경우 빈 배열로 초기화
+      const eventsArray = Array.isArray(data) ? data : [];
+
+      // 각 이벤트를 `eventItem` 형식으로 변환하여 새로운 배열로 저장
+      const eventItems = eventsArray.map((event) => ({
+        eventId: event.eventId, // 각 이벤트의 ID
+        title: event.title, // 이벤트의 제목
+        start: event.startDateTime, // 시작 시간
+        end: event.endDateTime, // 종료 시간
+        allDay: event.allDay, // 하루 종일 여부
+        color: event.indexColor, // 색상 (사용자 지정 색상 코드)
+      }));
+
+      setEvents(eventItems);
+    };
+    getEvent();
+  }, [setEvents]);
 
   // 이벤트 스타일을 변경하는 함수
   const applyTimeGridStyles = (info: any) => {
