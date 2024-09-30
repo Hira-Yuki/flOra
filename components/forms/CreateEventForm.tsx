@@ -4,6 +4,8 @@ import DDayCheckBox from '@components/CustomElements/DDayCheckBox';
 import ModalFormTitleInput from '@components/CustomElements/ModalFormTitleInput';
 import ModalSaveButton from '@components/CustomElements/ModalSaveButton';
 import ToggleSwitch from '@components/CustomElements/ToggleSwitch';
+import { INDEX_COLORS } from '@constants';
+import { eventAPI } from '@lib/api/event';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -63,10 +65,19 @@ export default function CreateEventForm() {
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    // 뭔가 한다....
-
+    let formData = { ...state, indexColor: INDEX_COLORS[state.indexColor] };
+    if (formData.isAllDay) {
+      formData = {
+        ...formData,
+        start: dayjs(formData.start).hour(0).minute(0).second(0).toDate(),
+        end: dayjs(formData.end).hour(23).minute(59).second(59).toDate(),
+      };
+    }
+    console.log(formData);
     try {
       // 서버 호출 ~~~~
+      const response = eventAPI.createEvent(formData);
+      console.log(response);
     } catch (error) {
       console.error(error);
     }
@@ -93,17 +104,17 @@ export default function CreateEventForm() {
           label={'하루종일'}
         />
         <CustomDatePicker
+          isAllDay={state.isAllDay}
           value={state.start}
           startDate={state.start}
-          state={state}
           endDate={state.end}
           onChange={(value) => stateHandler('start', value)}
           type="start"
           label={'시작'}
         />
         <CustomDatePicker
+          isAllDay={state.isAllDay}
           value={state.end}
-          state={state}
           onChange={(value) => stateHandler('end', value)}
           type="end"
           startDate={state.start}

@@ -1,7 +1,8 @@
-import { useMockApi } from '@hooks';
 import { BASE_URL, createAxiosInstance } from '@lib/axiosInstance';
 import { AxiosError } from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import useCookie from 'hooks/useCookie';
+import { parseJwt } from 'util/jwt';
 
 /**
  * 이벤트 API를 호출하기 위한 기본 인터페이스
@@ -9,8 +10,22 @@ import MockAdapter from 'axios-mock-adapter';
  */
 export const eventInstance = createAxiosInstance(`${BASE_URL}/members`);
 
+const cookie = useCookie();
+const Authorization = cookie.getCookie('Authorization');
+
 // 요청 인터셉터 설정 함수
 const requestInterceptor = (config: any) => {
+  if (Authorization) {
+    const newConfig = {
+      ...config,
+      headers: {
+        ...config.headers, // 기존 헤더 유지
+        Authorization,
+      },
+    };
+    console.log('Auth member API 요청 인터셉터:', newConfig);
+    return newConfig;
+  }
   console.log('member API 요청 인터셉터:', config);
   return config;
 };
@@ -32,6 +47,10 @@ const errorInterceptor = (error: AxiosError) => {
   );
 };
 
+const header = Authorization?.split(' ')[1];
+const token = parseJwt(header);
+const memberId = token?.memberId;
+
 // 요청 인터셉터 생성
 eventInstance.interceptors.request.use(requestInterceptor, Promise.reject);
 
@@ -39,17 +58,7 @@ eventInstance.interceptors.request.use(requestInterceptor, Promise.reject);
 eventInstance.interceptors.response.use(responseInterceptor, errorInterceptor);
 
 export const eventAPI = {
-  /**
-   * @payload in {title, description, startDateTime, endDateTime, index, isDDay}
-   * @title {string}
-   * @description {string}
-   * @startDateTime {string}
-   * @endDateTime {string}
-   * @index {color}
-   * @isDDay {boolean}
-   */
-  createEvent: (memberId: string, payload) =>
-    eventInstance.post(`/${memberId}/events`, payload),
+  createEvent: (payload) => eventInstance.post(`/${memberId}/events`, payload),
 };
 
 const setupMockApi = (instance: any) => {
@@ -61,4 +70,4 @@ const setupMockApi = (instance: any) => {
 };
 
 // Mock API 설정
-if (useMockApi) setupMockApi(eventInstance);
+// if (useMockApi) setupMockApi(eventInstance);
