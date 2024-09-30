@@ -53,6 +53,7 @@ export default function MotivationWidget() {
     e.target.setSelectionRange(length, length); // 커서를 텍스트 끝으로 이동
   };
 
+  // 수정 모드로 트리거하고 입력 모드를 활성화함.
   const activeModify = () => {
     isModify.setTrue();
     activateEditMode();
