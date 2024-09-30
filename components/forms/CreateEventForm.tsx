@@ -21,8 +21,8 @@ interface TodoEventType {
   title: string;
   isDDay: boolean;
   isAllDay: boolean;
-  start: Date;
-  end: Date;
+  start: Date | string;
+  end: Date | string;
   indexColor: IndexColor;
   memo: string;
 }
@@ -81,12 +81,12 @@ export default function CreateEventForm({ modalController }) {
           .hour(0)
           .minute(0)
           .second(0)
-          .toDate(),
+          .format('YYYY-MM-DDTHH:mm'),
         endDateTime: dayjs(formData.endDateTime)
           .hour(23)
           .minute(59)
           .second(59)
-          .toDate(),
+          .format('YYYY-MM-DDTHH:mm'),
       };
     }
     try {

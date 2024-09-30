@@ -23,22 +23,22 @@ const requestInterceptor = (config: any) => {
         Authorization,
       },
     };
-    console.log('Auth member API 요청 인터셉터:', newConfig);
+    console.log('Auth 이벤트 API 요청 인터셉터:', newConfig);
     return newConfig;
   }
-  console.log('member API 요청 인터셉터:', config);
+  console.log('이벤트 API 요청 인터셉터:', config);
   return config;
 };
 
 // 응답 인터셉터 설정 함수
 const responseInterceptor = (response: any) => {
-  console.log('member API 응답 인터셉터:', response);
+  console.log('이벤트 API 응답 인터셉터:', response);
   return response;
 };
 
 // 에러 처리 함수
 const errorInterceptor = (error: AxiosError) => {
-  console.error('member API 응답 인터셉터 에러:', error);
+  console.error('이벤트 API 응답 인터셉터 에러:', error);
   return Promise.reject(
     error.response?.data || {
       state: 0,
