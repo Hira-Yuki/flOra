@@ -4,7 +4,7 @@ import AddIcon from '@components/icons/AddIcon';
 import EllipsisIcon from '@components/icons/EllipsisIcon';
 import WidgetHeader from '@components/widgetElements/WidgetHeader';
 import WidgetWrapper from '@components/widgetElements/WidgetWrapper';
-import { useInput, useToggle } from '@hooks';
+import { useDebouncedSubmit, useInput, useToggle } from '@hooks';
 import { motivationAPI } from '@lib/api/motivation';
 import { useEffect, useRef } from 'react';
 import { toast } from 'react-toastify';
@@ -68,8 +68,7 @@ export default function MotivationWidget() {
     }, 0);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     isEdit.setFalse(); // 엔터 시 편집 모드 종료
     handleSave();
   };
@@ -113,6 +112,13 @@ export default function MotivationWidget() {
     }
   };
 
+  const debouncedSubmit = useDebouncedSubmit(handleSubmit);
+
+  const onSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    debouncedSubmit();
+  };
+
   useEffect(() => {
     const getMotivation = async () => {
       try {
@@ -120,7 +126,6 @@ export default function MotivationWidget() {
         input.setValues(data.content);
       } catch (err) {
         console.log(err);
-        input.setValues('');
       }
     };
     getMotivation();
@@ -164,7 +169,7 @@ export default function MotivationWidget() {
       <div className="flex h-full">
         <form
           className="flex h-full w-full relative -top-10 justify-center items-center content-center"
-          onSubmit={handleSubmit}
+          onSubmit={onSubmit}
         >
           <textarea
             ref={textAreaRef} // ref로 textarea 연결
