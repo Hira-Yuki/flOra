@@ -1,14 +1,18 @@
 import { BASE_URL, createAxiosInstance } from '@lib/axiosInstance';
 import { AxiosError } from 'axios';
-import MockAdapter from 'axios-mock-adapter';
 import useCookie from 'hooks/useCookie';
 import { parseJwt } from 'util/jwt';
 
-// API 인스턴스 생성
-export const eventInstance = createAxiosInstance(`${BASE_URL}/members`);
-
+// 쿠키 설정
 const cookie = useCookie();
 const Authorization = cookie.getCookie('Authorization');
+
+const jwt = Authorization?.split(' ')[1];
+const token = parseJwt(jwt);
+const memberId = token?.memberId;
+
+// member API 인스턴스 생성
+export const imageInstance = createAxiosInstance(`${BASE_URL}/members`);
 
 // 요청 인터셉터 설정 함수
 const requestInterceptor = (config: any) => {
@@ -38,35 +42,21 @@ const errorInterceptor = (error: AxiosError) => {
   console.error('이벤트 API 응답 인터셉터 에러:', error);
   return Promise.reject(
     error.response?.data || {
-      state: 404,
-      message: '이벤트 요청 서버가 응답하지 않습니다.',
+      state: 0,
+      message: '알 수 없는 오류가 발생했습니다.',
     },
   );
 };
 
-const jwt = Authorization?.split(' ')[1];
-const token = parseJwt(jwt);
-const memberId = token?.memberId;
-
 // 요청 인터셉터 생성
-eventInstance.interceptors.request.use(requestInterceptor, Promise.reject);
+imageInstance.interceptors.request.use(requestInterceptor, Promise.reject);
 
 // 응답 인터셉터 생성
-eventInstance.interceptors.response.use(responseInterceptor, errorInterceptor);
+imageInstance.interceptors.response.use(responseInterceptor, errorInterceptor);
 
-export const eventAPI = {
-  createEvent: (payload) => eventInstance.post(`/${memberId}/events`, payload),
-  getEvents: () => eventInstance.get(`/${memberId}/events`),
-  getDDay: () => eventInstance.get(`/${memberId}/events/dday`),
+export const imageAPI = {
+  postImage: (payload) => imageInstance.post(`/${memberId}/images`, payload),
+  getImage: (payload) => imageInstance.get(`/${memberId}/images`, payload),
+  deleteImage: (payload) =>
+    imageInstance.delete(`/${memberId}/images`, payload),
 };
-
-const setupMockApi = (instance: any) => {
-  const mock = new MockAdapter(instance);
-
-  // mock.onGet('/test').reply(200, {
-  //   message: 'Mock API 호출 성공',
-  // });
-};
-
-// Mock API 설정
-// if (useMockApi) setupMockApi(eventInstance);

@@ -12,7 +12,7 @@ const memberId = token?.memberId;
 
 // API 인스턴스 생성
 export const motivationInstance = createAxiosInstance(
-  `${BASE_URL}/members/${memberId}/promise`,
+  `${BASE_URL}/members/${memberId}/promises`,
 );
 
 // 요청 인터셉터 설정 함수
@@ -43,8 +43,8 @@ const errorInterceptor = (error: AxiosError) => {
   console.error('다짐 API 응답 인터셉터 에러:', error);
   return Promise.reject(
     error.response?.data || {
-      state: 0,
-      message: '알 수 없는 오류가 발생했습니다.',
+      state: 404,
+      message: '목표/다짐 서버가 응답하지 않습니다.',
     },
   );
 };
