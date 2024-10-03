@@ -5,7 +5,9 @@ import EllipsisIcon from '@components/icons/EllipsisIcon';
 import WidgetHeader from '@components/widgetElements/WidgetHeader';
 import WidgetWrapper from '@components/widgetElements/WidgetWrapper';
 import { useToggle } from '@hooks';
-import { useRef, useState } from 'react';
+import { imageAPI } from '@lib/api/image';
+import { useEffect, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
 
 export default function PicFrameWidget() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -14,6 +16,21 @@ export default function PicFrameWidget() {
 
   const toggleMenu = () => isOpenMenu.toggleValue();
   const closeMenu = () => isOpenMenu.setFalse();
+
+  useEffect(() => {
+    const getImage = async () => {
+      try {
+        const { data } = await imageAPI.getImage({
+          imageType: 'IMAGE_GALLERY',
+        });
+        setUploadedImage(data);
+      } catch (err) {
+        toast.error(err.message);
+      }
+    };
+
+    getImage();
+  }, []);
 
   const handleAdd = () => {
     fileInputRef.current?.click();
@@ -24,9 +41,32 @@ export default function PicFrameWidget() {
     const files = event.target.files;
     if (files && files.length > 0) {
       const file = files[0];
+
+      // 파일 크기 제한 (10MB)
+      const maxFileSize = 10 * 1024 * 1024; // 10MB = 10 * 1024 * 1024 bytes
+      if (file.size > maxFileSize) {
+        toast.error('파일 크기는 최대 10MB까지 업로드할 수 있습니다.');
+        return;
+      }
+
       const imageUrl = URL.createObjectURL(file);
       setUploadedImage(imageUrl);
       // 추가적으로 업로드할 로직을 여기에 추가할 수 있습니다.
+      uploadImage(file);
+    }
+  };
+
+  const uploadImage = async (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('imageType', 'IMAGE_GALLERY');
+    try {
+      const { data } = await imageAPI.postImage(formData);
+      setUploadedImage(data);
+      toast.success('이미지 업로드 성공');
+    } catch (err) {
+      console.log(err);
+      toast.warn(err.message);
     }
   };
 
@@ -35,12 +75,16 @@ export default function PicFrameWidget() {
     fileInputRef.current?.click(); // 파일 입력 다시 열기
   };
 
-  const handleDelete = () => {
-    setUploadedImage(null); // 이미지 삭제
+  const handleDelete = async () => {
     try {
-      //do something
+      const { data } = await imageAPI.deleteImage({
+        imageType: 'IMAGE_GALLERY',
+      });
+      toast.success(data);
+      setUploadedImage(null); // 이미지 삭제
     } catch (err) {
       console.log(err);
+      toast.warn(err.message);
     }
   };
 

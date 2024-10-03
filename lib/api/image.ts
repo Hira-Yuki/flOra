@@ -24,26 +24,26 @@ const requestInterceptor = (config: any) => {
         Authorization,
       },
     };
-    console.log('Auth 이벤트 API 요청 인터셉터:', newConfig);
+    console.log('Auth 이미지 API 요청 인터셉터:', newConfig);
     return newConfig;
   }
-  console.log('이벤트 API 요청 인터셉터:', config);
+  console.log('이미지 API 요청 인터셉터:', config);
   return config;
 };
 
 // 응답 인터셉터 설정 함수
 const responseInterceptor = (response: any) => {
-  console.log('이벤트 API 응답 인터셉터:', response);
+  console.log('이미지 API 응답 인터셉터:', response);
   return response;
 };
 
 // 에러 처리 함수
 const errorInterceptor = (error: AxiosError) => {
-  console.error('이벤트 API 응답 인터셉터 에러:', error);
+  console.error('이미지 API 응답 인터셉터 에러:', error);
   return Promise.reject(
     error.response?.data || {
-      state: 0,
-      message: '알 수 없는 오류가 발생했습니다.',
+      state: 404,
+      message: '이미지 서버가 응답하지 않습니다.',
     },
   );
 };
@@ -55,8 +55,13 @@ imageInstance.interceptors.request.use(requestInterceptor, Promise.reject);
 imageInstance.interceptors.response.use(responseInterceptor, errorInterceptor);
 
 export const imageAPI = {
-  postImage: (payload) => imageInstance.post(`/${memberId}/images`, payload),
-  getImage: (payload) => imageInstance.get(`/${memberId}/images`, payload),
-  deleteImage: (payload) =>
-    imageInstance.delete(`/${memberId}/images`, payload),
+  postImage: (payload) =>
+    imageInstance.post(`/${memberId}/images`, payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }),
+  getImage: (params) => imageInstance.get(`/${memberId}/images`, { params }),
+  deleteImage: (params) =>
+    imageInstance.delete(`/${memberId}/images`, { params }),
 };
