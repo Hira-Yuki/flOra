@@ -1,4 +1,5 @@
 import CustomBorderItem from '@components/CustomElements/CustomBorderItem';
+import ImageIcon from '@components/icons/ImageIcon';
 import PenIcon from '@components/icons/PenIcon';
 
 export default function Diary() {
@@ -16,11 +17,9 @@ export default function Diary() {
             className="object-cover w-full h-full"
           />
         ) : (
-          <img
-            src="/image/img.png"
-            className="object-cover w-full h-full"
-            alt="no image"
-          />
+          <div className="w-full h-full flex justify-center items-center cursor-pointer">
+            <ImageIcon />
+          </div>
         )}
       </div>
 
@@ -51,7 +50,7 @@ export default function Diary() {
         )}
       </div>
       {/* 히스토리 */}
-      <div className="col-span-1">
+      <div className="col-span-1 border-l-2 border-white">
         <div className="p-4">
           <h3 className="text-center text-lg font-bold text-descText">
             History

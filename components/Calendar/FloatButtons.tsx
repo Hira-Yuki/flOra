@@ -12,7 +12,9 @@ import { useState } from 'react';
 
 export default function FloatButtons({ modalController }) {
   const addMenuToggle = useToggle();
-  const [options, setOPtions] = useState<'event' | 'todo'>();
+  const [options, setOPtions] = useState<'event' | 'todo' | 'dday'>();
+  const diaryOpen = useToggle();
+
   const callModal = (option) => {
     modalController.setTrue();
     addMenuToggle.setFalse();
@@ -48,7 +50,11 @@ export default function FloatButtons({ modalController }) {
                 </button>
               </li>
               <li>
-                <button type="button" className="flex gap-2 hover:opacity-70">
+                <button
+                  type="button"
+                  className="flex gap-2 hover:opacity-70"
+                  onClick={() => callModal('dday')}
+                >
                   <ClockIcon />
                   <span>디데이</span>
                 </button>

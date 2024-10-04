@@ -27,10 +27,10 @@ interface TodoEventType {
   memo: string;
 }
 
-export default function CreateEventForm({ modalController }) {
+export default function CreateEventForm({ modalController, options = false }) {
   const [state, setState] = useState<TodoEventType>({
     title: '',
-    isDDay: false,
+    isDDay: options,
     isAllDay: false,
     start: dayjs().second(0).toDate(),
     end: dayjs().second(0).toDate(),
