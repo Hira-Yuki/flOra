@@ -7,13 +7,13 @@ export default function CustomRoutineSelector({
 }) {
   const idPrefix = useId(); // 공통 접두사로 고유한 ID 생성
   const weekday = [
-    { id: `${idPrefix}-mon`, label: '월', value: 'mon' },
-    { id: `${idPrefix}-tue`, label: '화', value: 'tue' },
-    { id: `${idPrefix}-wed`, label: '수', value: 'wed' },
-    { id: `${idPrefix}-thu`, label: '목', value: 'thu' },
-    { id: `${idPrefix}-fri`, label: '금', value: 'fri' },
-    { id: `${idPrefix}-sat`, label: '토', value: 'sat' },
-    { id: `${idPrefix}-sun`, label: '일', value: 'sun' },
+    { id: `${idPrefix}-mon`, label: '월', value: 'MONDAY' },
+    { id: `${idPrefix}-tue`, label: '화', value: 'TUESDAY' },
+    { id: `${idPrefix}-wed`, label: '수', value: 'WEDNESDAY' },
+    { id: `${idPrefix}-thu`, label: '목', value: 'THURSDAY' },
+    { id: `${idPrefix}-fri`, label: '금', value: 'FRIDAY' },
+    { id: `${idPrefix}-sat`, label: '토', value: 'SATURDAY' },
+    { id: `${idPrefix}-sun`, label: '일', value: 'SUNDAY' },
   ];
 
   // 부모 컴포넌트로부터 받은 요일 정보로 상태 초기화

@@ -8,8 +8,8 @@ import { parseJwt } from 'util/jwt';
 const cookie = useCookie();
 const Authorization = cookie.getCookie('Authorization');
 
-const jwt = Authorization?.split(' ')[1];
-const token = parseJwt(jwt);
+const jwt = Authorization?.split(' ')[1] ?? null;
+const token = jwt ? parseJwt(jwt) : null;
 const memberId = token?.memberId;
 
 // todo list API 인스턴스 생성
@@ -25,16 +25,16 @@ const requestInterceptor = (config: any) => {
         Authorization,
       },
     };
-    console.log('Auth member API 요청 인터셉터:', newConfig);
+    console.log('Auth Todo API 요청 인터셉터:', newConfig);
     return newConfig;
   }
-  console.log('member API 요청 인터셉터:', config);
+  console.log('Todo API 요청 인터셉터:', config);
   return config;
 };
 
 // 응답 인터셉터 설정 함수
 const responseInterceptor = (response: any) => {
-  console.log('member API 응답 인터셉터:', response);
+  console.log('Todo API 응답 인터셉터:', response);
   const token = response.headers?.authorization;
   if (token) {
     cookie.setCookie('Authorization', response.headers.authorization, {
@@ -51,7 +51,7 @@ const responseInterceptor = (response: any) => {
 
 // 에러 처리 함수
 const errorInterceptor = (error: AxiosError) => {
-  console.error('member API 응답 인터셉터 에러:', error);
+  console.error('Todo API 응답 인터셉터 에러:', error);
   return Promise.reject(
     error.response?.data || {
       state: 0,
@@ -66,7 +66,16 @@ todoInstance.interceptors.request.use(requestInterceptor, Promise.reject);
 todoInstance.interceptors.response.use(responseInterceptor, errorInterceptor);
 
 // todo list API
-export const eventAPI = {
-  createTodoList: (payload) => todoInstance.post(`/${memberId}/todo`, payload),
-  getTodoList: () => todoInstance.get(`/${memberId}/todo`),
+export const todoAPI = {
+  createTodoList: (payload) => todoInstance.post(`/${memberId}/todos`, payload),
+  getTodoList: ({ isRoutine, todoType, date }) => {
+    const queryParams = new URLSearchParams();
+
+    queryParams.append('isRoutine', isRoutine);
+    queryParams.append('todoType', todoType);
+    queryParams.append('date', date);
+
+    // URL에 쿼리 파라미터를 붙여서 요청
+    return todoInstance.get(`/${memberId}/todos?${queryParams.toString()}`);
+  },
 };

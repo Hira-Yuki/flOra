@@ -153,7 +153,7 @@ export default function CreateEventForm({ modalController, options = false }) {
           className="block outline-none p-3 w-full"
         />
         <div className="flex flex-row-reverse">
-          <ModalSaveButton onClick={onSubmit} />
+          <ModalSaveButton />
         </div>
       </div>
     </form>

@@ -4,6 +4,7 @@ import CustomDatePicker from '@components/CustomElements/CustomDatePicker';
 import CustomRoutineSelector from '@components/CustomElements/CustomRoutineSelector';
 import ModalFormTitleInput from '@components/CustomElements/ModalFormTitleInput';
 import ModalSaveButton from '@components/CustomElements/ModalSaveButton';
+import { todoAPI } from '@lib/api/todo';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
@@ -27,7 +28,7 @@ interface TodoFormType {
   day_of_week: string[];
 }
 
-export default function CreateTodoForm() {
+export default function CreateTodoForm({ modalController }) {
   const [state, setState] = useState<TodoFormType>({
     title: '',
     createType: 'studyRoutine',
@@ -68,23 +69,52 @@ export default function CreateTodoForm() {
 
   const onSubmit = async (event) => {
     event.preventDefault();
-
-    const formData = {
-      isRoutine,
-      title: state.title,
-      startDateTime: state.start,
-      endDateTime: state.end,
-      indexColor: state.indexColor,
-      description: state.memo,
-      isComplete: false,
-      day_of_week: state.day_of_week,
-    };
+    const todoType =
+      state.createType === 'studyRoutine' || state.createType === 'study'
+        ? 'TODO_STUDY'
+        : 'TODO_LIFE';
+    let formData;
+    if (isRoutine) {
+      formData = {
+        isRoutine,
+        todoType,
+        title: state.title,
+        startDate: dayjs(state.start).format('YYYY-MM-DD'),
+        endDate: dayjs(state.end).format('YYYY-MM-DD'),
+        indexColor: state.indexColor,
+        description: state.memo,
+        repeatDays: state.day_of_week,
+      };
+    } else {
+      formData = {
+        isRoutine,
+        todoType,
+        title: state.title,
+        startDate: dayjs(state.start).format('YYYY-MM-DD'),
+        endDate: dayjs(state.end).format('YYYY-MM-DD'),
+        indexColor: state.indexColor,
+        description: state.memo,
+      };
+    }
 
     try {
       // 서버 호출 ~~~~
-      console.log('생성된 폼데이터 :', formData);
-    } catch (error) {
-      console.error(error);
+      const { data } = await todoAPI.createTodoList(formData);
+      toast.success(data);
+    } catch (err) {
+      console.error(err);
+      toast.error(err.message);
+    } finally {
+      setState({
+        title: '',
+        createType: 'studyRoutine',
+        start: dayjs().second(0).toDate(),
+        end: dayjs().second(0).toDate(),
+        indexColor: 'indexRed',
+        memo: '',
+        day_of_week: [],
+      });
+      modalController.setFalse();
     }
   };
 
@@ -92,6 +122,7 @@ export default function CreateTodoForm() {
     <form onSubmit={onSubmit}>
       <div className="flex items-center">
         <ModalFormTitleInput
+          fullWidth={true}
           value={state.title}
           onChange={(e) => stateHandler('title', e.target.value)}
         />
@@ -106,7 +137,7 @@ export default function CreateTodoForm() {
       <hr />
       <div className="mt-6 flex flex-col gap-3">
         <CustomDatePicker
-          isAllDay={false}
+          isAllDay={true}
           value={state.start}
           startDate={state.start}
           endDate={state.end}
@@ -115,7 +146,7 @@ export default function CreateTodoForm() {
           label={'시작 날짜'}
         />
         <CustomDatePicker
-          isAllDay={false}
+          isAllDay={true}
           value={state.end}
           onChange={(value) => stateHandler('end', value)}
           type="end"
@@ -147,7 +178,7 @@ export default function CreateTodoForm() {
           className="block outline-none p-3 w-full"
         />
         <div className="flex flex-row-reverse">
-          <ModalSaveButton onClick={onSubmit} />
+          <ModalSaveButton />
         </div>
       </div>
     </form>

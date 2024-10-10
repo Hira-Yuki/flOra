@@ -49,7 +49,7 @@ const responseInterceptor = (response: any) => {
       secure: '/',
       httponly: true,
       sameSite: 'Strict',
-      expires: dayjs().add(1, 'hour').toDate(),
+      expires: dayjs().add(7, 'day').toDate(),
     });
   }
 

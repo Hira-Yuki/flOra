@@ -1,6 +1,5 @@
 import CustomBorderItem from '@components/CustomElements/CustomBorderItem';
-import ImageIcon from '@components/icons/ImageIcon';
-import PenIcon from '@components/icons/PenIcon';
+import { ImageIcon, PenIcon } from '@components/icons';
 
 export default function Diary() {
   // 임시 데이터

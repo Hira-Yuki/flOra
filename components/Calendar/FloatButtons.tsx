@@ -6,20 +6,21 @@ import {
   PenIcon,
   TodoIcon,
 } from '@components/icons';
+import DiaryCreateModal from '@components/ModalContents/DiaryCreateModal';
 import EventCreateModal from '@components/ModalContents/EventCreateModal';
 import { useToggle } from '@hooks';
 import { useState } from 'react';
 
 export default function FloatButtons({ modalController }) {
   const addMenuToggle = useToggle();
-  const [options, setOPtions] = useState<'event' | 'todo' | 'dday'>();
-  const diaryOpen = useToggle();
+  const [options, setOPtions] = useState<'event' | 'todo' | 'dday' | 'diary'>(
+    null,
+  );
 
   const callModal = (option) => {
     modalController.setTrue();
     addMenuToggle.setFalse();
 
-    // 동적으로 모달 내용 변경...
     setOPtions(option);
   };
 
@@ -61,7 +62,11 @@ export default function FloatButtons({ modalController }) {
               </li>
             </ul>
             <div className="bg-white px-4 py-1 rounded-xl">
-              <button type="button" className="flex gap-2 hover:opacity-70">
+              <button
+                type="button"
+                className="flex gap-2 hover:opacity-70"
+                onClick={() => callModal('diary')}
+              >
                 <PenIcon />
                 <span>일기</span>
               </button>
@@ -76,8 +81,10 @@ export default function FloatButtons({ modalController }) {
         </div>
       </div>
       {/* <------------------> */}
-      {modalController.value && (
+      {modalController.value && options !== 'diary' ? (
         <EventCreateModal options={options} modalController={modalController} />
+      ) : (
+        <DiaryCreateModal modalController={modalController} />
       )}
     </div>
   );

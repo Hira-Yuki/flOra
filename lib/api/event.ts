@@ -1,6 +1,5 @@
 import { BASE_URL, createAxiosInstance } from '@lib/axiosInstance';
 import { AxiosError } from 'axios';
-import MockAdapter from 'axios-mock-adapter';
 import useCookie from 'hooks/useCookie';
 import { parseJwt } from 'util/jwt';
 
@@ -9,6 +8,10 @@ export const eventInstance = createAxiosInstance(`${BASE_URL}/members`);
 
 const cookie = useCookie();
 const Authorization = cookie.getCookie('Authorization');
+
+const jwt = Authorization?.split(' ')[1] ?? null;
+const token = jwt ? parseJwt(jwt) : null;
+const memberId = token?.memberId;
 
 // 요청 인터셉터 설정 함수
 const requestInterceptor = (config: any) => {
@@ -44,10 +47,6 @@ const errorInterceptor = (error: AxiosError) => {
   );
 };
 
-const jwt = Authorization?.split(' ')[1];
-const token = parseJwt(jwt);
-const memberId = token?.memberId;
-
 // 요청 인터셉터 생성
 eventInstance.interceptors.request.use(requestInterceptor, Promise.reject);
 
@@ -58,15 +57,21 @@ export const eventAPI = {
   createEvent: (payload) => eventInstance.post(`/${memberId}/events`, payload),
   getEvents: () => eventInstance.get(`/${memberId}/events`),
   getDDay: () => eventInstance.get(`/${memberId}/events/dday`),
+  createDiary: (payload) =>
+    eventInstance.post(`/${memberId}/diaries`, payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }),
 };
 
-const setupMockApi = (instance: any) => {
-  const mock = new MockAdapter(instance);
+// const setupMockApi = (instance: any) => {
+//   const mock = new MockAdapter(instance);
 
-  // mock.onGet('/test').reply(200, {
-  //   message: 'Mock API 호출 성공',
-  // });
-};
+// mock.onGet('/test').reply(200, {
+//   message: 'Mock API 호출 성공',
+// });
+// };
 
 // Mock API 설정
 // if (useMockApi) setupMockApi(eventInstance);

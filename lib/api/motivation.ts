@@ -6,8 +6,8 @@ import { parseJwt } from 'util/jwt';
 // 쿠키 설정
 const cookie = useCookie();
 const Authorization = cookie.getCookie('Authorization');
-const jwt = Authorization?.split(' ')[1];
-const token = parseJwt(jwt);
+const jwt = Authorization?.split(' ')[1] ?? null;
+const token = jwt ? parseJwt(jwt) : null;
 const memberId = token?.memberId;
 
 // API 인스턴스 생성

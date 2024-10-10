@@ -1,11 +1,34 @@
-import CustomCheckbox from '@components/CustomElements/CustomCheckbox';
 import WidgetWrapper from '@components/widgetElements/WidgetWrapper';
 import { useToggle } from '@hooks';
+import { todoAPI } from '@lib/api/todo';
+import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
 
 import SwitchButton from './SwitchButton';
+import TodoItem from './TodoItem';
 
 export default function TodoList({ title, subTitle }) {
   const isRoutine = useToggle(true);
+  const [todoList, setTodoList] = useState([]);
+  useEffect(() => {
+    const getTodoList = async () => {
+      const todoType = subTitle === 'Study' ? 'TODO_STUDY' : 'TODO_LIFE';
+      const date = dayjs().format('YYYY-MM-DD');
+      try {
+        // 호출
+        const { data } = await todoAPI.getTodoList({
+          isRoutine: isRoutine.value,
+          todoType,
+          date,
+        });
+        setTodoList(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    getTodoList();
+  }, [isRoutine.value]);
+
   return (
     <WidgetWrapper>
       <SwitchButton
@@ -21,18 +44,7 @@ export default function TodoList({ title, subTitle }) {
       </div>
       <div className="my-6">
         <ul className="flex flex-col gap-6 overflow-scroll">
-          <li>
-            <CustomCheckbox
-              line1={false}
-              text="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa, eius reiciendis earum debitis veritatis doloremque omnis eaque maxime soluta aperiam! Veniam repellendus vero sunt aperiam explicabo perspiciatis autem officiis cupiditate."
-            />
-          </li>
-          <li>
-            <CustomCheckbox text="Lorem ipsum, dolor sit amet" />
-          </li>
-          <li>
-            <CustomCheckbox text="Lorem ipsum, dolor sit amet" />
-          </li>
+          <TodoItem todoList={todoList} />
         </ul>
       </div>
     </WidgetWrapper>

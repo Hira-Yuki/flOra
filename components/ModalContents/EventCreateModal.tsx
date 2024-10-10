@@ -18,7 +18,7 @@ interface EventCreateModalProps {
     setTrue: () => void;
     setFalse: () => void;
   };
-  options?: 'event' | 'todo' | 'dday';
+  options?: 'event' | 'todo' | 'dday' | 'diary';
 }
 
 export default function EventCreateModal({
@@ -38,7 +38,7 @@ export default function EventCreateModal({
       {isEvent === 'event' ? (
         <CreateEventForm modalController={modalController} />
       ) : isEvent === 'todo' ? (
-        <CreateTodoForm />
+        <CreateTodoForm modalController={modalController} />
       ) : (
         <CreateEventForm
           options={options === 'dday'}
