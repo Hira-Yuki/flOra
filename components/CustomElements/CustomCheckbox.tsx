@@ -1,5 +1,4 @@
-import { useToggle } from '@hooks';
-import { useId } from 'react';
+import { useEffect, useId, useState } from 'react';
 
 const borderClass = {
   indexRed: 'border-indexRed',
@@ -22,27 +21,36 @@ export default function CustomCheckbox({
   indexColor = 'indexRed',
   text = '',
   line1 = true,
+  onClick,
 }) {
-  const checked = useToggle(initialValue);
+  const [checked, setChecked] = useState(initialValue);
   const checkBoxId = useId();
 
+  // initialValue가 변경되면 checked 상태를 업데이트
+  useEffect(() => {
+    setChecked(initialValue);
+  }, [initialValue]);
+
+  // 체크박스 변경 이벤트 핸들러
+  const handleCheckboxChange = () => {
+    setChecked((prev) => !prev); // 상태 반전
+    onClick(!checked); // 부모 컴포넌트에 새로운 상태 전달
+  };
+
   return (
-    <div
-      className="flex items-center gap-2 relative"
-      onClick={checked.toggleValue}
-    >
+    <div className="flex items-center gap-2 relative">
       <input
         id={checkBoxId}
         type="checkbox"
-        checked={checked.value}
-        onChange={checked.toggleValue}
+        checked={checked}
+        onChange={handleCheckboxChange}
         className="sr-only peer"
       />
       <label
         htmlFor={checkBoxId}
-        className={`min-w-6 min-h-6 ${borderClass[indexColor]} ${checked.value && `${bgClass[indexColor]}`} peer-checked:${bgClass[indexColor]} peer-checked:opacity-40 border-[3px] rounded-md hover:opacity-80 cursor-pointer`}
+        className={`min-w-6 min-h-6 ${borderClass[indexColor]} ${checked && `${bgClass[indexColor]}`} peer-checked:${bgClass[indexColor]} peer-checked:opacity-40 border-[3px] rounded-md hover:opacity-80 cursor-pointer`}
       >
-        {checked.value && (
+        {checked && (
           <label
             htmlFor={checkBoxId}
             className="absolute w-2 h-4 border-b-[3px] border-r-[3px] border-white transform rotate-45 left-2"

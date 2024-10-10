@@ -69,6 +69,7 @@ const errorInterceptor = (error: AxiosError) => {
         },
       );
     case 401:
+      cookie.removeCookie('Authorization');
       return Promise.reject(
         error.response?.data || {
           state: 401,
@@ -107,13 +108,17 @@ memberInstance.interceptors.response.use(responseInterceptor, errorInterceptor);
 // member API
 export const memberApi = {
   signUp: (payload: SignInPayload) => memberInstance.post('/signup', payload),
+  // 이메일 입력 받아, 일치하면 이메일로 임시 비밀번호 전송됨
   findPassword: (payload: FindPasswordPayload) =>
     memberInstance.post('/password', payload),
   signOut: () => memberInstance.post('/signout'),
+  // 사용자가 새 비밀번호 입력하여 수정
   resetPassword: (memberId: string, newPassword: string) =>
     memberInstance.put(`/${memberId}/password`, newPassword),
   getMemberData: (memberId: string, config = {}) =>
     memberInstance.get(`/${memberId}`, config),
+  // 토큰 갱신
+  refreshToken: () => memberInstance.post('/refresh'),
 };
 
 // mock member API

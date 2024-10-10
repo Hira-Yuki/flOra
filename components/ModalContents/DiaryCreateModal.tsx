@@ -55,9 +55,8 @@ export default function DiaryCreateModal({ modalController }) {
       if (file) formData.append('file', file);
       formData.append('diaryCreateDto', JSON.stringify(diaryForm));
 
-      console.log(file);
-      const response = await eventAPI.createDiary(formData);
-      console.log(response);
+      const { data } = await eventAPI.createDiary(formData);
+      toast.success(data);
     } catch (err) {
       toast.error(err.message);
     } finally {

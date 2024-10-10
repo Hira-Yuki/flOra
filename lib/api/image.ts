@@ -34,18 +34,51 @@ const requestInterceptor = (config: any) => {
 // 응답 인터셉터 설정 함수
 const responseInterceptor = (response: any) => {
   console.log('이미지 API 응답 인터셉터:', response);
+
   return response;
 };
 
 // 에러 처리 함수
 const errorInterceptor = (error: AxiosError) => {
   console.error('이미지 API 응답 인터셉터 에러:', error);
-  return Promise.reject(
-    error.response?.data || {
-      state: 404,
-      message: '이미지 서버가 응답하지 않습니다.',
-    },
-  );
+  switch (error.status) {
+    case 400:
+      return Promise.reject(
+        error.response?.data || {
+          state: 400,
+          message: '요청이 올바르지 않습니다.',
+        },
+      );
+    case 401:
+      cookie.removeCookie('Authorization');
+      return Promise.reject(
+        error.response?.data || {
+          state: 401,
+          message: '인증 토큰이 올바르지 않습니다.',
+        },
+      );
+    case 403:
+      return Promise.reject(
+        error.response?.data || {
+          state: 403,
+          message: '비밀번호가 올바르지 않습니다.',
+        },
+      );
+    case 404:
+      return Promise.reject(
+        error.response?.data || {
+          state: 404,
+          message: '서버를 찾을 수 없습니다.',
+        },
+      );
+    default:
+      return Promise.reject(
+        error.response?.data || {
+          state: 0,
+          message: '알 수 없는 오류가 발생했습니다.',
+        },
+      );
+  }
 };
 
 // 요청 인터셉터 생성
