@@ -9,11 +9,11 @@ export default function TodoItem({ todoList, toggleTodoListItem }) {
         <li key={todo.todoId}>
           <CustomCheckbox
             text={todo.title}
+            indexColor={todo.indexColor}
             initialValue={todo.isCompleted}
             onClick={(newState: boolean) =>
               toggleTodoListItem(todo.todoId, newState)
             }
-            line1={todo.title.length >= 20}
           />
         </li>
       ))}

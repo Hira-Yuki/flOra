@@ -1,18 +1,49 @@
 import CustomBorderItem from '@components/CustomElements/CustomBorderItem';
 import { ImageIcon, PenIcon } from '@components/icons';
+import { eventAPI } from '@lib/api/event';
+import dayjs from 'dayjs';
+import { useEffect, useState } from 'react';
 
+interface diaryListType {
+  diaryId: string;
+  title: string;
+  date: string;
+}
 export default function Diary() {
-  // 임시 데이터
-  const Diary = false;
+  const [diaryList, setDiaryList] = useState<diaryListType[]>([]);
+  const [diary, setDiary] = useState(null);
+  useEffect(() => {
+    const getDiaryList = async () => {
+      try {
+        const { data } = await eventAPI.getDiaryList();
+        setDiaryList(data);
+        const todayDate = dayjs().format('YYYY-MM-DD'); // 오늘 날짜
+        const todayDiary = data.find((diary) => diary.date === todayDate); // 오늘 날짜와 일치하는 일기 찾기
+        const diaryId = todayDiary.diaryId;
+        toDayDiary(diaryId);
+      } catch (err) {
+        console.error('Failed to get diary list', err);
+      }
+    };
+    const toDayDiary = async (diaryId) => {
+      try {
+        const { data } = await eventAPI.getTodayDiary(diaryId);
+        setDiary(data);
+      } catch (err) {
+        console.error('Failed to get today diary', err);
+      }
+    };
+    getDiaryList();
+  }, []);
 
   return (
     <div className="bg-floraBeige rounded-2xl h-full text-mainText overflow-hidden grid grid-cols-3">
       {/* 이미지 */}
       <div className="col-span-1">
-        {Diary ? (
+        {diary ? (
           <img
-            src="https://picsum.photos/300/300"
-            alt="diary"
+            src={diary.imageUrl}
+            alt="diary image"
             className="object-cover w-full h-full"
           />
         ) : (
@@ -24,18 +55,16 @@ export default function Diary() {
 
       {/* 일기 작성 */}
       <div className="col-span-1">
-        {Diary ? (
+        {diary ? (
           <div className="flex flex-col">
             <div className="flex justify-between p-4 pl-6 text-lg text-mainText font-bold">
-              <h3>일기의 제목이 있는 풍경</h3>
+              <h3>{diary.title}</h3>
               <PenIcon />
             </div>
             <div className="text-right text-descText font-medium pr-6">
-              2024-09-20
+              {diary.date}
             </div>
-            <div className="p-6 text-mainText font-medium">
-              어쩌구 저쩌구 블라블라
-            </div>
+            <div className="p-6 text-mainText font-medium">{diary.content}</div>
           </div>
         ) : (
           <div className="flex justify-center items-center h-full">
@@ -57,11 +86,14 @@ export default function Diary() {
         </div>
         <div>
           <ul className="flex flex-col gap-4 overflow-scroll max-h-56 p-3 font-semibold">
-            <CustomBorderItem
-              indexColor={'indexRed'}
-              text={'sample'}
-              subText={'2024-07-30'}
-            />
+            {diaryList.map((item) => (
+              <CustomBorderItem
+                key={item.diaryId}
+                indexColor={'indexRed'} // 나증에 색 순환되게???
+                text={item.title}
+                subText={item.date}
+              />
+            ))}
           </ul>
         </div>
       </div>

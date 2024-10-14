@@ -53,7 +53,11 @@ export default function DiaryCreateModal({ modalController }) {
     try {
       const formData = new FormData();
       if (file) formData.append('file', file);
-      formData.append('diaryCreateDto', JSON.stringify(diaryForm));
+      else formData.append('file', null);
+      formData.append(
+        'diaryCreateDto',
+        new Blob([JSON.stringify(diaryForm)], { type: 'application/json' }),
+      );
 
       const { data } = await eventAPI.createDiary(formData);
       toast.success(data);

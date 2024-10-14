@@ -20,7 +20,6 @@ export default function CustomCheckbox({
   initialValue = false,
   indexColor = 'indexRed',
   text = '',
-  line1 = true,
   onClick,
 }) {
   const [checked, setChecked] = useState(initialValue);
@@ -60,7 +59,7 @@ export default function CustomCheckbox({
 
       <label
         htmlFor={checkBoxId}
-        className={`text-black peer-checked:text-subText peer-checked:line-through ${line1 ? 'line-clamp-1' : 'line-clamp-2'} overflow-ellipsis cursor-pointer`}
+        className={`text-black peer-checked:text-subText peer-checked:line-through line-clamp-2 overflow-ellipsis cursor-pointer`}
       >
         {text}
       </label>

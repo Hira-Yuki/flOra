@@ -60,7 +60,7 @@ const errorInterceptor = (error: AxiosError) => {
       return Promise.reject(
         error.response?.data || {
           state: 403,
-          message: '비밀번호가 올바르지 않습니다.',
+          message: '요청이 올바르지 않습니다.',
         },
       );
     case 404:
@@ -96,6 +96,9 @@ export const eventAPI = {
         'Content-Type': 'multipart/form-data',
       },
     }),
+  getDiaryList: () => eventInstance.get(`/${memberId}/diaries/list`),
+  getTodayDiary: (diaryId) =>
+    eventInstance.get(`/${memberId}/diaries/${diaryId}`),
 };
 
 // const setupMockApi = (instance: any) => {
