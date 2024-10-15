@@ -7,16 +7,21 @@ import dayjs from 'dayjs';
 import { useEffect, useId, useState } from 'react';
 import { toast } from 'react-toastify';
 
-export default function DiaryCreateModal({ modalController }) {
-  const today = dayjs();
-  const id = useId();
-  const [diaryForm, setDiaryForm] = useState({
+export default function DiaryCreateModal({
+  modalController,
+  initialValue = {
     title: '',
     content: '',
-    date: today.format('YYYY-MM-DD'),
-  });
-  const [image, setImage] = useState<string | null>(null);
+    date: dayjs().format('YYYY-MM-DD'),
+  },
+  photo = null,
+  diaryId = '',
+}) {
+  const id = useId();
+  const [diaryForm, setDiaryForm] = useState(initialValue);
+  const [image, setImage] = useState<string | null>(photo);
   const [file, setFile] = useState(null);
+
   const onChange = (key, value) => {
     setDiaryForm((prev) => {
       return { ...prev, [key]: value };
@@ -49,7 +54,6 @@ export default function DiaryCreateModal({ modalController }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    //------------------- 고쳐야할 수 있음.
     try {
       const formData = new FormData();
       if (file) formData.append('file', file);
@@ -59,8 +63,14 @@ export default function DiaryCreateModal({ modalController }) {
         new Blob([JSON.stringify(diaryForm)], { type: 'application/json' }),
       );
 
-      const { data } = await eventAPI.createDiary(formData);
-      toast.success(data);
+      console.log(diaryId);
+      if (diaryId) {
+        const { data } = await eventAPI.editDiary(diaryId, formData);
+        toast.success(data);
+      } else {
+        const { data } = await eventAPI.createDiary(formData);
+        toast.success(data);
+      }
     } catch (err) {
       toast.error(err.message);
     } finally {
@@ -80,7 +90,7 @@ export default function DiaryCreateModal({ modalController }) {
     <CustomModal modalController={modalController}>
       <div>
         <span className="py-1.5 px-4 bg-floraYellow rounded-3xl text-mainText">
-          {today.format('YYYY.MM.DD')}
+          {dayjs().format('YYYY.MM.DD')}
         </span>
       </div>
       <form onSubmit={onSubmit}>

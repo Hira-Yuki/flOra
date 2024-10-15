@@ -99,6 +99,12 @@ export const eventAPI = {
   getDiaryList: () => eventInstance.get(`/${memberId}/diaries/list`),
   getTodayDiary: (diaryId) =>
     eventInstance.get(`/${memberId}/diaries/${diaryId}`),
+  editDiary: (diaryId, payload) =>
+    eventInstance.put(`/${memberId}/diaries/${diaryId}`, payload, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }),
 };
 
 // const setupMockApi = (instance: any) => {

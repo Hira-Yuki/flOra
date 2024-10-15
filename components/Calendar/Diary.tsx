@@ -1,5 +1,7 @@
 import CustomBorderItem from '@components/CustomElements/CustomBorderItem';
 import { ImageIcon, PenIcon } from '@components/icons';
+import DiaryCreateModal from '@components/ModalContents/DiaryCreateModal';
+import { useToggle } from '@hooks';
 import { eventAPI } from '@lib/api/event';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
@@ -12,6 +14,13 @@ interface diaryListType {
 export default function Diary() {
   const [diaryList, setDiaryList] = useState<diaryListType[]>([]);
   const [diary, setDiary] = useState(null);
+  const modalController = useToggle();
+  const [diaryIdState, setDiaryIdState] = useState(null);
+
+  const editDiary = () => {
+    modalController.setTrue();
+  };
+
   useEffect(() => {
     const getDiaryList = async () => {
       try {
@@ -21,6 +30,7 @@ export default function Diary() {
         const todayDiary = data.find((diary) => diary.date === todayDate); // 오늘 날짜와 일치하는 일기 찾기
         const diaryId = todayDiary.diaryId;
         toDayDiary(diaryId);
+        setDiaryIdState(diaryId);
       } catch (err) {
         console.error('Failed to get diary list', err);
       }
@@ -59,7 +69,9 @@ export default function Diary() {
           <div className="flex flex-col">
             <div className="flex justify-between p-4 pl-6 text-lg text-mainText font-bold">
               <h3>{diary.title}</h3>
-              <PenIcon />
+              <div onClick={editDiary}>
+                <PenIcon />
+              </div>
             </div>
             <div className="text-right text-descText font-medium pr-6">
               {diary.date}
@@ -97,6 +109,18 @@ export default function Diary() {
           </ul>
         </div>
       </div>
+      {diary && (
+        <DiaryCreateModal
+          modalController={modalController}
+          initialValue={{
+            title: diary.title,
+            date: diary.date,
+            content: diary.content,
+          }}
+          photo={diary.imageUrl}
+          diaryId={diaryIdState}
+        />
+      )}
     </div>
   );
 }
