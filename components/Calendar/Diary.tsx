@@ -44,7 +44,7 @@ export default function Diary() {
       }
     };
     getDiaryList();
-  }, []);
+  }, [modalController.value]);
 
   return (
     <div className="bg-floraBeige rounded-2xl h-full text-mainText overflow-hidden grid grid-cols-3">
@@ -69,7 +69,7 @@ export default function Diary() {
           <div className="flex flex-col">
             <div className="flex justify-between p-4 pl-6 text-lg text-mainText font-bold">
               <h3>{diary.title}</h3>
-              <div onClick={editDiary}>
+              <div onClick={editDiary} className="cursor-pointer">
                 <PenIcon />
               </div>
             </div>
