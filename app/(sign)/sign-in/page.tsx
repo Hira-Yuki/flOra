@@ -28,12 +28,20 @@ export default function SignIn() {
     setAlertMessage('');
   }
 
+  const REST_API_KEY = process.env.NEXT_PUBLIC_REST_API_KEY;
+  const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI;
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+  const kakaoAuth = () => {
+    window.location.href = KAKAO_AUTH_URL;
+  };
+
   return (
     <>
       <SignInTitle text={'Welcome!'} />
       <SignInForm />
       <SignInSNSDivider />
-      <SignInSNSButtons />
+      <SignInSNSButtons kakaoAuth={kakaoAuth} />
     </>
   );
 }
